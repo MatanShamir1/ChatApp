@@ -1,25 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Contact from './ChatPage/Contact';
+import React, {Component} from "react";
+import './AppStyle.css';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//if i want to write children inside my component, instead of returning it in them, i can write them between its tag and make sure to return props.children from it.
+class App extends Component {
+  render(){
+      return(
+        
+        <></> // return only LOGIN!
+      
+      )
+  }
 }
-
 export default App;
