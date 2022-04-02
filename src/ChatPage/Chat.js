@@ -5,14 +5,7 @@ import React, { Component } from "react";
 class Chat extends Component {
     render() {
         return (
-            <div id="contacts" className="card">
-                <ul class="list-group list-group-flush"></ul>
-                <Contact name="Coral" />
-
-                <Contact name="Itamar" />
-
-                <Contact name="Amit" />
-            </div>
+            <div></div>
         )
     }
 }

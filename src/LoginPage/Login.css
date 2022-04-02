@@ -1,0 +1,17 @@
+.form {
+    text-align: center;
+}
+
+#uppart {
+    padding: 50px;
+    margin-bottom: 20px;
+    background-color: rgb(144, 201, 250);
+}
+
+.signButton {
+    margin-left: 82px;
+    margin-top: 40px;
+}
+.register {
+    margin-left: 180px;
+}
