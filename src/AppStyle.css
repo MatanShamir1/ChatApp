@@ -1,6 +1,42 @@
-#contacts{
+.contacts {
     width: 320px;
 }
-.to-right{
-    float:right
+
+.to-right {
+    float: right;
+}
+
+.bg-successive {
+    background-color: lightcyan;
+}
+
+.circular-square {
+    border-radius: 50%;
+    width:50px;
+    height:50px;
+}
+
+.down-div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.contact :hover {
+    background-color: lightblue;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.leftMenu {
+    width: 320px;
+    height: 400px;
+    float: left;
+}
+
+.conversation {
+    width: 600px;
+    height: 600px;
+    float: left;
+    position: relative;
 }
