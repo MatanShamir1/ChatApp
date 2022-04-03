@@ -36,10 +36,7 @@ class Login extends Component {
             }
         }
         if (user != null) {
-            return (<Navigate to={{
-                pathname: '/order',
-                state: { id: '123' }
-            }} />);
+            this.props.navigate.navigate("../ChatPage/Chat");
         } else {
             return (<div>Login Please</div>);
         }
