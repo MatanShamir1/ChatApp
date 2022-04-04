@@ -1,6 +1,4 @@
-import { useHistory } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
-import { Navigate } from 'react-router';
 import React, { Component } from "react";
 import './Login.css';
 let users = [
