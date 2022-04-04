@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'rea
 import { Navigate } from 'react-router';
 import React, { Component } from "react";
 import './Login.css';
-let contactList = [
-    { username: "Itamar", Password: 1234 },
-    { username: "Coral", Password: 1234 },
-    { username: "Amit", Password: 1234 }
+let users = [
+    { username: "Avi", Password: 1234 },
 ]
 
 class Login extends Component {
@@ -29,16 +27,16 @@ class Login extends Component {
 
     onSubmit(event) {
         var user;
-        for (var i = 0; i < contactList.length; i++) {
-            if (this.state.userName === contactList[i].username && this.state.password == contactList[i].Password) {
-                user = contactList[i]
+        for (var i = 0; i < users.length; i++) {
+            if (this.state.userName === users[i].username && this.state.password == users[i].Password) {
+                user = users[i]
                 break;
             }
         }
         if (user != null) {
-            this.props.navigate.navigate("../ChatPage/Chat");
+            this.props.setName(user.username)
         } else {
-            return (<div>Login Please</div>);
+            alert('Wrong Username or Password. Please try again')
         }
     }
 
@@ -63,7 +61,7 @@ class Login extends Component {
                     <div className='signButton'>
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span className='register'>Not registered? </span>
-                        <Link to='/Register'>Click here</Link>
+                        <Link to='./Register'>Click here</Link>
                         <span> to register.</span>
                     </div>
                 </form>
