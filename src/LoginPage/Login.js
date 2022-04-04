@@ -1,9 +1,7 @@
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import React, { Component } from "react";
 import './Login.css';
-let users = [
-    { username: "Avi", Password: 1234 },
-]
+import users from './usersList';
 
 class Login extends Component {
     constructor(props) {
@@ -25,8 +23,9 @@ class Login extends Component {
 
     onSubmit(event) {
         var user;
+        console.log(users);
         for (var i = 0; i < users.length; i++) {
-            if (this.state.userName === users[i].username && this.state.password == users[i].Password) {
+            if (this.state.userName === users[i].username && this.state.password == users[i].password) {
                 user = users[i]
                 break;
             }
@@ -59,8 +58,11 @@ class Login extends Component {
                     <div className='signButton'>
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span className='register'>Not registered? </span>
-                        <Link to='./Register'>Click here</Link>
-                        <span> to register.</span>
+                        <Link
+                            to={{
+                                pathname: "./Register",
+                                setName: this.props.setName
+                            }}><span> to register.</span></Link>
                     </div>
                 </form>
             </div>
