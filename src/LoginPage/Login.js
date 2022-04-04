@@ -23,7 +23,6 @@ class Login extends Component {
 
     onSubmit(event) {
         var user;
-        console.log(users);
         for (var i = 0; i < users.length; i++) {
             if (this.state.userName === users[i].username && this.state.password == users[i].password) {
                 user = users[i]

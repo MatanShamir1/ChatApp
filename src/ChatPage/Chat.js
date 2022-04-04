@@ -23,14 +23,14 @@ class Chat extends Component {
 
     addContact = () => {
         this.setState({
-            isAdd: true
+            isAdd: !this.state.isAdd
         })
     }
 
     render() {
         return (
             <div>
-                <AddContactPopUp isActive={this.state.isAdd} />
+                <AddContactPopUp isActive={this.state.isAdd} setActive={this.addContact} />
                 <div className="out-div">
                     <span className="upper-recognition"> Hello, {this.props.username} </span>
                     <div className="leftMenu">

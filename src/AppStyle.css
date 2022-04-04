@@ -63,6 +63,16 @@
     height: 80%;
 }
 
-.pop-up{
-    position:absolute;
+.pop-up {
+    position: absolute;
+    display: block;
+}
+
+.add-contact {
+    text-align:center;
+    width:100%;
+}
+
+.add-contact-text {
+    width:40%
 }
