@@ -28,7 +28,7 @@ class MessageList extends Component {
                             <i className="bi bi-paperclip"></i>
                         </span>
                         <input type="text" className="form-control contacts" placeholder="Type your message..." />
-                        <span className="input-group-text paperclip" id="basic-addon1">Send</span>
+                        <span className="input-group-text" id="basic-addon1">Send</span>
                     </span>
                 </div>
             )

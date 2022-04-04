@@ -1,18 +1,28 @@
-import {useRef} from 'react';
+import { useRef } from 'react';
+import contactList from "./contactList";
 
-function Search(props){
+function Search(props) {
 
     const searchBox = useRef(null);
 
-    const search = function(){
+    const search = function () {
         props.setSearchQuery(searchBox.current.value)
+    }
+
+    const addContact = () => {
+        props.addContact();
     }
 
     return (
         <div>
             <div className="input-group mb-3">
-            <span className="input-group-text" id="basic-addon1">@</span>
-            <input ref={searchBox} onKeyUp={search} type="text" className="form-control contacts" placeholder="Type to search in contacts..."/>
+                <span className="input-group-text" id="basic-addon1">
+                    <i className="bi bi-search"></i>
+                </span>
+                <input ref={searchBox} onKeyUp={search} type="text" className="form-control contacts" placeholder="Type to search in contacts..." />
+                <span className="input-group-text" id="basic-addon1">
+                    <i className="bi bi-person-plus" onClick={addContact}></i>
+                </span>
             </div>
         </div>
     )

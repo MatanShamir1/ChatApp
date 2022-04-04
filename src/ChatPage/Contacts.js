@@ -10,7 +10,7 @@ class Contacts extends Component {
         super(props)
         this.state = {
             contacts: contactList,
-            curr: ''
+            curr: '',
         }
         this.render = this.render.bind(this)
     }
@@ -32,10 +32,14 @@ class Contacts extends Component {
         })
     }
 
+    addContact = () => {
+        this.props.addContact();
+    }
+
     render() {
         return (
             <div>
-                <Search setSearchQuery={this.setSearchQuery} />
+                <Search setSearchQuery={this.setSearchQuery} addContact={this.addContact} />
                 <div id="contacts" className="card">
                     <ul className="list-group list-group-flush"></ul>
                     {this.state.contacts.map((contact, key) => {
