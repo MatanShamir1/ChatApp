@@ -27,6 +27,12 @@ class Chat extends Component {
         })
     }
 
+    addMessage = (message) => {
+        this.setState({
+            isAdd: this.state.isAdd
+        })
+    }
+
     render() {
         var theClass = "out-div";
         if (this.state.isAdd === true) {
@@ -41,7 +47,7 @@ class Chat extends Component {
                         <Contacts setChat={this.setChat} addContact={this.addContact} />
                     </div>
                     <div>
-                        <MessageList name={this.state.name} />
+                        <MessageList name={this.state.name} addMessage={this.addMessage} />
                     </div>
                 </div>
             </div>
