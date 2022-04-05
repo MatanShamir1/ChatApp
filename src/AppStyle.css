@@ -1,5 +1,10 @@
 .out-div {
-    max-width: none;
+    width:100%;
+    height:100%;
+}
+
+.trans-out-div {
+    opacity: 25%;
 }
 
 .upper-recognition {
@@ -63,9 +68,14 @@
     height: 80%;
 }
 
-.pop-up {
+.pop-up-exist {
     position: absolute;
     display: block;
+}
+
+.pop-up-not-exist {
+    position: absolute;
+    display: none;
 }
 
 .add-contact {
@@ -75,4 +85,8 @@
 
 .add-contact-text {
     width:40%
+}
+
+.down-modal {
+    margin-top: 10%;
 }

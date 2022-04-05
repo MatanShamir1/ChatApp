@@ -28,10 +28,14 @@ class Chat extends Component {
     }
 
     render() {
+        var theClass = "out-div";
+        if (this.state.isAdd === true) {
+            theClass += " trans-out-div";
+        }
         return (
             <div>
                 <AddContactPopUp isActive={this.state.isAdd} setActive={this.addContact} />
-                <div className="out-div">
+                <div className={theClass}>
                     <span className="upper-recognition"> Hello, {this.props.username} </span>
                     <div className="leftMenu">
                         <Contacts setChat={this.setChat} addContact={this.addContact} />
