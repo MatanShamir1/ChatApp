@@ -8,6 +8,7 @@ class Message extends Component {
     }
 
     render() {
+        console.log(this.props.content)
         return (
             //we get as a prop, a text message, and an image.
             <div className="card-body p-4" >
@@ -16,7 +17,14 @@ class Message extends Component {
                         <img src={this.props.source} alt="Avatar" className="circular-square"></img>
                     </div>
                     <div className="pe-2">
-                        <div className="card d-inline-block">{this.props.content}</div>
+                        {this.props.content[1] === "text" && (
+                            <div className="card d-inline-block">{this.props.content[0]}</div>
+                        )}
+                        {this.props.content[1] === "image" && (
+                            <img src={this.props.content[0]}></img>
+                        )}
+                        
+
                     </div>
                 </div>
             </div>

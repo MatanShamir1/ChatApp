@@ -42,7 +42,6 @@ class Chat extends Component {
             <div>
                 <AddContactPopUp isActive={this.state.isAdd} setActive={this.addContact} />
                 <div className={theClass}>
-                    <span className="upper-recognition"> Hello, {this.props.username} </span>
                     <div className="leftMenu">
                         <Contacts setChat={this.setChat} addContact={this.addContact} />
                     </div>

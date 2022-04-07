@@ -26,7 +26,7 @@ function AddContactPopUp(props) {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={props.setActive}></button>
                     </div>
                     <div className="modal-body">
-                        <div>
+                        <div id ="User">
                             <div className="row mb-3 form">
                                 <label className="col-sm-2 col-form-label add-contact-text" >Contact name</label>
                                 <div className="col-sm-4">
