@@ -43,11 +43,11 @@ class Contacts extends Component {
                 <div id="contacts" className="card">
                     <ul className="list-group list-group-flush"></ul>
                     {this.state.contacts.map((contact, key) => {
-                        let styles = "contact list-group-item list-group-item-action"
+                        let styles = "contact btn btn-outline-secondary"
                         if (contact.name === this.state.curr) {
-                            styles = "contact list-group-item list-group-item-action bg-successive"
+                            styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        return <Contact name={contact.name} message={contact.lastMessage} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} />
+                        return <Contact source={contact.source} name={contact.name} message={contact.lastMessage} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} />
                     })}
                 </div>
             </div>
