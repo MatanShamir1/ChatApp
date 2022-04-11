@@ -146,3 +146,23 @@
     display: flex;
     justify-content: center;
 }
+
+.droppy {
+    margin:0.1%;
+}
+
+.bi-size-xlarge{
+    font-size:large;
+    margin-bottom: 20%;
+    cursor: pointer;
+}
+
+.bi-size {
+    cursor: pointer;
+}
+
+.resizedTextbox {
+    width: 100px;
+    height: 45px;
+    margin-top: 0.3%;
+}

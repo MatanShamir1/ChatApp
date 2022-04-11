@@ -39,7 +39,18 @@ class MessageList extends Component {
             popUpVideoOrImage: false
         })
     }
+    keyDownEvent = (e) => {
+        if (e.code === "Enter" && !e.shiftKey) {
+            this.sendMessage();
+        }
+        this.sendBox.style.height = "auto";
+        let scHeight = e.target.scrollHeight;
+        this.sendBox.style.height = `${scHeight}px`;
+    }
     sendMessage = () => {
+        if (this.sendBox.current.value === '') {
+            return;
+        }
         const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
         contact.messages.push([this.sendBox.current.value, "text"]);
         this.sendBox.current.value = '';
@@ -79,10 +90,6 @@ class MessageList extends Component {
     }
 
 
-
-
-
-
     render() {
         if (this.props.name === '') {
             return (
@@ -105,10 +112,10 @@ class MessageList extends Component {
                             </Modal.Body>
                             <Modal.Footer></Modal.Footer>
                         </Modal>
-                        <span className="input-group mb-2 down">
-                            <div className="dropup">
-                                <button className="input-group-text dropbtn" id="basic-addon1" onMouseOver={this.onHoverDisplay}>
-                                    <i className="bi bi-paperclip"></i>
+                        <span className="input-group mb-2 down rounded-pill">
+                            <div className="dropup droppy">
+                                <button className="input-group-text dropbtn rounded-pill" id="basic-addon1" onMouseOver={this.onHoverDisplay}>
+                                    <i className="bi bi-paperclip bi-size"></i>
                                     {this.state.onMouseOver && (
                                         <div className="dropup-content" >
                                             <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleClickImage}></button>
@@ -117,8 +124,10 @@ class MessageList extends Component {
                                         </div>)}
                                 </button>
                             </div>
-                            <input type="text" className="form-control contacts" placeholder="Type your message..." ref={this.sendBox} />
-                            <span className="input-group-text" id="basic-addon1" onClick={this.sendMessage}>Send</span>
+                            <textarea className="form-control rounded-pill droppy resizedTextbox" placeholder="Type your message..." ref={this.sendBox} onKeyDown={this.keyDownEvent} />
+                            <span className="input-group-text rounded-pill droppy" id="basic-addon1" onClick={this.sendMessage}>
+                                <i className="bi bi-arrow-right-short bi-size-xlarge"></i>
+                            </span>
                         </span>
                     </div>
 
