@@ -47,7 +47,9 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        return <Contact source={contact.source} name={contact.name} message={contact.lastMessage} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} />
+                        return <Contact source={contact.source} name={contact.name} message={
+                            contact.messages.at(-1)[0].indexOf("blob:") !== -1 ? "voice message" : contact.messages.at(-1)[0]
+                        } key={key} applyChat={this.applyChat} styles={styles} news={contact.new} />
                     })}
                 </div>
             </div>
