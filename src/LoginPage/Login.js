@@ -39,8 +39,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                <h1 id="uppart"></h1>
+            <div id='back-div'>
                 <form onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label" >Username</label>
@@ -49,7 +48,7 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className="row mb-3 form" >
-                        <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+                        <label className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-4">
                             <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangePassword}></input>
                         </div>

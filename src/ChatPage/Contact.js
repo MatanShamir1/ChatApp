@@ -13,30 +13,21 @@ class Contact extends Component {
     }
 
     render() {
-        if (this.props.news === 0) {
-            return (
-                <li className={this.props.styles} onClick={this.changeState}>
-                    <div className="ms-2 me-auto">
-                        <div className="fw-bold">
-                            {this.props.name}
-                        </div>
-                        {this.props.message}
+        return (
+            <li className={this.props.styles} onClick={this.changeState}>
+                <div className="ms-2 me-auto">
+                    {this.props.news !== 0 && (<span className="badge bg-primary rounded-pill to-right">{this.props.news}</span>)}
+                    <div className="position-relative avatar cont-div">
+                        <img src={this.props.source} alt="Avatar" className="circular-square"></img>
                     </div>
-                </li> //do that the onclick will set this to true. it is essential to use () => because the function should know what is the component, "this".
-            )
-        } else {
-            return (
-                <li className={this.props.styles} onClick={this.changeState}>
-                    <div className="ms-2 me-auto">
-                        <span className="badge bg-primary rounded-pill to-right">{this.props.news}</span>
-                        <div className="fw-bold">
-                            {this.props.name}
-                        </div>
-                        {this.props.message}
+                    <div className="fw-bold">
+                        {this.props.name}
                     </div>
-                </li> //do that the onclick will set this to true. it is essential to use () => because the function should know what is the component, "this".
-            )
-        }
+                    {this.props.message}
+                </div>
+            </li> //do that the onclick will set this to true. it is essential to use () => because the function should know what is the component, "this".
+        )
+
     }
 }
 export default Contact;
