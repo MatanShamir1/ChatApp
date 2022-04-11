@@ -23,8 +23,6 @@ function App() {
         <Routes>
           <Route path='/' element={name === '' || name === 'GO_TO_LOGIN' ? <Login setName={setName} /> : <Navigate to="./Chat" />}></Route>
           <Route path='Register' element={name === 'GO_TO_LOGIN' ? <Navigate to="/" /> : <Register setName={setName} />}></Route>
-
-          <Route path='Chat' element={<Chat username={name}/>}></Route>
           <Route path='Chat' element={<Chat user={
             users.find((user) => {
               return user.username === name;
