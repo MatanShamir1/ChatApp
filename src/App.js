@@ -11,29 +11,25 @@ import users from './LoginPage/usersList';
 //if i want to write children inside my component, instead of returning it in them, i can write them between its tag and make sure to return props.children from it.
 function App() {
   const [name, setName] = useState('');
-<<<<<<< HEAD
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
   }, []);
   console.log('in rerendering app. current directory is:' + window.location.pathname);
-=======
->>>>>>> 52dcfc4 (design of contact, register and login. changed header title and favicon.)
+
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={name === '' || name === 'GO_TO_LOGIN' ? <Login setName={setName} /> : <Navigate to="./Chat" />}></Route>
           <Route path='Register' element={name === 'GO_TO_LOGIN' ? <Navigate to="/" /> : <Register setName={setName} />}></Route>
-<<<<<<< HEAD
+
           <Route path='Chat' element={<Chat username={name}/>}></Route>
-=======
           <Route path='Chat' element={<Chat user={
             users.find((user) => {
               return user.username === name;
             })} setName={setName} />}>
-
           </Route>
->>>>>>> 52dcfc4 (design of contact, register and login. changed header title and favicon.)
         </Routes>
       </BrowserRouter>
     </div>
