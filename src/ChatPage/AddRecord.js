@@ -72,7 +72,7 @@ export default function AddRecord(props) {
             });
     }
     function handleClick(callBack) {
-       callBack(recording.url, props.show);
+       callBack(recording.url, "record");
     }
     return (
         <div>

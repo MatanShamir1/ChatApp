@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import Message from "./Message";
 import contactList from "./contactList";
 import './MessageList.css';
-import AddVideoPopUp from "./AddVideoPopUp";
+import AddVideoOrImagePopUp from "./AddVideoOrImagePopUp";
 import { Modal } from 'react-bootstrap';
 import AddRecord from "./AddRecord";
 import AddVideoFromScreen from "./AddVIdeoFromScreen";
+import AddPicFromScreen from "./AddPicFromScreen";
 
 //you can write rce and it gives you a className template!
 //create a constructor using the keyword rconst.
@@ -17,26 +18,29 @@ class MessageList extends Component {
         this.state = {
             onMouseOver: false,
             show: false,
-            showSomething: "",
-            showRecord: "",
             popUpRecord: false,
-            popUpVideoOrImage: false
+            popUpVideoOrImage: false,
+            PopUpRecordFromScreen: false,
+            popUpImgfromScreen: false
         }
         this.handleClickRecord = this.handleClickRecord.bind(this)
+        this.handleClickImgFromScreen = this.handleClickImgFromScreen.bind(this)
         this.onHoverDisplay = this.onHoverDisplay.bind(this)
         this.handlePopData = this.handlePopData.bind(this)
         this.handleClickImage = this.handleClickImage.bind(this)
+        this.handleRecordFromScreen = this.handleRecordFromScreen.bind(this)
         this.render = this.render.bind(this)
         this.closeButton = this.closeButton.bind(this)
         this.sendBox = React.createRef();
     }
+  
     closeButton() {
         this.setState({
-            show: !this.state.show,
-            showSomething: "",
-            showRecord: "",
+            show: false,
             popUpRecord: false,
-            popUpVideoOrImage: false
+            popUpVideoOrImage: false,
+            PopUpRecordFromScreen: false,
+            popUpImgfromScreen: false
         })
     }
     keyDownEvent = (e) => {
@@ -61,27 +65,37 @@ class MessageList extends Component {
             onMouseOver: true
         });
     }
+    handleRecordFromScreen() {
+        this.setState({
+            show: !this.state.show,
+            PopUpRecordFromScreen: true
+        });
+    }
     handleClickImage() {
         this.setState({
             show: !this.state.show,
-            showSomething: "video",
             popUpVideoOrImage: true
         });
     }
     handleClickRecord() {
         this.setState({
             show: !this.state.show,
-            showRecord: "record",
             popUpRecord: true
+        });
+    }
+    handleClickImgFromScreen() {
+        this.setState({
+            show: !this.state.show,
+            popUpImgfromScreen: true
         });
     }
     handlePopData(x, y) {
         this.setState({
-            show: !this.state.show,
-            showSomething: "",
-            showRecord: "",
+            show: false,
+            popUpRecord: false,
             popUpVideoOrImage: false,
-            popUpRecord: false
+            PopUpRecordFromScreen: false,
+            popUpImgfromScreen: false
         })
         const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
         contact.messages.push([x, y]);
@@ -106,21 +120,24 @@ class MessageList extends Component {
                         <Modal show={this.state.show} onHide={this.closeButton} >
                             <Modal.Header closeButton></Modal.Header>
                             <Modal.Body>
-                                {this.state.popUpVideoOrImage && (<AddVideoFromScreen show={this.state.showRecord} parentCallback={this.handlePopData}></AddVideoFromScreen>)}
-                                {this.state.popUpRecord && (<AddRecord show={this.state.showRecord} parentCallback={this.handlePopData} ></AddRecord>)}
-                                {this.state.popUpVideoOrImage && (<AddVideoPopUp show={this.state.showSomething} parentCallback={this.handlePopData}></AddVideoPopUp>)}
+                                {this.state.PopUpRecordFromScreen && (<AddVideoFromScreen parentCallback={this.handlePopData}></AddVideoFromScreen>)}
+                                {this.state.popUpRecord && (<AddRecord parentCallback={this.handlePopData} ></AddRecord>)}
+                                {this.state.popUpVideoOrImage && (<AddVideoOrImagePopUp parentCallback={this.handlePopData} ></AddVideoOrImagePopUp>)}
+                                {this.state.popUpImgfromScreen && (<AddPicFromScreen parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                             </Modal.Body>
                             <Modal.Footer></Modal.Footer>
                         </Modal>
-                        <span className="input-group mb-2 down rounded-pill">
+                    </div>
+                    <span className="input-group mb-2 down rounded-pill">
                             <div className="dropup droppy">
                                 <button className="input-group-text dropbtn rounded-pill" id="basic-addon1" onMouseOver={this.onHoverDisplay}>
                                     <i className="bi bi-paperclip bi-size"></i>
                                     {this.state.onMouseOver && (
                                         <div className="dropup-content" >
-                                            <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleClickImage}></button>
+                                            <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleRecordFromScreen}></button>
                                             <button className="bi bi-card-image btn btn-outline-light" onClick={this.handleClickImage}></button>
                                             <button className="bi bi-mic-fill btn btn-outline-light" onClick={this.handleClickRecord}></button>
+                                            <button className="bi bi-camera-video btn btn-outline-light" onClick={this.handleClickImgFromScreen}></button>
                                         </div>)}
                                 </button>
                             </div>
@@ -129,7 +146,6 @@ class MessageList extends Component {
                                 <i className="bi bi-arrow-right-short bi-size-xlarge"></i>
                             </span>
                         </span>
-                    </div>
 
                 </div>
             )

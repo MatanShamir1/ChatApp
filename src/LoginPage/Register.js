@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import users from './usersList';
 import { Navigate } from "react-router-dom"
 import './Login.css';
-import AddVideoPopUp from '../ChatPage/AddVideoPopUp';
+import AddVideoPopUp from '../ChatPage/AddVideoOrImagePopUp';
 
 class Register extends Component {
     constructor(props) {

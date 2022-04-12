@@ -50,36 +50,36 @@ class Chat extends Component {
             theClass += " trans-out-div";
         }
         return (
-            <div id="everything">
-                <div id="recognition">
-                    <span>
-                        <div className="position-relative avatar up-div">
-                            <img src={this.props.user.imgsrc} alt="Avatar" className="circular-square"></img>
-                            <span>{this.props.user.username}</span>
-                        </div>
-                        <div className="cent">
-                            <img src={logo} className='lit-log' />
-                        </div>
-                        <button id="log-out" onClick={this.logOut} type="button" className="btn btn-outline-secondary">Log out</button>
-                    </span>
-                </div>
-                <Modal show={this.state.isAdd} onHide={this.addContact} >
-                    <Modal.Header closeButton></Modal.Header>
-                    <Modal.Body>
-                        <AddContactPopUp setActive={this.addContact}>
-                        </AddContactPopUp>
-                    </Modal.Body>
-                    <Modal.Footer></Modal.Footer>
-                </Modal>
-                <div className={theClass}>
-                    <div className="leftMenu">
-                        <Contacts setChat={this.setChat} addContact={this.addContact} />
+                <div id="everything">
+                    <div id="recognition">
+                        <span>
+                            <div className="position-relative avatar up-div">
+                                <img src={this.props.user.imgsrc} alt="Avatar" className="circular-square"></img>
+                                <span>{this.props.user.username}</span>
+                            </div>
+                            <div className="cent">
+                                <img src={logo} className='lit-log' />
+                            </div>
+                            <button id="log-out" onClick={this.logOut} type="button" className="btn btn-outline-secondary">Log out</button>
+                        </span>
                     </div>
-                    <div>
-                        <MessageList name={this.state.name} addMessage={this.addMessage} />
+                    <Modal show={this.state.isAdd} onHide={this.addContact} >
+                        <Modal.Header closeButton></Modal.Header>
+                        <Modal.Body>
+                            <AddContactPopUp setActive={this.addContact}>
+                            </AddContactPopUp>
+                        </Modal.Body>
+                        <Modal.Footer></Modal.Footer>
+                    </Modal>
+                    <div className={theClass}>
+                        <div className="leftMenu ">
+                            <Contacts setChat={this.setChat} addContact={this.addContact} />
+                        </div>
+                        <div>
+                            <MessageList name={this.state.name} addMessage={this.addMessage} />
+                        </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
