@@ -8,33 +8,44 @@ class Message extends Component {
     }
 
     render() {
+        var float_dir = "justify-content-start";
+        var msg_col = "msg-sender";
+        if (this.props.content[2] === "rcv") {
+            msg_col = "msg-receiver";
+            float_dir = "justify-content-end";
+        }
         return (
-            //we get as a prop, a text message, and an image.
             <div className="card-body p-4" >
-                <div className="d-flex align-items-baseline mb-4 ">
-                    <div className="position-relative avatar down-div">
-                        <img src={this.props.source} alt="Avatar" className="circular-square"></img>
-                    </div>
-                    <div className="pe-2">
-                        {this.props.content[1] === "text" && (
-                            <div className="card d-inline-block">{this.props.content[0]}</div>
-                        )}
-                        {this.props.content[1] === "image" && (
-                            <img src={this.props.content[0]}></img>
-                        )}
-                        {this.props.content[1] === "video" && (
-                            <video width="320" height="240" controls>
-                                <source src={this.props.content[0]} type="video/mp4"></source>
-                            </video>
-                        )}
-                        {this.props.content[1] === "record" && (
-                            <audio controls>
-                                <source src={this.props.content[0]}></source>
-                            </audio>
-                        )}
-
-
-                    </div>
+                <div className={"d-flex mb-4 " + float_dir}>
+                    {float_dir === "justify-content-start" &&
+                        (<div className="img_cont_msg">
+                            <img src={this.props.source} className="rounded-circle user_img_msg" />
+                        </div>)
+                    }
+                    {this.props.content[1] === "text" && (
+                        <div className={"msg_cotainer " + msg_col}>
+                            {this.props.content[0]}
+                            <span className="msg_time">8:40 AM, Today</span>
+                        </div>
+                    )}
+                    {this.props.content[1] === "image" && (
+                        <img src={this.props.content[0]}></img>
+                    )}
+                    {this.props.content[1] === "video" && (
+                        <video width="320" height="240" controls>
+                            <source src={this.props.content[0]} type="video/mp4"></source>
+                        </video>
+                    )}
+                    {this.props.content[1] === "record" && (
+                        <audio controls>
+                            <source src={this.props.content[0]}></source>
+                        </audio>
+                    )}
+                    {float_dir === "justify-content-end" &&
+                        (<div className="img_cont_msg">
+                            <img src={this.props.source} className="rounded-circle user_img_msg" />
+                        </div>)
+                    }
                 </div>
             </div>
         )

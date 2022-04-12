@@ -4,7 +4,7 @@ import MessageList from "./MessageList";
 import AddContactPopUp from "./AddContactPopUp.js";
 import { Modal } from 'react-bootstrap';
 import { Navigate } from "react-router-dom"
-import logo from "../images/ChatApp-logos_transparent.png"
+import Recognition from "./Recognition";
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 //shift+alt+f formatting!
@@ -51,18 +51,7 @@ class Chat extends Component {
         }
         return (
                 <div id="everything">
-                    <div id="recognition">
-                        <span>
-                            <div className="position-relative avatar up-div">
-                                <img src={this.props.user.imgsrc} alt="Avatar" className="circular-square"></img>
-                                <span>{this.props.user.username}</span>
-                            </div>
-                            <div className="cent">
-                                <img src={logo} className='lit-log' />
-                            </div>
-                            <button id="log-out" onClick={this.logOut} type="button" className="btn btn-outline-secondary">Log out</button>
-                        </span>
-                    </div>
+                    <Recognition imgsrc = {this.props.user.imgsrc} username = {this.props.user.username} logOut = {this.logOut} />
                     <Modal show={this.state.isAdd} onHide={this.addContact} >
                         <Modal.Header closeButton></Modal.Header>
                         <Modal.Body>

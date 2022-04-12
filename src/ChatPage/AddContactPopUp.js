@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { useRef } from 'react';
 import Message from "./Message";
 import contactList from "./contactList";
+import friend_img from "../images/default_friend_img.jpg"
 //you can write rce and it gives you a className template!
 //create a constructor using the keyword rconst.
 function AddContactPopUp(props) {
@@ -13,7 +14,7 @@ function AddContactPopUp(props) {
     }
     const saveChanges = () => {
         contactList.push({
-            name: contactBox.current.value, lastMessage: 'no messages yet', messages: [], new: 0, source: ''
+            name: contactBox.current.value, messages: [], new: 0, source: friend_img
         })
         getOut();
     }

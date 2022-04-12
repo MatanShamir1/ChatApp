@@ -46,17 +46,20 @@ class MessageList extends Component {
     keyDownEvent = (e) => {
         if (e.code === "Enter" && !e.shiftKey) {
             this.sendMessage();
+        } else if (e.code==="Enter" && e.shiftKey){
+            this.sendBox.current.value += "\n";
         }
-        this.sendBox.style.height = "auto";
-        let scHeight = e.target.scrollHeight;
-        this.sendBox.style.height = `${scHeight}px`;
+        // this.sendBox.style.height = "auto";
+        // let scHeight = e.target.scrollHeight;
+        // this.sendBox.style.height = `${scHeight}px`;
     }
     sendMessage = () => {
-        if (this.sendBox.current.value === '') {
+        if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
+            this.sendBox.current.value = '';
             return;
         }
         const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
-        contact.messages.push([this.sendBox.current.value, "text"]);
+        contact.messages.push([this.sendBox.current.value, "text","snd"]);
         this.sendBox.current.value = '';
         this.props.addMessage();
     }
@@ -113,7 +116,7 @@ class MessageList extends Component {
             const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0]
             return (
                 <div className="conversation bg-successive overflow-auto your-div">
-                    <div>
+                    <div class="card-body msg_card_body">
                         {contact.messages.map((message, key) => {
                             return <Message content={message} source={contact.source} key={key} />
                         })}
