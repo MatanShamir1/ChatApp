@@ -31,10 +31,19 @@ class MessageList extends Component {
         this.handleRecordFromScreen = this.handleRecordFromScreen.bind(this)
         this.render = this.render.bind(this)
         this.closeButton = this.closeButton.bind(this)
+        this.updateCamera = this.updateCamera.bind(this)
         this.sendBox = React.createRef();
+        this.closeCamera = React.createRef();
     }
-
+    updateCamera(camera) {
+        this.closeCamera = camera;
+    }
     closeButton() {
+        if(this.closeCamera){
+            this.closeCamera.forEach((track) => {
+                track.stop();
+              });
+        }
         this.setState({
             show: false,
             popUpRecord: false,
@@ -125,9 +134,9 @@ class MessageList extends Component {
                                 <Modal.Header closeButton></Modal.Header>
                                 <Modal.Body>
                                     {this.state.PopUpRecordFromScreen && (<AddVideoFromScreen parentCallback={this.handlePopData}></AddVideoFromScreen>)}
-                                    {this.state.popUpRecord && (<AddRecord parentCallback={this.handlePopData} ></AddRecord>)}
+                                    {this.state.popUpRecord && (<AddRecord closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
                                     {this.state.popUpVideoOrImage && (<AddVideoOrImagePopUp parentCallback={this.handlePopData} ></AddVideoOrImagePopUp>)}
-                                    {this.state.popUpImgfromScreen && (<AddPicFromScreen parentCallback={this.handlePopData} ></AddPicFromScreen>)}
+                                    {this.state.popUpImgfromScreen && (<AddPicFromScreen closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                                 </Modal.Body>
                                 <Modal.Footer></Modal.Footer>
                             </Modal>

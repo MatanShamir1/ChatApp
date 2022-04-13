@@ -48,6 +48,7 @@ class AddPicFromScreen extends React.Component {
         })
         .then((stream) => {
           this.player.srcObject = stream;
+          this.props.closeCamera(this.player.srcObject.getVideoTracks())
         })
         .catch((error) => {
           console.error(error);
