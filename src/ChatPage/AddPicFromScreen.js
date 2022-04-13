@@ -90,27 +90,28 @@ class AddPicFromScreen extends React.Component {
     this.props.parentCallback(this.state.imageDataURL,"image")
 }
 
-  render() {
-    const playerORImage = Boolean(this.state.imageDataURL) ? (
-      <img src={this.state.imageDataURL} alt="cameraPic" />
-    ) : (
-      <video
-        ref={(refrence) => {
-          this.player = refrence;
-        }}
-        autoPlay
-      ></video>
-    );
+render() {
+  const playerORImage = Boolean(this.state.imageDataURL) ? (
+    <img className="popUp" src={this.state.imageDataURL} alt="cameraPic" />
+  ) : (
+    <video className="popUp"
+      ref={(refrence) => {
+        this.player = refrence;
+      }}
+      autoPlay
+    ></video>
+  );
 
-    return (
-      <div className="AddPicFromScreen">
-        {playerORImage}
-        <button onClick={this.initializeMedia}>Take Photo</button>
-        <button onClick={this.capturePicture}>Capture</button>
-        <button onClick={this.saveImage}>save</button>
-      </div>
-    );
-  }
+  return (
+    <div className="AddPicFromScreen">
+      {playerORImage}
+      <button className="btn btn-primary" onClick={this.initializeMedia}>Take Photo</button>
+      <button className="btn btn-secondary" onClick={this.capturePicture}>Capture</button>
+      <button className="btn btn-success bt" onClick={this.saveImage}>save</button>
+    </div>
+  );
 }
+}
+
 
 export default AddPicFromScreen;

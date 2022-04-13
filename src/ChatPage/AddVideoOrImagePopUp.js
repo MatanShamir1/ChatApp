@@ -49,7 +49,6 @@ class AddVideoOrImagePopUp extends Component {
         return (
             <div>
                 <input type="file" name="myImage" onChange={this.onImageChange} accept="video/* , image/*" />
-                <img src={this.state.image} />
                 <button onClick={this.handleClick}> click</button>
             </div>
         );

@@ -7,6 +7,9 @@ class Message extends Component {
         super(props)
     }
 
+ 
+    
+
     render() {
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
@@ -14,8 +17,9 @@ class Message extends Component {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
         }
+
         return (
-            <div className="card-body p-4" >
+            <div id="check" className="card-body p-4">
                 <div className={"d-flex mb-4 " + float_dir}>
                     {float_dir === "justify-content-start" &&
                         (<div className="img_cont_msg">
@@ -29,10 +33,12 @@ class Message extends Component {
                         </div>
                     )}
                     {this.props.content[1] === "image" && (
-                        <img src={this.props.content[0]}></img>
+                        <div>
+                            <img src={this.props.content[0]} className="check"></img>
+                        </div>
                     )}
                     {this.props.content[1] === "video" && (
-                        <video width="320" height="240" controls>
+                        <video width="240" height="180" controls>
                             <source src={this.props.content[0]} type="video/mp4"></source>
                         </video>
                     )}
