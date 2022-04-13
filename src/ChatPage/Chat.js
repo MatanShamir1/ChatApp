@@ -50,25 +50,24 @@ class Chat extends Component {
             theClass += " trans-out-div";
         }
         return (
-                <div id="everything">
-                    <Recognition imgsrc = {this.props.user.imgsrc} username = {this.props.user.username} logOut = {this.logOut} />
-                    <Modal show={this.state.isAdd} onHide={this.addContact} >
-                        <Modal.Header closeButton></Modal.Header>
-                        <Modal.Body>
-                            <AddContactPopUp setActive={this.addContact}>
-                            </AddContactPopUp>
-                        </Modal.Body>
-                        <Modal.Footer></Modal.Footer>
-                    </Modal>
-                    <div className={theClass}>
-                        <div className="leftMenu ">
-                            <Contacts setChat={this.setChat} addContact={this.addContact} />
-                        </div>
-                        <div>
-                            <MessageList name={this.state.name} addMessage={this.addMessage} />
-                        </div>
+            <div id="everything">
+                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.username} logOut={this.logOut} />
+                <Modal show={this.state.isAdd} onHide={this.addContact}>
+                    <Modal.Header closeButton >Add a contact</Modal.Header>
+                    <Modal.Body >
+                        <AddContactPopUp setActive={this.addContact}>
+                        </AddContactPopUp>
+                    </Modal.Body>
+                </Modal>
+                <div className={theClass}>
+                    <div className="leftMenu ">
+                        <Contacts setChat={this.setChat} addContact={this.addContact} />
+                    </div>
+                    <div>
+                        <MessageList name={this.state.name} addMessage={this.addMessage} />
                     </div>
                 </div>
+            </div>
         )
     }
 }

@@ -39,11 +39,12 @@ class MessageList extends Component {
         this.closeCamera = camera;
     }
     closeButton() {
-        if(this.closeCamera){
-            this.closeCamera.forEach((track) => {
-                track.stop();
-              });
-        }
+        //this does a red warning!!!
+        // if(this.closeCamera){
+        //     this.closeCamera.forEach((track) => {
+        //         track.stop();
+        //       });
+        // }
         this.setState({
             show: false,
             popUpRecord: false,
@@ -131,14 +132,18 @@ class MessageList extends Component {
                                 return <Message content={message} source={contact.source} key={key} />
                             })}
                             <Modal show={this.state.show} onHide={this.closeButton} >
-                                <Modal.Header closeButton></Modal.Header>
+                                <Modal.Header closeButton>
+                                    {this.state.PopUpRecordFromScreen && (<h3>Send a Video</h3>)}
+                                    {this.state.popUpRecord && (<h3>Send a recording</h3>)}
+                                    {this.state.popUpVideoOrImage && (<h3>Send an image</h3>)}
+                                    {this.state.popUpImgfromScreen && (<h3>Pick an image</h3>)}
+                                </Modal.Header>
                                 <Modal.Body>
                                     {this.state.PopUpRecordFromScreen && (<AddVideoFromScreen parentCallback={this.handlePopData}></AddVideoFromScreen>)}
                                     {this.state.popUpRecord && (<AddRecord closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
                                     {this.state.popUpVideoOrImage && (<AddVideoOrImagePopUp parentCallback={this.handlePopData} ></AddVideoOrImagePopUp>)}
                                     {this.state.popUpImgfromScreen && (<AddPicFromScreen closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                                 </Modal.Body>
-                                <Modal.Footer></Modal.Footer>
                             </Modal>
                             <span id="ch"></span>
                         </div>

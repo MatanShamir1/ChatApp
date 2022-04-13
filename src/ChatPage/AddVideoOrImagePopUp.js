@@ -49,7 +49,7 @@ class AddVideoOrImagePopUp extends Component {
         return (
             <div>
                 <input type="file" name="myImage" onChange={this.onImageChange} accept="video/* , image/*" />
-                <button onClick={this.handleClick}> click</button>
+                <button className="btn btn-secondary modal__btn" onClick={this.handleClick}> Send</button>
             </div>
         );
     }

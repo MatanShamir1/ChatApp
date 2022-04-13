@@ -72,24 +72,24 @@ export default function AddRecord(props) {
             });
     }
     function handleClick(callBack) {
-       callBack(recording.url, "record");
+        callBack(recording.url, "record");
     }
     return (
         <div>
             {stream.access ? (
                 <div className="audio-container">
                     <button
-                        className={recording.active ? "active" : null}
+                        className={recording.active ? "active btn btn-secondary modal__btn" : "btn btn-secondary modal__btn"}
                         onClick={() => !recording.active && stream.recorder.start()}
                     >
                         Start Recording
                     </button>
-                    <button onClick={() => stream.recorder.stop()}>Stop Recording</button>
+                    <button className="btn btn-secondary modal__btn" onClick={() => stream.recorder.stop()}>Stop Recording</button>
                     {recording.available && <audio controls src={recording.url} />}
-                    <button onClick={() => handleClick(callBack)}>Save</button>
+                    <button className="btn btn-secondary modal__btn" onClick={() => handleClick(callBack)}>Save</button>
                 </div>
             ) : (
-                <button onClick={getAccess}>Get Mic Access</button>
+                <button className="btn btn-secondary modal__btn" onClick={getAccess}>Get Mic Access</button>
             )}
         </div>
     );
