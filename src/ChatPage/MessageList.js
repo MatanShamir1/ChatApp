@@ -35,16 +35,19 @@ class MessageList extends Component {
         this.sendBox = React.createRef();
         this.closeCamera = React.createRef();
     }
+  componentDidUpdate(){
+    var element = document.getElementById("update");
+    element.scrollIntoView();
+  }
     updateCamera(camera) {
         this.closeCamera = camera;
     }
     closeButton() {
-        //this does a red warning!!!
-        // if(this.closeCamera){
-        //     this.closeCamera.forEach((track) => {
-        //         track.stop();
-        //       });
-        // }
+        if (this.closeCamera.current !== null) {
+            this.closeCamera.forEach((track) => {
+                track.stop();
+            });
+        }
         this.setState({
             show: false,
             popUpRecord: false,
@@ -131,6 +134,7 @@ class MessageList extends Component {
                             {contact.messages.map((message, key) => {
                                 return <Message content={message} source={contact.source} key={key} />
                             })}
+                            <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >
                                 <Modal.Header closeButton>
                                     {this.state.PopUpRecordFromScreen && (<h3>Send a Video</h3>)}
@@ -145,7 +149,7 @@ class MessageList extends Component {
                                     {this.state.popUpImgfromScreen && (<AddPicFromScreen closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                                 </Modal.Body>
                             </Modal>
-                            <span id="ch"></span>
+                            <div id="ch"></div>
                         </div>
                     </div>
                     <span className="input-group mb-2 down rounded-pill box bottom-0 ">

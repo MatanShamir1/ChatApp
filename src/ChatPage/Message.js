@@ -1,14 +1,25 @@
 import React, { Component } from "react";
+import { Modal } from 'react-bootstrap';
+import './MessageList.css';
 //you can write rce and it gives you a className template!
 //create a constructor using the keyword rconst.
 class Message extends Component {
 
     constructor(props) {
         super(props)
+        this.state = {
+            click: false
+        }
+        this.handleClick = this.handleClick.bind(this)
+    }
+    handleClick(){
+        this.setState({
+            click : !this.state.click
+        })
     }
 
- 
-    
+
+
 
     render() {
         var float_dir = "justify-content-start";
@@ -17,6 +28,7 @@ class Message extends Component {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
         }
+        
 
         return (
             <div id="check" className="card-body p-4">
@@ -34,7 +46,16 @@ class Message extends Component {
                     )}
                     {this.props.content[1] === "image" && (
                         <div>
-                            <img src={this.props.content[0]} className="check"></img>
+                            {this.state.click &&
+                                (<Modal show={this.state.click} onHide={this.handleClick} >
+                                    <Modal.Header closeButton>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <img src={this.props.content[0]} className="modalStyle"></img>
+
+                                    </Modal.Body>
+                                </Modal>)}
+                            <img src={this.props.content[0]} className="check" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Click to zoom"></img>
                         </div>
                     )}
                     {this.props.content[1] === "video" && (

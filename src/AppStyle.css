@@ -19,6 +19,7 @@
     width: 100%;
     overflow-y: scroll;
     height: 100%;
+    margin:1%;
     white-space: nowrap;
 }
 
@@ -67,6 +68,7 @@
     position: absolute;
     width: 35%;
     height: 100%;
+    overflow: auto;
     float: left;
 }
 
@@ -240,8 +242,8 @@
 .check {
     padding-left: 1%;
     margin: 2%;
-    max-width: 200px;
-    width: 80%;
+    max-width: 300px;
+    width: 100%;
 }
 
 .msg_time {

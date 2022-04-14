@@ -15,7 +15,7 @@ function Search(props) {
 
     return (
         <div>
-            <div className="input-group">
+            <div style={{marginTop: "2%"}} className="input-group ">
                 <span className="input-group-text" id="basic-addon1">
                     <i className="bi bi-search"></i>
                 </span>
