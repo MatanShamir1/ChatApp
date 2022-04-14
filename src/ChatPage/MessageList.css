@@ -60,6 +60,7 @@
   width: 65%;
   height: 90%;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .conversation2 {
@@ -85,7 +86,7 @@
 
 .modal-content {
   background-color: rgb(164, 185, 224);
-  width: 170%;
+  width: 140%;
 }
 
 /* Popup container - can be anything you want */

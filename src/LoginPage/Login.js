@@ -40,7 +40,7 @@ class Login extends Component {
     render() {
         return (
             <div id='back-div'>
-                <form onSubmit={this.onSubmit}>
+                <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label" >Username</label>
                         <div className="col-sm-4">
@@ -53,7 +53,7 @@ class Login extends Component {
                             <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangePassword}></input>
                         </div>
                     </div>
-                    <div className='signButton'>
+                    <div className='signButton form'>
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span className='register'>Not registered? </span>
                         <Link

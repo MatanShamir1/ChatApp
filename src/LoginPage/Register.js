@@ -66,7 +66,7 @@ class Register extends Component {
     render() {
         return (
             <div id='back-div'>
-                <form onSubmit={this.onSubmit}>
+                <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label">Username</label>
                         <div className="col-sm-4">
@@ -97,7 +97,7 @@ class Register extends Component {
                             <input type="file" name="myImage" onChange={this.handleImageChange} />
                         </div>
                     </div>
-                    <div className='signButton'>
+                    <div className='regButton'>
                         <button type="submit" className="btn btn-primary">Register</button>
                         <span className='register'>Already registered? </span>
                         <Link to='../'>Click here</Link>

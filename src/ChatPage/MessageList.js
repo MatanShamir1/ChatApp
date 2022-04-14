@@ -35,10 +35,12 @@ class MessageList extends Component {
         this.sendBox = React.createRef();
         this.closeCamera = React.createRef();
     }
-  componentDidUpdate(){
-    var element = document.getElementById("update");
-    element.scrollIntoView();
-  }
+    componentDidUpdate() {
+        var element = document.getElementById("update");
+        if (element != null) {
+            element.scrollIntoView();
+        }
+    }
     updateCamera(camera) {
         this.closeCamera = camera;
     }
@@ -59,20 +61,22 @@ class MessageList extends Component {
     keyDownEvent = (e) => {
         if (e.code === "Enter" && !e.shiftKey) {
             this.sendMessage();
-        } else if (e.code === "Enter" && e.shiftKey) {
-            this.sendBox.current.value += "\n";
         }
-        // this.sendBox.style.height = "auto";
-        // let scHeight = e.target.scrollHeight;
-        // this.sendBox.style.height = `${scHeight}px`;
     }
     sendMessage = () => {
+        this.sendBox.current.value = this.sendBox.current.value.trim();
         if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
-            this.sendBox.current.value = '';
             return;
         }
+        var today = new Date();
+        var hh = String(today.getHours()).padStart(2, '0');
+        var nn = String(today.getMinutes()).padStart(2, '0');
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = hh + ":" + nn + ', ' + mm + '/' + dd + '/' + yyyy;
         const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
-        contact.messages.push([this.sendBox.current.value, "text", "snd"]);
+        contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
         this.sendBox.current.value = '';
         this.props.addMessage();
     }

@@ -9,17 +9,44 @@
 }
 
 .signButton {
-    margin-left: 82px;
-    margin-top: 40px;
+    margin: 20%;
+    margin-top: 7%;
 }
+
 .register {
-    margin-left: 180px;
+    margin-left: 10%;
 }
-#back-div{
+
+#back-div {
     background-image: url('../images/ChatApp-logos.jpeg');
-    height:90%;
-    width:60%;
-    background-size: 90%;
+    height: 90%;
+    width: 70%;
+    background-size: 88%;
     padding-top: 3%;
-    position:absolute;
+    position: absolute;
+}
+
+.login-form {
+    margin-left: 17%;
+    margin-right: 17%;
+    border-radius: 4%;
+    box-shadow: 3px 3px 3px rgb(109, 216, 150);
+    /* background-color: rgb(111, 170, 111); */
+    background:
+        linear-gradient(rgb(59, 145, 71), transparent),
+        linear-gradient(to top left, rgb(118, 148, 118), transparent),
+        linear-gradient(to top right, rgb(216, 241, 226), transparent);
+    background-blend-mode: screen;
+}
+
+.regButton {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 3%;
+    left: 10%;
+    right: 10%;
+    width: 60%;
+    margin: 10%;
 }

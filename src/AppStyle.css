@@ -7,7 +7,6 @@
     overflow-y: hidden;
     box-shadow: 5px 5px 5px 5px rgb(193, 205, 238);
     border-radius: 1%;
-    ;
 }
 
 .trans-out-div {
@@ -19,7 +18,7 @@
     width: 100%;
     overflow-y: scroll;
     height: 100%;
-    margin:1%;
+    margin: 1%;
     white-space: nowrap;
 }
 
@@ -70,6 +69,7 @@
     height: 100%;
     overflow: auto;
     float: left;
+    overflow-x: hidden;
 }
 
 .pop-up-exist {
@@ -183,6 +183,11 @@
 
 .msg-sender {
     background-color: #82ccdd !important;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    overflow:hidden;
+    white-space: pre-line;
 }
 
 .msg-receiver {
@@ -248,8 +253,8 @@
 
 .msg_time {
     position: relative;
-    left: 0;
-    bottom: -30px;
+    left: 0px;
+    bottom: -13px;
     color: rgba(255, 255, 255, 0.5);
     font-size: 10px;
 }
@@ -268,7 +273,7 @@
 
 .modal__btn {
     padding: 1rem 1.6rem;
-    border: 1px solid var(--border-color);
+    border: 1px;
     border-radius: 100rem;
 
     color: inherit;
