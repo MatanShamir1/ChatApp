@@ -87,7 +87,14 @@
 }
 
 .down-modal {
-    margin-top: 10%;
+    margin-top: 11%;
+}
+
+.oclock {
+    position:absolute;
+    font-size: x-small;
+    bottom: 1px !important;
+    right: 0px !important;
 }
 
 #recognition {
@@ -184,6 +191,10 @@
     overflow-wrap: break-word;
     overflow: hidden;
     white-space: pre-line;
+}
+
+.me-auto {
+    position: relative !important;
 }
 
 .msg-receiver {
