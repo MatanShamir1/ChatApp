@@ -150,6 +150,7 @@
 
 .droppy {
     margin: 0.1%;
+    background-color: transparent;
 }
 
 .bi-size-xlarge {
@@ -317,3 +318,70 @@
 .modal-dialog {
     margin-top: 15%;
 }
+
+
+
+
+
+
+.reply{
+    padding: 15px 0;
+    background-color: #f5f8f9;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  
+  .reply:before, .reply:after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+  .bi-paperclip, input, button{
+    float: left;
+    margin: 3px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+  }
+  
+  
+  .bi-paperclip{
+    color: #444; 
+    font-size: 1.3em; 
+    padding-top: 1px; 
+    transform: rotate(-30deg);
+    cursor: pointer;
+  }
+  
+  input{
+    width: 72%;
+    padding: 10px;
+    border: none;
+    font-size: 1.2em;
+    background-color: inherit;
+  }
+  
+  input:focus, button:focus{
+    outline: 0;
+  }
+
+  .btny {
+      border:none;
+      background-color: transparent;
+  }
+
+  .bi-arrow-right-circle-fill{
+    color: #444; 
+    font-size: 1.8em;
+    cursor: pointer;
+  }
+
+  .resizedTextbox {
+      border:none;
+      overflow-y: hidden;
+  }

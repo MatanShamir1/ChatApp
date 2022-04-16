@@ -156,10 +156,11 @@ class MessageList extends Component {
                             <div id="ch"></div>
                         </div>
                     </div>
-                    <span className="input-group mb-2 down rounded-pill box bottom-0 ">
+
+                    <section class="input-group mb-2 down box bottom-0 reply" id="reply">
                         <div className="dropup droppy">
-                            <button className="input-group-text dropbtn rounded-pill" id="basic-addon1" onMouseOver={this.onHoverDisplay}>
-                                <i className="bi bi-paperclip bi-size"></i>
+                            <button className="btny" onMouseOver={this.onHoverDisplay}>
+                                <i class="bi bi-paperclip bi-size"></i>
                                 {this.state.onMouseOver && (
                                     <div className="dropup-content" >
                                         <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleRecordFromScreen}></button>
@@ -170,10 +171,10 @@ class MessageList extends Component {
                             </button>
                         </div>
                         <textarea className="form-control rounded-pill droppy resizedTextbox" placeholder="Type your message..." ref={this.sendBox} onKeyDown={this.keyDownEvent} />
-                        <span className="input-group-text rounded-pill droppy" id="basic-addon1" onClick={this.sendMessage}>
-                            <i className="bi bi-arrow-right-short bi-size-xlarge"></i>
+                        <span className="input-group-text btny droppy" id="basic-addon1" onClick={this.sendMessage}>
+                            <i className="bi bi-arrow-right-circle-fill bi-size-xlarge"></i>
                         </span>
-                    </span>
+                    </section>
                 </div>
             )
         }
