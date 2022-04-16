@@ -6,6 +6,7 @@
     position: relative;
     overflow-y: hidden;
     box-shadow: 5px 5px 5px 5px rgb(193, 205, 238);
+    background-color: rgb(192 199 215);
     border-radius: 1%;
 }
 
@@ -18,16 +19,11 @@
     width: 100%;
     overflow-y: scroll;
     height: 100%;
-    margin: 1%;
     white-space: nowrap;
 }
 
 .to-right {
     float: right;
-}
-
-.bg-successive {
-    background-color: rgb(192 199 215);
 }
 
 .contact {
@@ -67,9 +63,8 @@
     position: absolute;
     width: 35%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     float: left;
-    overflow-x: hidden;
 }
 
 .pop-up-exist {
@@ -138,9 +133,9 @@
 }
 
 .lit-log {
-    height: 70px;
+    height: 18%;
     position: fixed;
-    top: 0px;
+    top: -30px;
 }
 
 .cent {
@@ -151,6 +146,7 @@
 .droppy {
     margin: 0.1%;
     background-color: transparent;
+    bottom: 33%;
 }
 
 .bi-size-xlarge {
@@ -164,8 +160,7 @@
 }
 
 .resizedTextbox {
-    width: 100px;
-    height: 45px;
+    height: 40px;
     margin-top: 0.3%;
 }
 
@@ -187,7 +182,7 @@
     max-width: 100%;
     overflow-x: hidden;
     overflow-wrap: break-word;
-    overflow:hidden;
+    overflow: hidden;
     white-space: pre-line;
 }
 
@@ -324,64 +319,45 @@
 
 
 
-.reply{
-    padding: 15px 0;
+.reply {
     background-color: #f5f8f9;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-  }
-  
-  .reply:before, .reply:after{
-    content: "";
-    display: block;
-    clear: both;
-  }
-  
-  .bi-paperclip, input, button{
+    justify-content: center;
+}
+
+.bi-paperclip {
     float: left;
     margin: 3px;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-  }
-  
-  
-  .bi-paperclip{
-    color: #444; 
-    font-size: 1.3em; 
-    padding-top: 1px; 
+    margin-top: 5px;
+    color: #444;
+    font-size: 1.5em;
     transform: rotate(-30deg);
     cursor: pointer;
-  }
-  
-  input{
-    width: 72%;
-    padding: 10px;
-    border: none;
-    font-size: 1.2em;
-    background-color: inherit;
-  }
-  
-  input:focus, button:focus{
+}
+
+input:focus,
+button:focus {
     outline: 0;
-  }
+}
 
-  .btny {
-      border:none;
-      background-color: transparent;
-  }
+.btny {
+    border: none;
+    padding-right: 5px !important;
+    height: 90%;
+    background-color: transparent;
+}
 
-  .bi-arrow-right-circle-fill{
-    color: #444; 
+.bi-arrow-right-circle-fill {
+    color: #444;
     font-size: 1.8em;
     cursor: pointer;
-  }
+}
 
-  .resizedTextbox {
-      border:none;
-      overflow-y: hidden;
-  }
+.resizedTextbox {
+    border: none;
+    overflow-y: hidden;
+}
+
+.input-group {
+    margin-top: 0% !important;
+}

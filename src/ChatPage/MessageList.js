@@ -132,7 +132,7 @@ class MessageList extends Component {
         } else {
             const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0]
             return (
-                <div className="">
+                <div>
                     <div className="conversation bg-successive your-div container">
                         <div className="card-body msg_card_body row">
                             {contact.messages.map((message, key) => {
@@ -157,10 +157,10 @@ class MessageList extends Component {
                         </div>
                     </div>
 
-                    <section class="input-group mb-2 down box bottom-0 reply" id="reply">
+                    <section className="input-group down box reply msg_cotainer" id="reply">
                         <div className="dropup droppy">
                             <button className="btny" onMouseOver={this.onHoverDisplay}>
-                                <i class="bi bi-paperclip bi-size"></i>
+                                <i className="bi bi-paperclip bi-size"></i>
                                 {this.state.onMouseOver && (
                                     <div className="dropup-content" >
                                         <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleRecordFromScreen}></button>

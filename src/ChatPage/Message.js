@@ -28,7 +28,6 @@ class Message extends Component {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
         }
-        console.log(this.props.content[3]);
         return (
             <div id="check" className="card-body p-4">
                 <div className={"d-flex mb-4 " + float_dir}>

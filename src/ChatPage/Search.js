@@ -21,7 +21,7 @@ function Search(props) {
                 </span>
                 <input ref={searchBox} onKeyUp={search} type="text" className="form-control contacts" placeholder="Type to search in contacts..." />
                 <span className="input-group-text" id="basic-addon1">
-                    <i className="bi bi-person-plus" onClick={addContact}></i>
+                    <i className="bi bi-person-plus bi-size" onClick={addContact}></i>
                 </span>
             </div>
         </div>

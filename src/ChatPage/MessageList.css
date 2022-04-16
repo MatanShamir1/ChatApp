@@ -38,12 +38,13 @@
 }
 
 .down {
-  position: absolute;
+  position: fixed;
   position: -webkit-sticky;
-  width: 100%;
-  bottom: 0px;
+  width: 60% !important;
+  height: 6.5% !important;
   padding: 0.5%;
-  margin-bottom: 0px !important;
+  bottom: 5% !important;
+  left: 35% !important;
   align-self: flex-end;
 }
 
@@ -58,7 +59,7 @@
   right: 0px;
   float: left;
   width: 65%;
-  height: 90%;
+  height: 100%;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -161,9 +162,4 @@
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
-}
-
-
-.card-body {
-  padding: 2.25rem;
 }
