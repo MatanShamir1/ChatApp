@@ -24,18 +24,16 @@ class Message extends Component {
     render() {
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
-        var source = this.props.source;
         if (this.props.content[2] === "rcv") {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
-            source = this.props.userimg;
         }
         return (
             <div id="check" className="card-body p-4">
                 <div className={"d-flex mb-4 " + float_dir}>
                     {float_dir === "justify-content-start" &&
                         (<div className="img_cont_msg">
-                            <img src={source} className="rounded-circle user_img_msg" />
+                            <img src={this.props.userimg} className="rounded-circle user_img_msg" />
                         </div>)
                     }
                     {this.props.content[1] === "text" && (
