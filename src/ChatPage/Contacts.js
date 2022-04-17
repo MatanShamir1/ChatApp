@@ -47,7 +47,6 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        console.log(contact.messages.at(-1)[0]);
                         const message = contact.messages.length===0?'': contact.messages.at(-1)[0].indexOf("blob:") !== -1 ? "attachment" : contact.messages.at(-1)[0]
                         const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
                         return <Contact source={contact.source} name={contact.name} message={message} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} oclock={oclock}/>

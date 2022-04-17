@@ -64,7 +64,7 @@ class Chat extends Component {
                         <Contacts setChat={this.setChat} addContact={this.addContact} />
                     </div>
                     <div>
-                        <MessageList name={this.state.name} addMessage={this.addMessage} />
+                        <MessageList imgsrc={this.props.user.imgsrc} name={this.state.name} addMessage={this.addMessage} />
                     </div>
                 </div>
             </div>

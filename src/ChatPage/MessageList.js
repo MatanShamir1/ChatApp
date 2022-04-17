@@ -78,6 +78,9 @@ class MessageList extends Component {
         const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
         contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
         this.sendBox.current.value = '';
+        const index = contactList.indexOf(contact);
+        contactList.splice(index, 1);
+        contactList.unshift(contact);
         this.props.addMessage();
     }
     onHoverDisplay() {
@@ -136,7 +139,7 @@ class MessageList extends Component {
                     <div className="conversation bg-successive your-div container">
                         <div className="card-body msg_card_body row">
                             {contact.messages.map((message, key) => {
-                                return <Message content={message} source={contact.source} key={key} />
+                                return <Message userimg={this.props.userimg} content={message} source={contact.source} key={key} />
                             })}
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >
