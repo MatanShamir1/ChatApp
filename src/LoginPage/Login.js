@@ -2,13 +2,15 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'rea
 import React, { Component } from "react";
 import './Login.css';
 import users from './usersList';
+import logo from "../images/ChatApp-logos.jpeg";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
-            password: ''
+            password: '',
+            errors: ''
         }
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -32,14 +34,16 @@ class Login extends Component {
         if (user != null) {
             this.props.setName(user.username)
         } else {
-            alert('Wrong Username or Password. Please try again')
+            this.setState({
+                errors: 'Wrong Username or Password. Please try again'
+            });
         }
     }
 
 
     render() {
         return (
-            <div id='back-div'>
+            <div className="everything">
                 <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label" >Username</label>
@@ -62,9 +66,12 @@ class Login extends Component {
                                 setName: this.props.setName
                             }}><span> to register.</span></Link>
                     </div>
+                    <div className="alert-message">
+                        {this.state.errors}
+                    </div>
                 </form>
+                <img src= {logo} className="logo-div"></img>
             </div>
-
         )
     }
 }

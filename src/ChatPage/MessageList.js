@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Message from "./Message";
-import contactList from "./contactList";
+import contactLists from "./contactLists";
 import './MessageList.css';
 import AddVideoOrImagePopUp from "./AddVideoOrImagePopUp";
 import { Modal } from 'react-bootstrap';
@@ -75,12 +75,28 @@ class MessageList extends Component {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         today = hh + ":" + nn + ', ' + mm + '/' + dd + '/' + yyyy;
-        const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
+        const contact = this.props.contactList.find((contact) => contact.name.includes(this.props.name));
+        //update my conversation
         contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
+        //update everyone else's conversations with me
+        for (var i=0; i< contactLists.length; i++){
+            if(contactLists[i][0] === this.props.username){
+                continue;
+            }
+            console.log(contactLists[i]);
+            const contact1 = contactLists[i][1].find((contact1) => {
+                return contact1.phoneNumber === this.props.username;
+            })
+            contact1.messages.push([this.sendBox.current.value, "text", "rcv", today]);
+            contact1.new++;
+            const index = contactLists[i][1].indexOf(contact1);
+            contactLists[i][1].splice(index, 1);
+            contactLists[i][1].unshift(contact1);
+        }
         this.sendBox.current.value = '';
-        const index = contactList.indexOf(contact);
-        contactList.splice(index, 1);
-        contactList.unshift(contact);
+        const index = this.props.contactList.indexOf(contact);
+        this.props.contactList.splice(index, 1);
+        this.props.contactList.unshift(contact);
         this.props.addMessage();
     }
     onHoverDisplay() {
@@ -120,7 +136,7 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false
         })
-        const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0];
+        const contact = this.props.contactList.filter((contact) => contact.name.includes(this.props.name))[0];
         contact.messages.push([x, y]);
         this.sendBox.current.value = '';
         this.props.addMessage();
@@ -133,7 +149,7 @@ class MessageList extends Component {
                 <div className="conversation2 bg-successive" />
             )
         } else {
-            const contact = contactList.filter((contact) => contact.name.includes(this.props.name))[0]
+            const contact = this.props.contactList.filter((contact) => contact.name.includes(this.props.name))[0]
             return (
                 <div>
                     <div className="conversation bg-successive your-div container">

@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import contactList from "./contactList";
 
 function Search(props) {
 

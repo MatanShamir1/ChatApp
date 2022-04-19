@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Contact from "./Contact.js"
 import Search from "./Search"
-import contactList from "./contactList";
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 class Contacts extends Component {
@@ -9,22 +8,22 @@ class Contacts extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            contacts: contactList,
+            contacts: this.props.contactList,
             curr: '',
         }
         this.render = this.render.bind(this)
     }
     setSearchQuery = (q) => {
         this.setState(
-            { contacts: contactList.filter((contact) => contact.name.includes(q)) }
+            { contacts: this.props.contactList.filter((contact) => contact.name.includes(q)) }
         )
     }
 
     applyChat = (name) => {
         this.props.setChat(name);
-        for (var i = 0, iLen = contactList.length; i < iLen; i++) {
-            if (contactList[i].name == name) {
-                contactList[i].new = 0;
+        for (var i = 0, iLen = this.props.contactList.length; i < iLen; i++) {
+            if (this.props.contactList[i].name == name) {
+                this.props.contactList[i].new = 0;
             }
         }
         this.setState({
@@ -37,6 +36,7 @@ class Contacts extends Component {
     }
 
     render() {
+        console.log(this.state.contacts)
         return (
             <div>
                 <Search setSearchQuery={this.setSearchQuery} addContact={this.addContact} />

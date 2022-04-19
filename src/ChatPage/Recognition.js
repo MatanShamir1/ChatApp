@@ -14,7 +14,7 @@ class Recognition extends Component {
                 <div className="cent">
                     <img src={logo} className='lit-log' />
                 </div>
-                <button id="log-out" onClick={this.props.logOut} type="button" className="btn btn-outline-secondary">Log out</button>
+                <button id="log-out" onClick={this.props.logOut} type="button" className="btn btn-outline-dark">Log out</button>
             </div>
         )
 

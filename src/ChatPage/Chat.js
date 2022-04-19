@@ -5,6 +5,7 @@ import AddContactPopUp from "./AddContactPopUp.js";
 import { Modal } from 'react-bootstrap';
 import { Navigate } from "react-router-dom"
 import Recognition from "./Recognition";
+
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 //shift+alt+f formatting!
@@ -51,20 +52,20 @@ class Chat extends Component {
         }
         return (
             <div id="everything">
-                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.username} logOut={this.logOut} />
+                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.nickname} logOut={this.logOut} />
                 <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
-                        <AddContactPopUp setActive={this.addContact}>
+                        <AddContactPopUp setActive={this.addContact} username = {this.props.user.username} contactList={this.props.contactList}>
                         </AddContactPopUp>
                     </Modal.Body>
                 </Modal>
                 <div className={theClass}>
                     <div className="leftMenu ">
-                        <Contacts setChat={this.setChat} addContact={this.addContact} />
+                        <Contacts setChat={this.setChat} addContact={this.addContact} contactList={this.props.contactList}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} name={this.state.name} addMessage={this.addMessage} />
+                        <MessageList imgsrc={this.props.user.imgsrc} name={this.state.name} username={this.props.user.username} addMessage={this.addMessage} contactList={this.props.contactList}/>
                     </div>
                 </div>
             </div>

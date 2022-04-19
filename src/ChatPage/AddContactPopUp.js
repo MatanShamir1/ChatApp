@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import { useRef } from 'react';
-import Message from "./Message";
-import contactList from "./contactList";
-import friend_img from "../images/default_friend_img.jpg"
-//you can write rce and it gives you a className template!
-//create a constructor using the keyword rconst.
+import React from "react";
+import { useRef, useState } from 'react';
+import users from '../LoginPage/usersList';
+
 function AddContactPopUp(props) {
+    const [error, setError] = useState('');
     const contactBox = useRef(null);
     const phoneBox = useRef(null);
     var theClass = 'modal pop-up-exist';
@@ -13,9 +11,16 @@ function AddContactPopUp(props) {
         theClass = 'modal pop-up-not-exist'
     }
     const saveChanges = () => {
-        contactList.push({
-            name: contactBox.current.value, messages: [], new: 0, source: friend_img
+        const user = users.find((user) => {
+            return user.username === phoneBox;
         })
+        if (user === undefined) {
+            setError('There\'s no user with this phone number/username.');
+        } else {
+            this.props.contactList.push({
+                name: contactBox.current.value, phoneNumber:user.username, messages: [], new: 0, source: user.imgsrc //this should be the other user's image...
+            })
+        }
         getOut();
     }
     const getOut = () => {
@@ -28,6 +33,9 @@ function AddContactPopUp(props) {
                     <label className="col-sm-2 col-form-label add-contact-text" >Contact name</label>
                     <div className="col-sm-4">
                         <input id='contact-name' ref={contactBox} className="form-control"></input>
+                    </div>
+                    <div className="alert-message">
+                        {error}
                     </div>
                 </div>
             </div>

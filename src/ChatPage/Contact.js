@@ -13,7 +13,7 @@ class Contact extends Component {
     }
 
     render() {
-        let message = this.props.message.length<30 ? this.props.message : this.props.message.substring(0,28)+"..."
+        let message = this.props.message.length<25 ? this.props.message : this.props.message.substring(0,23)+"..."
         return (
             <li className={this.props.styles} onClick={this.changeState}>
                 <div className="ms-2 me-auto">

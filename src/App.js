@@ -1,12 +1,13 @@
 import './App.css';
 import { Navigate } from "react-router-dom"
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './AppStyle.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from "./LoginPage/Login";
 import Register from "./LoginPage/Register";
 import Chat from "./ChatPage/Chat";
 import users from './LoginPage/usersList';
+import contactLists from "./ChatPage/contactLists";
 
 //if i want to write children inside my component, instead of returning it in them, i can write them between its tag and make sure to return props.children from it.
 function App() {
@@ -15,7 +16,10 @@ function App() {
   useEffect(() => {
     document.body.style.overflow = "hidden";
   }, []);
-  console.log('in rerendering app. current directory is:' + window.location.pathname);
+
+  var contactList = contactLists.find((contactList) => {
+    return contactList[0] === name
+  })
 
   return (
     <div>
@@ -26,7 +30,7 @@ function App() {
           <Route path='Chat' element={<Chat user={
             users.find((user) => {
               return user.username === name;
-            })} setName={setName} />}>
+            })} setName={setName} contactList={contactList===undefined?[]:contactList[1]} />}>
           </Route>
         </Routes>
       </BrowserRouter>

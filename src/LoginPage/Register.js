@@ -2,9 +2,8 @@
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import React, { Component } from "react";
 import users from './usersList';
-import { Navigate } from "react-router-dom"
 import './Login.css';
-import AddVideoPopUp from '../ChatPage/AddVideoOrImagePopUp';
+import logo from "../images/ChatApp-logos.jpeg";
 
 class Register extends Component {
     constructor(props) {
@@ -14,7 +13,8 @@ class Register extends Component {
             password: '',
             cpassword: '',
             nickname: '',
-            img: ''
+            img: '',
+            errors: ''
         }
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -55,8 +55,15 @@ class Register extends Component {
         if (!this.state.cpassword === this.state.password) {
             screenMessage += 'Password and confirmation dont match.'
         }
+        if (users.find((user) => {
+            return user.username === this.state.userName;
+        }) !== undefined) {
+            screenMessage += 'Another user with the same Phone number/username already exists.'
+        }
         if (screenMessage != '') {
-            alert(screenMessage);
+            this.setState({
+                errors: screenMessage
+            });
         } else {
             users.push({ username: this.state.userName, password: this.state.password, nickname: this.state.nickname, imgsrc: this.state.img })
             console.log('in onsubmit in register');
@@ -65,8 +72,8 @@ class Register extends Component {
     }
     render() {
         return (
-            <div id='back-div'>
-                <form className="login-form" onSubmit={this.onSubmit}>
+            <div className="everything">
+                <form className="login-form register-form" onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label">Username</label>
                         <div className="col-sm-4">
@@ -103,9 +110,12 @@ class Register extends Component {
                         <Link to='../'>Click here</Link>
                         <span> to login.</span>
                     </div>
+                    <div className="alert-message">
+                        {this.state.errors}
+                    </div>
                 </form>
+                <img src= {logo} className="logo-div"></img>
             </div>
-
         )
     }
 }
