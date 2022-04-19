@@ -37,6 +37,7 @@ class Login extends Component {
             this.setState({
                 errors: 'Wrong Username or Password. Please try again'
             });
+            event.preventDefault();
         }
     }
 
@@ -58,7 +59,7 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className='signButton form'>
-                        <button type="submit" className="btn btn-primary">Login</button>
+                        <button type="submit" id='refresh' className="btn btn-primary">Login</button>
                         <span className='register'>Not registered? </span>
                         <Link
                             to={{
@@ -70,7 +71,7 @@ class Login extends Component {
                         {this.state.errors}
                     </div>
                 </form>
-                <img src= {logo} className="logo-div"></img>
+                <img src={logo} className="logo-div"></img>
             </div>
         )
     }

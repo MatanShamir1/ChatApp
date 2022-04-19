@@ -32,6 +32,7 @@ class MessageList extends Component {
         this.render = this.render.bind(this)
         this.closeButton = this.closeButton.bind(this)
         this.updateCamera = this.updateCamera.bind(this)
+        this.sendAllkindOfMessage = this.sendAllkindOfMessage.bind(this)
         this.sendBox = React.createRef();
         this.closeCamera = React.createRef();
     }
@@ -68,6 +69,9 @@ class MessageList extends Component {
         if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
             return;
         }
+        this.sendAllkindOfMessage();
+    }
+    sendAllkindOfMessage(x ,y){
         var today = new Date();
         var hh = String(today.getHours()).padStart(2, '0');
         var nn = String(today.getMinutes()).padStart(2, '0');
@@ -77,7 +81,13 @@ class MessageList extends Component {
         today = hh + ":" + nn + ', ' + mm + '/' + dd + '/' + yyyy;
         const contact = this.props.contactList.find((contact) => contact.name.includes(this.props.name));
         //update my conversation
-        contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
+        if (typeof x !== 'undefined'){
+            contact.messages.push([x, y, "snd", today]);
+        } 
+        else{
+            contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
+        }
+    
         //update everyone else's conversations with me
         for (var i=0; i< contactLists.length; i++){
             if(contactLists[i][0] === this.props.username){
@@ -87,11 +97,22 @@ class MessageList extends Component {
             const contact1 = contactLists[i][1].find((contact1) => {
                 return contact1.phoneNumber === this.props.username;
             })
-            contact1.messages.push([this.sendBox.current.value, "text", "rcv", today]);
-            contact1.new++;
-            const index = contactLists[i][1].indexOf(contact1);
-            contactLists[i][1].splice(index, 1);
-            contactLists[i][1].unshift(contact1);
+            
+            if (typeof x !== 'undefined'){
+                contact1.messages.push([x,y, "rcv", today]);
+                contact1.new++;
+                const index = contactLists[i][1].indexOf(contact1);
+                contactLists[i][1].splice(index, 1);
+                contactLists[i][1].unshift(contact1);
+            } 
+            else{
+                contact1.messages.push([x, "text", "rcv", today]);
+                contact1.new++;
+                const index = contactLists[i][1].indexOf(contact1);
+                contactLists[i][1].splice(index, 1);
+                contactLists[i][1].unshift(contact1);
+            }
+         
         }
         this.sendBox.current.value = '';
         const index = this.props.contactList.indexOf(contact);
@@ -136,10 +157,7 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false
         })
-        const contact = this.props.contactList.filter((contact) => contact.name.includes(this.props.name))[0];
-        contact.messages.push([x, y]);
-        this.sendBox.current.value = '';
-        this.props.addMessage();
+      this.sendAllkindOfMessage(x ,y);
     }
 
 

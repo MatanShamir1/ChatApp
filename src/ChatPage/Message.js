@@ -12,9 +12,9 @@ class Message extends Component {
         }
         this.handleClick = this.handleClick.bind(this)
     }
-    handleClick(){
+    handleClick() {
         this.setState({
-            click : !this.state.click
+            click: !this.state.click
         })
     }
 
@@ -22,6 +22,9 @@ class Message extends Component {
 
 
     render() {
+        if (this.props.content[0] === "") {
+            return;
+        }
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
         if (this.props.content[2] === "rcv") {
@@ -47,24 +50,33 @@ class Message extends Component {
                             {this.state.click &&
                                 (<Modal show={this.state.click} onHide={this.handleClick} >
                                     <Modal.Header closeButton>
+                                        <h3>Image</h3>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <img src={this.props.content[0]} className="modalStyle"></img>
-
                                     </Modal.Body>
                                 </Modal>)}
-                            <img src={this.props.content[0]} className="check" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Click to zoom"></img>
+                            <div className={"msg_cotainer " + msg_col}>
+                                <img height="130" src={this.props.content[0]} style="width:100%" className="check" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Click to zoom"></img>
+                                <div className="msg_time_record">{this.props.content[3]}</div>
+                            </div>
                         </div>
                     )}
                     {this.props.content[1] === "video" && (
-                        <video width="240" height="180" controls>
-                            <source src={this.props.content[0]} type="video/mp4"></source>
-                        </video>
+                        <div className={"msg_cotainer " + msg_col}>
+                            <video height="130" controls>
+                                <source src={this.props.content[0]} type="video/mp4"></source>
+                            </video>
+                            <div className="msg_time_record">{this.props.content[3]}</div>
+                        </div>
                     )}
                     {this.props.content[1] === "record" && (
-                        <audio controls>
-                            <source src={this.props.content[0]}></source>
-                        </audio>
+                        <div className={"msg_cotainer " + msg_col}>
+                            <audio controls>
+                                <source src={this.props.content[0]}></source>
+                            </audio>
+                            <div className="msg_time_record">{this.props.content[3]}</div>
+                        </div>
                     )}
                     {float_dir === "justify-content-end" &&
                         (<div className="img_cont_msg">

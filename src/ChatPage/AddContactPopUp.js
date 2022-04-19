@@ -16,6 +16,7 @@ function AddContactPopUp(props) {
         })
         if (user === undefined) {
             setError('There\'s no user with this phone number/username.');
+            return;
         } else {
             this.props.contactList.push({
                 name: contactBox.current.value, phoneNumber:user.username, messages: [], new: 0, source: user.imgsrc //this should be the other user's image...

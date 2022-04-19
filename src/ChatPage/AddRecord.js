@@ -58,6 +58,7 @@ export default function AddRecord(props) {
                         available: true,
                         url
                     });
+                    const tracks = stream.getTracks();
                 };
 
                 setStream({
