@@ -64,6 +64,7 @@ class Register extends Component {
             this.setState({
                 errors: screenMessage
             });
+            event.preventDefault();
         } else {
             users.push({ username: this.state.userName, password: this.state.password, nickname: this.state.nickname, imgsrc: this.state.img })
             console.log('in onsubmit in register');
