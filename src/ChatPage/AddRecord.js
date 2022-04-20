@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-
-
 export default function AddRecord(props) {
     const [stream, setStream] = useState({
         access: false,
@@ -22,7 +20,6 @@ export default function AddRecord(props) {
             .getUserMedia({ audio: true })
             .then((mic) => {
                 let mediaRecorder;
-
                 try {
                     mediaRecorder = new MediaRecorder(mic, {
                         mimeType: "audio/webm"
@@ -30,10 +27,9 @@ export default function AddRecord(props) {
                 } catch (err) {
                     console.log(err);
                 }
-
+                props.closeCamera(mic.getTracks()[0])
                 const track = mediaRecorder.stream.getTracks()[0];
                 track.onended = () => console.log("ended");
-
                 mediaRecorder.onstart = function () {
                     setRecording({
                         active: true,
@@ -49,7 +45,6 @@ export default function AddRecord(props) {
 
                 mediaRecorder.onstop = async function () {
                     console.log("stopped");
-
                     const url = URL.createObjectURL(chunks.current[0]);
                     chunks.current = [];
 
@@ -58,7 +53,7 @@ export default function AddRecord(props) {
                         available: true,
                         url
                     });
-                    const tracks = stream.getTracks();
+                    mic.getTracks()[0].stop();
                 };
 
                 setStream({

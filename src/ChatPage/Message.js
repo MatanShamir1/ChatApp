@@ -57,7 +57,7 @@ class Message extends Component {
                                     </Modal.Body>
                                 </Modal>)}
                             <div className={"msg_cotainer " + msg_col}>
-                                <img height="130" src={this.props.content[0]} style="width:100%" className="check" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Click to zoom"></img>
+                                <img height="130" src={this.props.content[0]} className="check" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Click to zoom"></img>
                                 <div className="msg_time_record">{this.props.content[3]}</div>
                             </div>
                         </div>
