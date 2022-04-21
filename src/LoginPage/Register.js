@@ -21,7 +21,7 @@ class Register extends Component {
         this.handleImageChange = this.handleImageChange.bind(this)
     }
     handleImageChange(event) {
-        this.setState({ img: URL.createObjectURL(event.target.value) });
+        this.setState({ img: URL.createObjectURL(event.target.files[0]) });
     }
     usernameIsValid(username) {
         return /^[0-9\-]+$/.test(username);
