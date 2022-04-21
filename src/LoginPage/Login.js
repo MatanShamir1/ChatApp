@@ -59,7 +59,7 @@ class Login extends Component {
                         </div>
                     </div>
                     <div className='signButton form'>
-                        <button type="submit" id='refresh' className="btn btn-primary">Login</button>
+                        <button type="submit" id='refresh' className="btn btn-primary modal__btn">Login</button>
                         <span className='register'>Not registered? </span>
                         <Link
                             to={{

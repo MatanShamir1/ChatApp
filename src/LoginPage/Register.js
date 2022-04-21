@@ -1,6 +1,7 @@
 
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import React, { Component } from "react";
+import contactLists from '../ChatPage/contactLists';
 import users from './usersList';
 import './Login.css';
 import logo from "../images/ChatApp-logos.jpeg";
@@ -9,34 +10,21 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            password: '',
-            cpassword: '',
-            nickname: '',
             img: '',
             errors: ''
         }
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.username = React.createRef();
+        this.password = React.createRef();
+        this.cpassword = React.createRef();
+        this.nickname = React.createRef();
         this.onSubmit = this.onSubmit.bind(this);
-    }
-    handleChangeUserName(event) {
-        this.setState({ userName: event.target.value });
-    }
-    handleChangePassword(event) {
-        this.setState({ password: event.target.value });
-    }
-    handleChangeCPassword(event) {
-        this.setState({ cpassword: event.target.value });
-    }
-    handleChangeNickname(event) {
-        this.setState({ nickname: event.target.value });
+        this.handleImageChange = this.handleImageChange.bind(this)
     }
     handleImageChange(event) {
         this.setState({ img: URL.createObjectURL(event.target.value) });
     }
     usernameIsValid(username) {
-        return /^[A-Za-z0-9_.]+$/.test(username);
+        return /^[0-9\-]+$/.test(username);
     }
     passwordIsValid(password) {
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
@@ -44,21 +32,22 @@ class Register extends Component {
 
     onSubmit(event) {
         var screenMessage = '';
-        console.log(this.state.userName);
-        if (!this.usernameIsValid(this.state.userName)) {
-            console.log(this.state.userName);
-            screenMessage += 'Please use only letters, numbers, and \'_\' or \'.\' for your username.\n';
+        if (!this.usernameIsValid(this.username.current.value)) {
+            screenMessage += '*Please use only numbers for your username (it should be your phone).\n';
         }
-        if (!this.passwordIsValid(this.state.password)) {
-            screenMessage += 'Please use a password that has Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.\n'
+        if (!this.passwordIsValid(this.password.current.value)) {
+            screenMessage += '*Please use a password that has Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.\n'
         }
-        if (!this.state.cpassword === this.state.password) {
-            screenMessage += 'Password and confirmation dont match.'
+        if (this.cpassword.current.value !== this.password.current.value) {
+            screenMessage += '*Password and confirmation dont match.\n'
+        }
+        if(this.nickname.current.value=''){
+            screenMessage += '*Please enter a nickname.\n'
         }
         if (users.find((user) => {
-            return user.username === this.state.userName;
+            return user.username === this.username.current.value;
         }) !== undefined) {
-            screenMessage += 'Another user with the same Phone number/username already exists.'
+            screenMessage += '*Another user with the same Phone number/username already exists.'
         }
         if (screenMessage != '') {
             this.setState({
@@ -66,8 +55,9 @@ class Register extends Component {
             });
             event.preventDefault();
         } else {
-            users.push({ username: this.state.userName, password: this.state.password, nickname: this.state.nickname, imgsrc: this.state.img })
-            console.log('in onsubmit in register');
+            console.log(this.state.img);
+            users.push({ username: this.username.current.value, password: this.password.current.value, nickname: this.nickname.current.value, imgsrc: this.state.img })
+            contactLists.push([this.username.current.value, []]);
             this.props.setName('GO_TO_LOGIN');
         }
     }
@@ -78,25 +68,25 @@ class Register extends Component {
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label">Username</label>
                         <div className="col-sm-4">
-                            <input id='username' className="form-control" onChange={this.handleChangeUserName}></input>
+                            <input id='username' className="form-control" ref={this.username}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form">
                         <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-4">
-                            <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangePassword}></input>
+                            <input type="password" className="form-control" id="inputPassword3" ref={this.password}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form">
                         <label for="inputPassword3" className="col-sm-2 col-form-label">Confirm password</label>
                         <div className="col-sm-4">
-                            <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangeCPassword}></input>
+                            <input type="password" className="form-control" id="inputPassword3" ref={this.cpassword}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form">
                         <label className="col-sm-2 col-form-label">Display name</label>
                         <div className="col-sm-4">
-                            <input id='username' className="form-control" onChange={this.handleChangeNickname}></input>
+                            <input id='username' className="form-control" ref={this.nickname}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form">
@@ -106,7 +96,7 @@ class Register extends Component {
                         </div>
                     </div>
                     <div className='regButton'>
-                        <button type="submit" className="btn btn-primary">Register</button>
+                        <button type="submit" className="btn btn-primary modal__btn">Register</button>
                         <span className='register'>Already registered? </span>
                         <Link to='../'>Click here</Link>
                         <span> to login.</span>
@@ -115,7 +105,7 @@ class Register extends Component {
                         {this.state.errors}
                     </div>
                 </form>
-                <img src= {logo} className="logo-div"></img>
+                <img src={logo} className="logo-div"></img>
             </div>
         )
     }

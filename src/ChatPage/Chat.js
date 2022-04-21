@@ -14,14 +14,14 @@ class Chat extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: '',
+            username: '',
             isAdd: false
         }
     }
 
-    setChat = (name) => {
+    setChat = (username) => {
         this.setState({
-            name: name
+            username: username
         })
     }
 
@@ -65,7 +65,7 @@ class Chat extends Component {
                         <Contacts setChat={this.setChat} addContact={this.addContact} contactList={this.props.contactList}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} name={this.state.name} username={this.props.user.username} addMessage={this.addMessage} contactList={this.props.contactList}/>
+                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user.username} addMessage={this.addMessage} contactList={this.props.contactList}/>
                     </div>
                 </div>
             </div>

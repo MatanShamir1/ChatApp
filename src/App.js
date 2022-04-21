@@ -20,6 +20,7 @@ function App() {
   var contactList = contactLists.find((contactList) => {
     return contactList[0] === name
   })
+  console.log(contactList)
 
   return (
     <div>

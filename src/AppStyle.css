@@ -334,11 +334,16 @@
 }
 
 
+.p-4 {
+    padding: 0% !important;
+}
 
-
-
+.pad-top {
+    bottom: 90px;
+}
 
 .reply {
+    margin-top: 400px;
     background-color: #f5f8f9;
     display: flex;
     justify-content: center;
@@ -386,4 +391,19 @@ button:focus {
         linear-gradient(rgb(162, 175, 235), transparent),
         linear-gradient(to top left, rgb(119, 152, 230), transparent),
         linear-gradient(to top right, rgb(183, 190, 199), transparent);
+}
+
+.circular-square {
+    object-fit: cover !important;
+    margin-top: 10%;   
+}
+
+.form-control {
+    min-width: 120px;
+    margin-left: 10px;
+}
+
+.row {
+    margin-left: 0% !important;
+    margin-right: 0% !important;
 }

@@ -74,7 +74,7 @@ class MessageList extends Component {
         if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
             return;
         }
-        this.sendAllkindOfMessage();
+        this.sendAllkindOfMessage(undefined,this.sendBox.current.value);
     }
     sendAllkindOfMessage(x, y) {
         var today = new Date();
@@ -84,46 +84,50 @@ class MessageList extends Component {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
         today = hh + ":" + nn + ', ' + mm + '/' + dd + '/' + yyyy;
-        const contact = this.props.contactList.find((contact) => contact.name.includes(this.props.name));
+        const contact = this.props.contactList.find((contact) => contact.phoneNumber.includes(this.props.phoneNumber));
         //update my conversation
         if (typeof x !== 'undefined') {
             contact.messages.push([x, y, "snd", today]);
         }
         else {
-            contact.messages.push([this.sendBox.current.value, "text", "snd", today]);
+            contact.messages.push([y, "text", "snd", today]);
         }
 
         //update everyone else's conversations with me
         for (var i = 0; i < contactLists.length; i++) {
-            if (contactLists[i][0] === this.props.username) {
-                continue;
-            }
-            console.log(contactLists[i]);
-            const contact1 = contactLists[i][1].find((contact1) => {
-                return contact1.phoneNumber === this.props.username;
-            })
+            if (contactLists[i][0] === this.props.phoneNumber) {
+                var contact1 = contactLists[i][1].find((contact1) => {
+                    return contact1.phoneNumber === this.props.username;
+                })  
+                //in this case, i write to someone and he doesn't have me in his contact. need to add me as a phone number contact.
+                if(contact1 === undefined){
+                    contactLists[i][1].push({name:this.props.username,phoneNumber:this.props.username,messages:[],new:0,source:this.props.imgsrc});
+                    contact1 = contactLists[i][1].find((contact1) => {
+                        return contact1.phoneNumber === this.props.username;
+                    })  
+                }
+                if (typeof x !== 'undefined') {
+                    contact1.messages.push([x, y, "rcv", today]);
+                    contact1.new++;
+                    const index = contactLists[i][1].indexOf(contact1);
+                    contactLists[i][1].splice(index, 1);
+                    contactLists[i][1].unshift(contact1);
+                }
+                else {
+                    contact1.messages.push([y, "text", "rcv", today]);
+                    contact1.new++;
+                    const index = contactLists[i][1].indexOf(contact1);
+                    contactLists[i][1].splice(index, 1);
+                    contactLists[i][1].unshift(contact1);
+                }
 
-            if (typeof x !== 'undefined') {
-                contact1.messages.push([x, y, "rcv", today]);
-                contact1.new++;
-                const index = contactLists[i][1].indexOf(contact1);
-                contactLists[i][1].splice(index, 1);
-                contactLists[i][1].unshift(contact1);
             }
-            else {
-                contact1.messages.push([x, "text", "rcv", today]);
-                contact1.new++;
-                const index = contactLists[i][1].indexOf(contact1);
-                contactLists[i][1].splice(index, 1);
-                contactLists[i][1].unshift(contact1);
-            }
-
+            this.sendBox.current.value = '';
+            const index = this.props.contactList.indexOf(contact);
+            this.props.contactList.splice(index, 1);
+            this.props.contactList.unshift(contact);
+            this.props.addMessage();
         }
-        this.sendBox.current.value = '';
-        const index = this.props.contactList.indexOf(contact);
-        this.props.contactList.splice(index, 1);
-        this.props.contactList.unshift(contact);
-        this.props.addMessage();
     }
     onHoverDisplay() {
         this.setState({
@@ -167,12 +171,13 @@ class MessageList extends Component {
 
 
     render() {
-        if (this.props.name === '') {
+        if (this.props.phoneNumber === '') {
             return (
                 <div className="conversation2 bg-successive" />
             )
         } else {
-            const contact = this.props.contactList.filter((contact) => contact.name.includes(this.props.name))[0]
+            console.log(this.props.contactList);
+            const contact = this.props.contactList.filter((contact) => contact.phoneNumber.includes(this.props.phoneNumber))[0]
             return (
                 <div>
                     <div className="conversation bg-successive your-div container">
@@ -186,7 +191,7 @@ class MessageList extends Component {
                                     {this.state.PopUpRecordFromScreen && (<h3>Send a Video</h3>)}
                                     {this.state.popUpRecord && (<h3>Send a recording</h3>)}
                                     {this.state.popUpVideoOrImage && (<h3>Send an image</h3>)}
-                                    {this.state.popUpImgfromScreen && (<h3>Pick an image</h3>)}
+                                    {this.state.popUpImgfromScreen && (<h3>Take a photo</h3>)}
                                 </Modal.Header>
                                 <Modal.Body>
                                     {this.state.PopUpRecordFromScreen && (<AddVideoFromScreen parentCallback={this.handlePopData}></AddVideoFromScreen>)}

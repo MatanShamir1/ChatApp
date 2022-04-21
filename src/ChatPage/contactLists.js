@@ -1,20 +1,41 @@
-import img1 from '../images/WhatsApp Image 2021-11-23 at 20.47.52.jpeg' //jon
-import img2 from '../images/WhatsApp Image 2021-11-23 at 20.47.52.jpeg' //arya
-import img3 from '../images/WhatsApp Image 2022-04-01 at 09.26.16.jpeg' //sansa
-import img4 from '../images/WhatsApp Image 2022-04-01 at 09.26.16.jpeg' //rob
+import imgArya from '../images/Arya_Stark.jpg'
+import imgJon from '../images/jon_snow.jpg'
+import imgCatelyn from '../images/catelyn_stark.png'
+import imgNed from '../images/Ned_Stark.jpg'
+import imgRob from '../images/rob_stark.jpg'
+import imgSansa from '../images/sansa_stark.jpg'
+
 
 let contactLists = [
-    ["054-1234567", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]], new: 1, source: img3 },  //jon
-    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]], new: 1, source: img2 },
-    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: img4 }]],
-    ["054-3456789", [{ name: "Jon", phoneNumber: "054-1234567",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 0, source: img1 }, //sansa
-    { name: "Arya", phoneNumber: "054-2345678",  messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]], new: 1, source: img2 },
-    { name: "Rob", phoneNumber: "054-4567890",  messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: img4 }]],
-    ["054-2345678", [{ name: "Jon", phoneNumber: "054-1234567",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 0, source: img1 },  //arya
-    { name: "Sansa", phoneNumber: "054-3456789",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 2, source: img3 },
-    { name: "Rob", phoneNumber: "054-4567890",  messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: img4 }]],
-    ["054-4567890", [{ name: "Jon", phoneNumber: "054-1234567",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 0, source: img1 }, //rob
-    { name: "Sansa", phoneNumber: "054-3456789",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 2, source: img3 },
-    { name: "Arya", phoneNumber: "054-2345678",  messages: [['what is up?',"text","snd","08:40, 04/14/2022"]], new: 1, source: img2 }]]
+    ["054-1234567", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgSansa },  //jon
+    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgArya },
+    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgRob },
+    { name: "Eddard", phoneNumber: "054-6789012", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgNed },
+    { name: "Catelyn", phoneNumber: "054-5678901", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: imgCatelyn }]],
+    ["054-2345678", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgSansa },  //arya
+    { name: "Jon", phoneNumber: "054-1234567", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgJon },
+    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgRob },
+    { name: "Eddard", phoneNumber: "054-6789012", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgNed },
+    { name: "Catelyn", phoneNumber: "054-5678901", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: imgCatelyn }]],
+    ["054-3456789", [{ name: "Jon", phoneNumber: "054-1234567", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgJon },  //sansa
+    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgArya },
+    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgRob },
+    { name: "Eddard", phoneNumber: "054-6789012", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgNed },
+    { name: "Catelyn", phoneNumber: "054-5678901", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: imgCatelyn }]],
+    ["054-4567890", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgSansa },  //rob
+    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgArya },
+    { name: "Jon", phoneNumber: "054-1234567", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgJon },
+    { name: "Eddard", phoneNumber: "054-6789012", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgNed },
+    { name: "Catelyn", phoneNumber: "054-5678901", messages: [['what is up?',"text","rcv","08:40, 04/14/2022"]] , new: 1, source: imgCatelyn }]],
+    ["054-5678901", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgSansa },  //catelyn
+    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgArya },
+    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgRob },
+    { name: "Eddard", phoneNumber: "054-6789012", messages: [['what is up?', "text", "rcv", "08:40, 04/14/2022"]], new: 1, source: imgNed },
+    { name: "Jon", phoneNumber: "054-1234567", messages: [['what is up?',"text","snd","08:40, 04/14/2022"]] , new: 0, source: imgJon }]],
+    ["054-6789012", [{ name: "Sansa", phoneNumber: "054-3456789", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgSansa },  //eddard
+    { name: "Arya", phoneNumber: "054-2345678", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgArya },
+    { name: "Rob", phoneNumber: "054-4567890", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgRob },
+    { name: "Jon", phoneNumber: "054-1234567", messages: [['what is up?', "text", "snd", "08:40, 04/14/2022"]], new: 0, source: imgJon },
+    { name: "Catelyn", phoneNumber: "054-5678901", messages: [['what is up?',"text","snd","08:40, 04/14/2022"]] , new: 0, source: imgCatelyn }]]
 ]
 export default contactLists;

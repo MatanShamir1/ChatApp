@@ -106,9 +106,9 @@ render() {
   return (
     <div className="AddPicFromScreen">
       {playerORImage}
-      <button className="btn btn-primary" onClick={this.initializeMedia}>Take Photo</button>
-      <button className="btn btn-secondary" onClick={this.capturePicture}>Capture</button>
-      <button className="btn btn-success bt" onClick={this.saveImage}>save</button>
+      <button className="btn btn-primary modal__btn" onClick={this.initializeMedia}>Take Photo</button>
+      <button className="btn btn-secondary modal__btn" onClick={this.capturePicture}>Capture</button>
+      <button className="btn btn-success bt modal__btn" onClick={this.saveImage}>Send</button>
     </div>
   );
 }

@@ -23,7 +23,7 @@ class Message extends Component {
 
     render() {
         if (this.props.content[0] === "") {
-            return;
+            return <></>;
         }
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
@@ -36,7 +36,7 @@ class Message extends Component {
                 <div className={"d-flex mb-4 " + float_dir}>
                     {float_dir === "justify-content-start" &&
                         (<div className="img_cont_msg">
-                            <img src={this.props.userimg} className="rounded-circle user_img_msg" />
+                            <img src={this.props.userimg} className="circular-square" />
                         </div>)
                     }
                     {this.props.content[1] === "text" && (
@@ -80,7 +80,7 @@ class Message extends Component {
                     )}
                     {float_dir === "justify-content-end" &&
                         (<div className="img_cont_msg">
-                            <img src={this.props.source} className="rounded-circle user_img_msg" />
+                            <img src={this.props.source} className="circular-square" />
                         </div>)
                     }
                 </div>

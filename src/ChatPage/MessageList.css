@@ -78,7 +78,9 @@
 }
 
 .bt {
-  margin-left: 40%;
+  position:absolute;
+  right: 3%;
+  bottom: 3%;;
 }
 
 .modalStyle {
@@ -162,4 +164,10 @@
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
+}
+
+
+.msg_card_body {
+  position:relative;
+  padding-bottom: 50px;
 }
