@@ -39,10 +39,12 @@ export default function AddRecord(props) {
                 };
 
                 mediaRecorder.ondataavailable = function (e) {
+                    console.log("data available");
                     chunks.current.push(e.data);
                 };
 
                 mediaRecorder.onstop = async function () {
+                    console.log("stopped");
                     const url = URL.createObjectURL(chunks.current[0]);
                     chunks.current = [];
 
@@ -61,6 +63,7 @@ export default function AddRecord(props) {
                 });
             })
             .catch((error) => {
+                console.log(error);
                 setStream({ ...stream, error });
             });
     }
@@ -79,7 +82,7 @@ export default function AddRecord(props) {
                     </button>
                     <button className="btn btn-secondary modal__btn" onClick={() => stream.recorder.stop()}>Stop Recording</button>
                     {recording.available && <audio controls src={recording.url} />}
-                    <button className="btn btn-secondary modal__btn" onClick={() => handleClick(callBack)}>Send</button>
+                    <button className="btn btn-secondary modal__btn" onClick={() => handleClick(callBack)}>Save</button>
                 </div>
             ) : (
                 <button className="btn btn-secondary modal__btn" onClick={getAccess}>Get Mic Access</button>
