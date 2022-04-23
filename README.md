@@ -2,8 +2,8 @@
 1. [About](#About)
 2. [Dependencies](#dependencies)  
 3. [Pages-flow-and-explanation](#Pages-flow-and-explanation)
-4. [How to open the app](#How to open the app)
-5. [How to use the app](#How to use the app)
+4. [How-to-open-the-app](#How-to-open-the-app)
+5. [How-to-use-the-app](#How-to-use-the-app)
 6. [Developers](#Developers)
 
 
@@ -48,6 +48,7 @@ Try to use these by choosing the pop-up next to the chat text-box.<br />
 - Adding chat with a new friend:<br />
 By clicking the on the contact symbol, the user can add an existing registrated user as a friend.<br />
 If the user does not exist, a red note will be displayed. otherwise, he will be added. <br />
+If the user added a contact but the contact does not have this user as friend, he will appear as an unknown number. <br />
 
 ![image](https://user-images.githubusercontent.com/74719554/164934916-3f840283-150f-4f34-833e-cded38d3c704.png)
 <br />
@@ -58,7 +59,7 @@ A user can search for a specific chat by typing a username in the search bar.<br
 The user can have as much contacts as he want with the same names, as nicknames aren't unique, unlike usernames (phone numbers).
 ![image](https://user-images.githubusercontent.com/74719554/164935231-434a76e1-ea98-4f88-887e-1d37f48ee947.png)
 
-## How to open the app
+## How-to-open-the-app
 1. Clone the repository to your preffered location. Get into your directory, <br />
    open Git Bash / PowerShell if on windows, or Terminal if on a linux machine, and write:  
     ```
@@ -73,7 +74,7 @@ The user can have as much contacts as he want with the same names, as nicknames 
    This will install all the dependencies needed for our project.
 4. Write npm start.   
 
-## How to use the app
+## How-to-use-the-app
 Now that you have logged in, in order to use our app, enter the following username and password:
 ```
 Username - 054-1234567
