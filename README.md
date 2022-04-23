@@ -46,11 +46,12 @@ Our app supports text, image choosing, video choosing, recording voice messages 
 Try to use these by choosing the pop-up next to the chat text-box.<br />
 ![image](https://user-images.githubusercontent.com/74719554/164934621-d79e6693-2a7b-46ec-af60-c224af73e58b.png)
 <br />
-### pay attention:**
+### pay attention:
 - ![buttons](https://user-images.githubusercontent.com/84122241/164943978-536b6b23-c024-46d3-a685-f8f9545ab092.png)
 - in first button you can upload both video and image and only them.
 - in the second button you can upload record from the computer.
 - in third button we also add ,dispite in wasn't requirment , abillty to picature image from the screen.
+<br/>
 **features included:**
 - Adding chat with a new friend:<br />
 By clicking the on the contact symbol, the user can add an existing registrated user as a friend.<br />
