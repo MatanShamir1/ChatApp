@@ -174,6 +174,16 @@ class MessageList extends Component {
         });
     }
     handlePopData(x, y) {
+        if (this.closeCamera.current !== null) {
+            if (this.closeCamera.kind === "audio") {
+                this.closeCamera.stop();
+            }
+            else {
+                this.closeCamera.forEach((track) => {
+                    track.stop();
+                });
+            }
+        }
         this.setState({
             show: false,
             popUpRecord: false,
