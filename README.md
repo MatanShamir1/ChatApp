@@ -1,4 +1,5 @@
-# Chat App - a chatting app by Matan Shamir and Itamar Bachar.
+# Chat App
+## a chatting app by Matan Shamir and Itamar Bachar.
 1. [About](#About)
 2. [Dependencies](#dependencies)  
 3. [Pages-flow-and-explanation](#Pages-flow-and-explanation)
@@ -14,6 +15,8 @@ This is the first milestone in the advanced programming 2 course. we used react 
 * Windows / Linux / macOS
 * Git
 * VScode
+* node.js
+* React packages:  react-bootstrap, react-router-dom
 
 ## Pages-flow-and-explanation:
 ### Login page
@@ -52,7 +55,6 @@ If the user added a contact but the contact does not have this user as friend, h
 
 ![image](https://user-images.githubusercontent.com/74719554/164934916-3f840283-150f-4f34-833e-cded38d3c704.png)
 <br />
-
 
 - Searching in the chat:<br />
 A user can search for a specific chat by typing a username in the search bar.<br />
