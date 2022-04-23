@@ -44,7 +44,7 @@ Try to use these by choosing the pop-up next to the chat text-box.<br />
 ![image](https://user-images.githubusercontent.com/74719554/164934621-d79e6693-2a7b-46ec-af60-c224af73e58b.png)
 <br />
 
-####features included:
+**features included:**
 - Adding chat with a new friend:<br />
 By clicking the on the contact symbol, the user can add an existing registrated user as a friend.<br />
 If the user does not exist, a red note will be displayed. otherwise, he will be added. <br />
@@ -92,5 +92,5 @@ Password - 12345678
 and see that Jons messages were received.
 
 ## Developers:
-**Matan Shamir 206960239**
+**Matan Shamir 206960239** <br>/
 **Itamar Bachar 295847376**
