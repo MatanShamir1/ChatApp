@@ -52,7 +52,6 @@ export default function AddRecord(props) {
             available: true,
             url
           });
-          mic.getTracks()[0].stop();
         };
 
         setStream({
