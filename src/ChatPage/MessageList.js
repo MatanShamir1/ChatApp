@@ -162,7 +162,9 @@ class MessageList extends Component {
     handleClickRecord() {
         this.setState({
             show: !this.state.show,
-            popUpRecord: true
+            popUpRecord: true,
+            disabled:"disabled"
+
         });
     }
     handleClickImgFromScreen() {
@@ -204,7 +206,6 @@ class MessageList extends Component {
                             <Modal show={this.state.show} onHide={this.closeButton} >
                                 <Modal.Header closeButton>
                                     {this.state.popUpRecord && (<h3>Send a recording </h3>)}
-                                    {/* {this.state.record && (<h3>start record</h3>)} */}
                                     {this.state.popUpVideoOrImage && (<h3>Send an image</h3>)}
                                     {this.state.popUpImgfromScreen && (<h3>Take a photo</h3>)}
                                 </Modal.Header>
@@ -224,7 +225,6 @@ class MessageList extends Component {
                                 <i className="bi bi-paperclip bi-size"></i>
                                 {this.state.onMouseOver && (
                                     <div className="dropup-content" >
-                                        <button className="bi bi-camera-reels btn btn-outline-light" onClick={this.handleRecordFromScreen}></button>
                                         <button className="bi bi-card-image btn btn-outline-light" onClick={this.handleClickImage}></button>
                                         <button className="bi bi-mic-fill btn btn-outline-light" onClick={this.handleClickRecord}></button>
                                         <button className="bi bi-camera-video btn btn-outline-light" onClick={this.handleClickImgFromScreen}></button>

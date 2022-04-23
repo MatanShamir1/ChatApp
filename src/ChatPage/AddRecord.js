@@ -15,7 +15,6 @@ export default function AddRecord(props) {
   const callStart = props.startRecord;
 
   const chunks = useRef([]);
-
   function getAccess() {
     navigator.mediaDevices
       .getUserMedia({ audio: true })
@@ -81,8 +80,9 @@ export default function AddRecord(props) {
             Start Recording
           </button>
           <button className="btn btn-secondary modal__btn" disabled={props.disabled}  onClick={() => stream.recorder.stop()}>Stop Recording</button>
-          {recording.available && <audio controls src={recording.url} />}
-          <button className="btn btn-secondary modal__btn" disabled={props.disabled}  onClick={() => handleClick(callBack)}>Save</button>
+          {recording.available && <audio controls className="chr" src={recording.url} />}
+          <div></div>
+          <button className="btn btn-secondary modal__btn ad" disabled={props.disabled}  onClick={() => handleClick(callBack)}>Save</button>
         </div>
       ) : (
         <button className="btn btn-secondary modal__btn" onClick={getAccess}>Get Mic Access</button>

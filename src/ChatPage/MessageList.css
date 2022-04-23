@@ -136,7 +136,12 @@
   width:100%;
   position:relative;
 }
-
+.ad{
+  float: right;
+}
+.chr{
+  width:100%
+}
 
 /* Toggle this class - hide and show the popup */
 .popup .show {
