@@ -1,9 +1,10 @@
 # Chat App - a chatting app by Matan Shamir and Itamar Bachar.
 1. [About](#About)
 2. [Dependencies](#dependencies)  
-3. [Installation](#Installation)
-4. [instructions](#instructions)
-5. [Simulation](#simulation)
+3. [Pages flow and explanation](#Pages flow and explanation)
+4. [How to open the app](#How to open the app)
+5. [How to use the app](#How to use the app)
+6. [Developers](#Developers)
 
 
 ## About
@@ -17,8 +18,6 @@ This is the first milestone in the advanced programming 2 course. we used react 
 ## Pages flow and explanation:
 ### Login page
 At this stage, only existing users (hard coded) can log in.<br />
-![signin](https://user-images.githubusercontent.com/90967892/164452725-c6b44047-79ee-4574-abfb-1dbcb88ecd80.jpg)<br />
-<br />
 In case of a wrong user name or password there is a note notifying about the error.<br />
 For safety reasons we do not give the information about which field is incorrect.<br />
 <br />
