@@ -21,8 +21,12 @@ class MessageList extends Component {
             popUpRecord: false,
             popUpVideoOrImage: false,
             PopUpRecordFromScreen: false,
-            popUpImgfromScreen: false
+            popUpImgfromScreen: false,
+            record: false,
+            disabled:"disabled"
+           
         }
+        this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
         this.handleClickImgFromScreen = this.handleClickImgFromScreen.bind(this)
         this.onHoverDisplay = this.onHoverDisplay.bind(this)
@@ -36,6 +40,13 @@ class MessageList extends Component {
         this.sendBox = React.createRef();
         this.closeCamera = React.createRef();
     }
+    startRecording() {
+        this.setState({
+            record: !this.state.record,
+            disabled:""
+        })
+    }
+
     componentDidUpdate() {
         var element = document.getElementById("update");
         if (element != null) {
@@ -61,7 +72,9 @@ class MessageList extends Component {
             popUpRecord: false,
             popUpVideoOrImage: false,
             PopUpRecordFromScreen: false,
-            popUpImgfromScreen: false
+            popUpImgfromScreen: false,
+            record: false,
+            disabled:"disabled"
         })
     }
     keyDownEvent = (e) => {
@@ -74,7 +87,7 @@ class MessageList extends Component {
         if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
             return;
         }
-        this.sendAllkindOfMessage(undefined,this.sendBox.current.value);
+        this.sendAllkindOfMessage(undefined, this.sendBox.current.value);
     }
     sendAllkindOfMessage(x, y) {
         var today = new Date();
@@ -98,13 +111,13 @@ class MessageList extends Component {
             if (contactLists[i][0] === this.props.phoneNumber) {
                 var contact1 = contactLists[i][1].find((contact1) => {
                     return contact1.phoneNumber === this.props.username;
-                })  
+                })
                 //in this case, i write to someone and he doesn't have me in his contact. need to add me as a phone number contact.
-                if(contact1 === undefined){
-                    contactLists[i][1].push({name:this.props.username,phoneNumber:this.props.username,messages:[],new:0,source:this.props.imgsrc});
+                if (contact1 === undefined) {
+                    contactLists[i][1].push({ name: this.props.username, phoneNumber: this.props.username, messages: [], new: 0, source: this.props.imgsrc });
                     contact1 = contactLists[i][1].find((contact1) => {
                         return contact1.phoneNumber === this.props.username;
-                    })  
+                    })
                 }
                 if (typeof x !== 'undefined') {
                     contact1.messages.push([x, y, "rcv", today]);
@@ -164,7 +177,9 @@ class MessageList extends Component {
             popUpRecord: false,
             popUpVideoOrImage: false,
             PopUpRecordFromScreen: false,
-            popUpImgfromScreen: false
+            popUpImgfromScreen: false,
+            record: false,
+            disabled:"disabled"
         })
         this.sendAllkindOfMessage(x, y);
     }
@@ -188,14 +203,13 @@ class MessageList extends Component {
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >
                                 <Modal.Header closeButton>
-                                    {this.state.PopUpRecordFromScreen && (<h3>Send a Video</h3>)}
-                                    {this.state.popUpRecord && (<h3>Send a recording</h3>)}
+                                    {this.state.popUpRecord && (<h3>Send a recording </h3>)}
+                                    {/* {this.state.record && (<h3>start record</h3>)} */}
                                     {this.state.popUpVideoOrImage && (<h3>Send an image</h3>)}
                                     {this.state.popUpImgfromScreen && (<h3>Take a photo</h3>)}
                                 </Modal.Header>
                                 <Modal.Body>
-                                    {this.state.PopUpRecordFromScreen && (<AddVideoFromScreen parentCallback={this.handlePopData}></AddVideoFromScreen>)}
-                                    {this.state.popUpRecord && (<AddRecord closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
+                                    {this.state.popUpRecord && (<AddRecord disabled={this.state.disabled}startRecord={this.startRecording} closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
                                     {this.state.popUpVideoOrImage && (<AddVideoOrImagePopUp parentCallback={this.handlePopData} ></AddVideoOrImagePopUp>)}
                                     {this.state.popUpImgfromScreen && (<AddPicFromScreen closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                                 </Modal.Body>

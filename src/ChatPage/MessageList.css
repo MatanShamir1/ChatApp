@@ -130,6 +130,12 @@
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
+.alert-message{
+  color:red;
+  text-align:center;
+  width:100%;
+  position:relative;
+}
 
 
 /* Toggle this class - hide and show the popup */
