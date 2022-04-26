@@ -51,6 +51,7 @@ class AddPicFromScreen extends React.Component {
           this.props.closeCamera(this.player.srcObject.getVideoTracks())
         })
         .catch((error) => {
+          this.props.parentCallback();
           console.error(error);
         });
     } else {

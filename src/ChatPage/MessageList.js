@@ -3,7 +3,7 @@ import Message from "./Message";
 import contactLists from "./contactLists";
 import './MessageList.css';
 import AddVideoOrImagePopUp from "./AddVideoOrImagePopUp";
-import { Modal } from 'react-bootstrap';
+import { Modal, ModalFooter } from 'react-bootstrap';
 import AddRecord from "./AddRecord";
 import AddVideoFromScreen from "./AddVIdeoFromScreen";
 import AddPicFromScreen from "./AddPicFromScreen";
@@ -23,8 +23,8 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
-            disabled:"disabled"
-           
+            disabled: "disabled",
+            showError: false
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -43,7 +43,7 @@ class MessageList extends Component {
     startRecording() {
         this.setState({
             record: !this.state.record,
-            disabled:""
+            disabled: ""
         })
     }
 
@@ -74,7 +74,8 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
-            disabled:"disabled"
+            disabled: "disabled",
+            showError: false
         })
     }
     keyDownEvent = (e) => {
@@ -163,7 +164,7 @@ class MessageList extends Component {
         this.setState({
             show: !this.state.show,
             popUpRecord: true,
-            disabled:"disabled"
+            disabled: "disabled"
 
         });
     }
@@ -174,6 +175,13 @@ class MessageList extends Component {
         });
     }
     handlePopData(x, y) {
+        if (x == null) {
+            this.setState({
+                showError: true,
+                popUpImgfromScreen:false
+            })
+            return;
+        }
         if (this.closeCamera.current !== null) {
             if (this.closeCamera.kind === "audio") {
                 this.closeCamera.stop();
@@ -191,7 +199,7 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
-            disabled:"disabled"
+            disabled: "disabled"
         })
         this.sendAllkindOfMessage(x, y);
     }
@@ -220,10 +228,15 @@ class MessageList extends Component {
                                     {this.state.popUpImgfromScreen && (<h3>Take a photo</h3>)}
                                 </Modal.Header>
                                 <Modal.Body>
-                                    {this.state.popUpRecord && (<AddRecord disabled={this.state.disabled}startRecord={this.startRecording} closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
+                                    {this.state.popUpRecord && (<AddRecord disabled={this.state.disabled} startRecord={this.startRecording} closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddRecord>)}
                                     {this.state.popUpVideoOrImage && (<AddVideoOrImagePopUp parentCallback={this.handlePopData} ></AddVideoOrImagePopUp>)}
                                     {this.state.popUpImgfromScreen && (<AddPicFromScreen closeCamera={this.updateCamera} parentCallback={this.handlePopData} ></AddPicFromScreen>)}
                                 </Modal.Body>
+                                <ModalFooter>
+                                    {this.state.showError && (<div className="alert-message">
+                                        Please close camera first , exit from pop up and try again.
+                                    </div>)}
+                                </ModalFooter>
                             </Modal>
                             <div id="ch"></div>
                         </div>

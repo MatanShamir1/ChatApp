@@ -65,33 +65,35 @@ class Register extends Component {
         return (
             <div className="everything">
                 <form className="login-form register-form" onSubmit={this.onSubmit}>
-                    <div className="row mb-3 form">
-                        <label className="col-sm-2 col-form-label">Username</label>
-                        <div className="col-sm-4">
+                    <div className="row mb form">
+                        <label className="col-sm col-form-label">Username</label>
+                        <div className="col-sm">
                             <input id='username' className="form-control" ref={this.username}></input>
                         </div>
                     </div>
-                    <div className="row mb-3 form">
-                        <label for="inputPassword3" className="col-sm-2 col-form-label">Password</label>
-                        <div className="col-sm-4">
+                    <div className="row mb form">
+                        <label for="inputPassword3" className="col-sm col-form-label">Password</label>
+                        <div className="col-sm">
                             <input type="password" className="form-control" id="inputPassword3" ref={this.password}></input>
                         </div>
                     </div>
-                    <div className="row mb-3 form">
-                        <label for="inputPassword3" className="col-sm-2 col-form-label">Confirm password</label>
-                        <div className="col-sm-4">
+                    <div className="row mb form">
+                        <label for="inputPassword3" className="col-sm col-form-label">Confirm password</label>
+                        <div className="col-sm">
                             <input type="password" className="form-control" id="inputPassword3" ref={this.cpassword}></input>
                         </div>
                     </div>
-                    <div className="row mb-3 form">
-                        <label className="col-sm-2 col-form-label">Display name</label>
-                        <div className="col-sm-4">
+                    <div className="row mb form">
+                        <label className="col-sm col-form-label">Display name</label>
+                        <div className="col-sm">
                             <input id='username' className="form-control" ref={this.nickname}></input>
                         </div>
                     </div>
-                    <div className="row mb-3 form">
-                        <label className="col-sm-2 col-form-label">Profile image</label>
-                        <div className="col-sm-4">
+                    <div className="row mb form">
+                        
+                        <label className="col-sm col-form-label">Profile image</label>
+                        
+                        <div className="col-sm">
                             <input type="file" name="myImage" onChange={this.handleImageChange} />
                         </div>
                     </div>
