@@ -47,14 +47,14 @@ class Login extends Component {
             <div className="everything">
                 <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="row mb-3 form">
-                        <label className="col-sm-2 col-form-label" >Username</label>
-                        <div className="col-sm-4">
+                        <label htmlFor='username' className="col-sm col-form-label" >Username</label>
+                        <div className="col-sm">
                             <input id='username' className="form-control" onChange={this.handleChangeUserName}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form" >
-                        <label className="col-sm-2 col-form-label">Password</label>
-                        <div className="col-sm-4">
+                        <label htmlFor='inputPassword3' className="col-sm col-form-label">Password</label>
+                        <div className="col-sm">
                             <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangePassword}></input>
                         </div>
                     </div>
