@@ -99,5 +99,5 @@ Password - 12345678
 and see that Jons messages were received.
 
 ## Developers:
-**Matan Shamir 206960239** <br>/
+**Matan Shamir 206960239** <br />
 **Itamar Bachar 295847376**
