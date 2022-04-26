@@ -56,21 +56,11 @@
 
 .conversation {
   position: absolute;
-  right: 0px;
-  float: left;
-  width: 65%;
+  right:0px;
+  width:65%;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
-}
-
-.conversation2 {
-  position: absolute;
-  right: 0px;
-  float: left;
-  width: 65%;
-  height: 100%;
-  overflow: auto;
 }
 
 .popUp {

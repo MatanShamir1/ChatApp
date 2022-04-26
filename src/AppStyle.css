@@ -120,7 +120,8 @@
     height: 100%;
     position: absolute;
     background-image: url('\\images\\background-img.png');
-    background-repeat:round;
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 
 ::-webkit-scrollbar {

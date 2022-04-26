@@ -200,14 +200,14 @@ class MessageList extends Component {
     render() {
         if (this.props.phoneNumber === '') {
             return (
-                <div className="conversation2 bg-successive" />
+                <div className="conversation bg-successive" />
             )
         } else {
             console.log(this.props.contactList);
             const contact = this.props.contactList.filter((contact) => contact.phoneNumber.includes(this.props.phoneNumber))[0]
             return (
                 <div>
-                    <div className="conversation bg-successive your-div container">
+                    <div className="conversation bg-successive your-div">
                         <div className="card-body msg_card_body row">
                             {contact.messages.map((message, key) => {
                                 return <Message userimg={this.props.imgsrc} content={message} source={contact.source} key={key} />
