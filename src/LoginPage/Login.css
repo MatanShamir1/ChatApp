@@ -36,6 +36,7 @@
 }
 
 .alert-message{
+    white-space: pre-line;
     color:red;
     text-align:center;
     width:100%;

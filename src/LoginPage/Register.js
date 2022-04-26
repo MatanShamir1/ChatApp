@@ -5,6 +5,7 @@ import contactLists from '../ChatPage/contactLists';
 import users from './usersList';
 import './Login.css';
 import logo from "../images/ChatApp-logos.jpeg";
+import default_img from "../images/default_friend_img.jpg"
 
 class Register extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Register extends Component {
         if (this.cpassword.current.value !== this.password.current.value) {
             screenMessage += '*Password and confirmation dont match.\n'
         }
-        if(this.nickname.current.value=''){
+        if(this.nickname.current.value==''){
             screenMessage += '*Please enter a nickname.\n'
         }
         if (users.find((user) => {
@@ -55,8 +56,7 @@ class Register extends Component {
             });
             event.preventDefault();
         } else {
-            console.log(this.state.img);
-            users.push({ username: this.username.current.value, password: this.password.current.value, nickname: this.nickname.current.value, imgsrc: this.state.img })
+            users.push({ username: this.username.current.value, password: this.password.current.value, nickname: this.nickname.current.value, imgsrc: this.state.img!==''?this.state.img:default_img })
             contactLists.push([this.username.current.value, []]);
             this.props.setName('GO_TO_LOGIN');
         }
