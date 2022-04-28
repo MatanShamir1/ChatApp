@@ -67,6 +67,19 @@ The user can have as much contacts as he want with the same names, as nicknames 
 ![image](https://user-images.githubusercontent.com/74719554/164935231-434a76e1-ea98-4f88-887e-1d37f48ee947.png)
 
 ## How-to-open-the-app
+if you are in linux please do the following..
+1) select Download Zip 
+![image](https://user-images.githubusercontent.com/84122241/165762901-012d7396-d583-470a-b5de-71a714cf5801.png)
+2) create new folder and extract the content to the new folder.
+3) ![image](https://user-images.githubusercontent.com/84122241/165763234-09187c83-35cf-40a1-be9c-8b42ea96bc26.png)
+4) upgrade and update in the terminal with the command - (sudo apt -y update && sudo apt -y upgrade)
+5) install node js - version 16 with the command - (sudo apt install -y curl)
+ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+ 6) go to the folder and start with npm start.
+
+
+
+if you are in windows please do the following..
 1. Clone the repository to your preffered location. Get into your directory, <br />
    open Git Bash / PowerShell if on windows, or Terminal if on a linux machine, and write:  
     ```
