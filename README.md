@@ -48,9 +48,9 @@ Try to use these by choosing the pop-up next to the chat text-box.<br />
 <br />
 ### pay attention:
 ![image](https://user-images.githubusercontent.com/84122241/164944419-b9da86b4-2e40-4e2e-8d0e-b4585a28b38f.png)
-- in first button you can upload both video and image and only them.
-- in the second button you can upload record from the computer.
-- in third button we also add ,dispite in wasn't requirment , abillty to picature image from the screen.
+- in first button, you can upload both videos and images, and only them.
+- in the second button, you can upload a record from the computer.
+- in the third button we also added ,despite it wasn't a requirement, the abillty to take a picture directly from the app.
 <br/>
 **features included:**
 - Adding chat with a new friend:<br />
