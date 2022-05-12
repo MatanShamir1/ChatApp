@@ -34,21 +34,27 @@ class Login extends Component {
         // }
         var username = this.state.userName;
         var password = this.state.password;
-        var response;
-        axios.post(`https://localhost:7243/api/login`, { username, password })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        response = res.data;
-      })
-        if (response == 'yes') {
-            this.props.setName("exists")
-        } else {
-            this.setState({
-                errors: 'Wrong Username or Password. Please try again'
-            });
-            event.preventDefault();
-        }
+    //     var response;
+    //     axios.post(`https://localhost:7243/api/login`, { username, password })
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //     response = res.data;
+    //   })
+    const requestOptions = {
+        method: 'Post',
+        headers: { 'Content-Type': 'application/json' },
+    };
+
+    const tokenGetter = fetch('http://localhost:7243/api/users/login', requestOptions).then(response=> { console.log(response.status)});
+        // if (response == 'yes') {
+        //     this.props.setName("exists")
+        // } else {
+        //     this.setState({
+        //         errors: 'Wrong Username or Password. Please try again'
+        //     });
+        //     event.preventDefault();
+        // }
     }
 
 
