@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import React, { Component } from "react";
 import './Login.css';
+import axios from 'axios'
 import users from './usersList';
 import logo from "../images/ChatApp-logos.jpeg";
 
@@ -25,14 +26,23 @@ class Login extends Component {
 
     onSubmit(event) {
         var user;
-        for (var i = 0; i < users.length; i++) {
-            if (this.state.userName === users[i].username && this.state.password == users[i].password) {
-                user = users[i]
-                break;
-            }
-        }
-        if (user != null) {
-            this.props.setName(user.username)
+        // for (var i = 0; i < users.length; i++) {
+        //     if (this.state.userName === users[i].username && this.state.password == users[i].password) {
+        //         user = users[i]
+        //         break;
+        //     }
+        // }
+        var username = this.state.userName;
+        var password = this.state.password;
+        var response;
+        axios.post(`https://localhost:7243/api/login`, { username, password })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        response = res.data;
+      })
+        if (response == 'yes') {
+            this.props.setName("exists")
         } else {
             this.setState({
                 errors: 'Wrong Username or Password. Please try again'
