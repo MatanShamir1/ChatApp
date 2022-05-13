@@ -15,7 +15,9 @@ class Chat extends Component {
         super(props)
         this.state = {
             username: '',
-            isAdd: false
+            isAdd: false,
+            nickname: '',
+            contactList: []
         }
     }
 
@@ -40,8 +42,10 @@ class Chat extends Component {
     logOut = () => {
         this.props.setName('');
     }
-
-
+    componentDidMount(){
+        // axios.post(`https://localhost:7243/api/users/Login`, )
+    }
+        
     render() {
         if (this.props.user === undefined) {
             return (<Navigate to="../" />);
@@ -50,13 +54,15 @@ class Chat extends Component {
         if (this.state.isAdd === true) {
             theClass += " trans-out-div";
         }
+        // user.nickname need to get from the server , img current need to remove , contact list need to get from th server,
+        //  
         return (
             <div id="everything">
                 <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.nickname} logOut={this.logOut} />
                 <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
-                        <AddContactPopUp setActive={this.addContact} username = {this.props.user.username} contactList={this.props.contactList}>
+                        <AddContactPopUp setActive={this.addContact} username = {this.props.user} contactList={this.props.contactList}>
                         </AddContactPopUp>
                     </Modal.Body>
                 </Modal>

@@ -6,7 +6,7 @@ import users from './usersList';
 import './Login.css';
 import logo from "../images/ChatApp-logos.jpeg";
 import default_img from "../images/default_friend_img.jpg"
-
+import axios from 'axios';
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -31,35 +31,26 @@ class Register extends Component {
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         var screenMessage = '';
-        if (!this.usernameIsValid(this.username.current.value)) {
-            screenMessage += '*Please use only numbers for your username (it should be your phone).\n';
-        }
-        if (!this.passwordIsValid(this.password.current.value)) {
-            screenMessage += '*Please use a password that has Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.\n'
-        }
         if (this.cpassword.current.value !== this.password.current.value) {
             screenMessage += '*Password and confirmation dont match.\n'
         }
-        if(this.nickname.current.value==''){
-            screenMessage += '*Please enter a nickname.\n'
-        }
-        if (users.find((user) => {
-            return user.username === this.username.current.value;
-        }) !== undefined) {
-            screenMessage += '*Another user with the same Phone number/username already exists.'
-        }
-        if (screenMessage != '') {
-            this.setState({
-                errors: screenMessage
-            });
-            event.preventDefault();
-        } else {
-            users.push({ username: this.username.current.value, password: this.password.current.value, nickname: this.nickname.current.value, imgsrc: this.state.img!==''?this.state.img:default_img })
-            contactLists.push([this.username.current.value, []]);
-            this.props.setName('GO_TO_LOGIN');
-        }
+        axios.post(`https://localhost:7243/api/users/Register`, { username:this.username.current.value ,
+        password:this.password.current.value , nickname: this.nickname.current.value })
+        .then(res => {
+                console.log(res.data)
+                if(res.data === 'yes'){
+                    this.props.setName('GO_TO_LOGIN');
+                }
+                else{
+                    // this.setState({
+                    //     errors: screenMessage
+                    // });
+                    alert("there is problem")
+                    event.preventDefault();
+                }
+        })
     }
     render() {
         return (

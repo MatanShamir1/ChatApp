@@ -24,37 +24,21 @@ class Login extends Component {
         this.setState({ userName: this.state.userName, password: event.target.value });
     }
 
-    onSubmit(event) {
-        var user;
-        // for (var i = 0; i < users.length; i++) {
-        //     if (this.state.userName === users[i].username && this.state.password == users[i].password) {
-        //         user = users[i]
-        //         break;
-        //     }
-        // }
+   async onSubmit(event) {
+        var check;
         var username = this.state.userName;
         var password = this.state.password;
-    //     var response;
-    //     axios.post(`https://localhost:7243/api/login`, { username, password })
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //     response = res.data;
-    //   })
-    const requestOptions = {
-        method: 'Post',
-        headers: { 'Content-Type': 'application/json' },
-    };
-
-    const tokenGetter = fetch('http://localhost:7243/api/users/login', requestOptions).then(response=> { console.log(response.status)});
-        // if (response == 'yes') {
-        //     this.props.setName("exists")
-        // } else {
-        //     this.setState({
-        //         errors: 'Wrong Username or Password. Please try again'
-        //     });
-        //     event.preventDefault();
-        // }
+        axios.post(`https://localhost:7243/api/users/Login`, { username:username , password:password })
+        .then(res => {
+                console.log(res.data)
+                if(res.data === 'yes'){
+                    this.props.setName(this.state.userName)
+                }
+                else{
+                    alert("there is problem")
+                    event.preventDefault();
+                }
+        })
     }
 
 
