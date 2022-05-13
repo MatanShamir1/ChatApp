@@ -9,35 +9,41 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            password: '',
             errors: ''
         }
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-    }
-    handleChangeUserName(event) {
-        this.setState({ userName: event.target.value, password: this.state.password });
-    }
-    handleChangePassword(event) {
-        this.setState({ userName: this.state.userName, password: event.target.value });
+        this.passwordBox = React.createRef();
+        this.usernameBox = React.createRef();
     }
 
    async onSubmit(event) {
-        var check;
-        var username = this.state.userName;
-        var password = this.state.password;
+       var username = this.usernameBox.current.value;
+       var password = this.passwordBox.current.value;
+        event.preventDefault();
+        var screenMessage = '';
+        if(username === ''){
+            screenMessage += "*Please insert a username.\n"
+        }
+        if(password === ''){
+            screenMessage += "*Please insert a password.\n"
+        }
+        if(screenMessage !== ''){
+            this.setState({
+                errors: screenMessage
+            });
+            return;
+        }
         axios.post(`https://localhost:7243/api/users/Login`, { username:username , password:password })
         .then(res => {
-                console.log(res.data)
-                if(res.data === 'yes'){
-                    this.props.setName(this.state.userName)
-                }
-                else{
-                    alert("there is problem")
-                    event.preventDefault();
-                }
+            if(res.data === 'yes'){
+                this.props.setName(this.usernameBox.current.value)
+            }
+            else{
+                screenMessage += '*Wrong username or password.\n'
+                this.setState({
+                    errors: screenMessage
+                });
+            }
         })
     }
 
@@ -49,13 +55,13 @@ class Login extends Component {
                     <div className="row mb-3 form">
                         <label htmlFor='username' className="col-sm col-form-label" >Username</label>
                         <div className="col-sm">
-                            <input id='username' className="form-control" onChange={this.handleChangeUserName}></input>
+                            <input id='username' className="form-control" ref={this.usernameBox}></input>
                         </div>
                     </div>
                     <div className="row mb-3 form" >
                         <label htmlFor='inputPassword3' className="col-sm col-form-label">Password</label>
                         <div className="col-sm">
-                            <input type="password" className="form-control" id="inputPassword3" onChange={this.handleChangePassword}></input>
+                            <input type="password" className="form-control" id="inputPassword3" ref={this.passwordBox}></input>
                         </div>
                     </div>
                     <div className='signButton form'>

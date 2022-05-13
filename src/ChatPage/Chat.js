@@ -6,6 +6,7 @@ import { Modal } from 'react-bootstrap';
 import { Navigate } from "react-router-dom"
 import Recognition from "./Recognition";
 
+
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 //shift+alt+f formatting!
@@ -42,9 +43,6 @@ class Chat extends Component {
     logOut = () => {
         this.props.setName('');
     }
-    componentDidMount(){
-        // axios.post(`https://localhost:7243/api/users/Login`, )
-    }
         
     render() {
         if (this.props.user === undefined) {
@@ -59,19 +57,19 @@ class Chat extends Component {
         return (
             <div id="everything">
                 <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.nickname} logOut={this.logOut} />
-                <Modal show={this.state.isAdd} onHide={this.addContact}>
+                {/* <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
                         <AddContactPopUp setActive={this.addContact} username = {this.props.user} contactList={this.props.contactList}>
                         </AddContactPopUp>
                     </Modal.Body>
-                </Modal>
+                </Modal> */}
                 <div className={theClass}>
                     <div className="leftMenu ">
-                        <Contacts setChat={this.setChat} addContact={this.addContact} contactList={this.props.contactList}/>
+                        <Contacts setChat={this.setChat} addContact={this.addContact}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user.username} addMessage={this.addMessage} contactList={this.props.contactList}/>
+                        {/* <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user.username} addMessage={this.addMessage}/> */}
                     </div>
                 </div>
             </div>

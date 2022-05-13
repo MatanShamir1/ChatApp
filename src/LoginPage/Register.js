@@ -32,9 +32,22 @@ class Register extends Component {
     }
 
     async onSubmit(event) {
+        event.preventDefault();
         var screenMessage = '';
         if (this.cpassword.current.value !== this.password.current.value) {
             screenMessage += '*Password and confirmation dont match.\n'
+        }
+        if(!this.passwordIsValid(this.password.current.value)){
+            screenMessage += '*Password must contacin at least 8 characters, special sign, and capital letter.\n'
+        }
+        if(!this.usernameIsValid(this.username.current.value)){
+            screenMessage += '*Username must contain numbers only: its a phone number!\n'
+        }
+        if(screenMessage!==''){
+            this.setState({
+                errors: screenMessage
+            });
+            return;
         }
         axios.post(`https://localhost:7243/api/users/Register`, { username:this.username.current.value ,
         password:this.password.current.value , nickname: this.nickname.current.value })
@@ -44,11 +57,10 @@ class Register extends Component {
                     this.props.setName('GO_TO_LOGIN');
                 }
                 else{
-                    // this.setState({
-                    //     errors: screenMessage
-                    // });
-                    alert("there is problem")
-                    event.preventDefault();
+                    screenMessage += '*Another user with this username already exists.\n'
+                    this.setState({
+                        errors: screenMessage
+                    });
                 }
         })
     }

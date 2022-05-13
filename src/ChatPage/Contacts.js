@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Contact from "./Contact.js"
 import Search from "./Search"
+import axios from 'axios'
+
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 class Contacts extends Component {
@@ -8,8 +10,8 @@ class Contacts extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            contacts: this.props.contactList,
-            curr: '',
+            contacts: [],
+            curr: ''
         }
         this.render = this.render.bind(this)
     }
@@ -17,6 +19,14 @@ class Contacts extends Component {
         this.setState(
             { contacts: this.props.contactList.filter((contact) => contact.name.includes(q)) }
         )
+    }
+
+    componentDidMount(){
+        axios.get(`https://localhost:7243/api/contacts`, )
+        .then(res => {
+            console.log('this is ther contacts:');
+            console.log(res);
+        });
     }
 
     applyChat = (username, name) => {
@@ -46,7 +56,6 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        console.log(contact.messages);
                         const message = contact.messages.length===0?'': (contact.messages.at(-1)[0].indexOf("blob:") !== -1 || contact.messages.at(-1)[0].indexOf("data:") !== -1 || contact.messages.at(-1)[0].indexOf("/static") !== -1) ? "attachment" : contact.messages.at(-1)[0]
                         const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
                         return <Contact source={contact.source} name={contact.name} username={contact.phoneNumber} message={message} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} oclock={oclock}/>
