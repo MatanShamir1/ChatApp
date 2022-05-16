@@ -64,7 +64,7 @@ class Contacts extends Component {
                         // const message = contact.messages.length===0?'': (contact.messages.at(-1)[0].indexOf("blob:") !== -1 || contact.messages.at(-1)[0].indexOf("data:") !== -1 || contact.messages.at(-1)[0].indexOf("/static") !== -1) ? "attachment" : contact.messages.at(-1)[0]
                         // const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
                         // source={contact.source} name={contact.name} , news={contact.new}   oclock={oclock}
-                        return <Contact name={contact.name} username={contact.name} key={key} applyChat={this.applyChat} styles={styles} message={contact.last}/>
+                        return <Contact name={contact.name} username={contact.name} key={key} applyChat={this.applyChat} styles={styles}  message={contact.last}/>
                     })}
                 </div>
             </div>

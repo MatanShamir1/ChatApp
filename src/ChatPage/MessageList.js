@@ -179,7 +179,7 @@ class MessageList extends Component {
         if (x == null) {
             this.setState({
                 showError: true,
-                popUpImgfromScreen:false
+                popUpImgfromScreen: false
             })
             return;
         }
@@ -204,15 +204,18 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
-    componentDidMount(){
-            axios.get(`http://localhost:5243/api/contacts/`)
+    componentDidMount() {
+        console.log(this.props.phoneNumber)
+        if (this.props.phoneNumber === '') {
+            return
+        }
+        var url = `http://localhost:5243/api/contacts/Coral/messages`
+        axios.get(url, { withCredentials: true })
             .then(res => {
-                      this.setState({
-                            contacts: this.state.contacts.concat(res.data)
-                      })
-                      console.log(this.state.contacts)
+
+                console.log(res.data)
             });
-        
+
     }
     render() {
         if (this.props.phoneNumber === '') {
