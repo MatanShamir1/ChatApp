@@ -43,15 +43,6 @@ class Chat extends Component {
     logOut = () => {
         this.props.setName('');
     }
-    // componentDidMount(){
-    //     axios.get(`https://localhost:7243`)
-    //     .then(res => {
-    //         this.setState({
-    //             contactList: res.data
-    //         })
-    //     })
-
-    // }
         
     render() {
         if (this.props.user === undefined) {

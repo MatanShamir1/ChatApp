@@ -9,7 +9,7 @@ class Contact extends Component {
     }
     //only make it active in this function. the others' functions should make this unselected.
     changeState() {
-        this.props.applyChat(this.props.username, this.props.name);
+        this.props.applyChat(this.props.name);
     }
 
     render() {

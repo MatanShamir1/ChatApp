@@ -22,12 +22,12 @@ class Message extends Component {
 
 
     render() {
-        if (this.props.content[0] === "") {
+        if (this.props.content.content === "") {
             return <></>;
         }
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
-        if (this.props.content[2] === "rcv") {
+        if (this.props.content.sent === true) {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
         }
@@ -39,10 +39,16 @@ class Message extends Component {
                             <img src={this.props.userimg} className="circular-square" />
                         </div>)
                     }
-                    {this.props.content[1] === "text" && (
+                    {/* {this.props.content[1] === "text" && (
                         <div className={"msg_cotainer " + msg_col}>
                             {this.props.content[0]}
                             <span className="msg_time">{this.props.content[3]}</span>
+                        </div>
+                    )} */}
+                    {true && (
+                        <div className={"msg_cotainer " + msg_col}>
+                            {this.props.content.content}
+                            <span className="msg_time">{this.props.content.created}</span>
                         </div>
                     )}
                     {this.props.content[1] === "image" && (

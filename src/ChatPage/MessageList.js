@@ -23,9 +23,10 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
+            doUpdate: true,
             disabled: "disabled",
             showError: false,
-            contactMessage: []
+            contactMessages: []
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -84,6 +85,7 @@ class MessageList extends Component {
             this.sendMessage();
         }
     }
+
     sendMessage = () => {
         this.sendBox.current.value = this.sendBox.current.value.trim();
         if (this.sendBox.current.value === '' || this.sendBox.current.value === '\n') {
@@ -91,58 +93,22 @@ class MessageList extends Component {
         }
         this.sendAllkindOfMessage(undefined, this.sendBox.current.value);
     }
+
     sendAllkindOfMessage(x, y) {
-        var today = new Date();
-        var hh = String(today.getHours()).padStart(2, '0');
-        var nn = String(today.getMinutes()).padStart(2, '0');
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-        today = hh + ":" + nn + ', ' + mm + '/' + dd + '/' + yyyy;
-        const contact = this.props.contactList.find((contact) => contact.phoneNumber.includes(this.props.phoneNumber));
-        //update my conversation
-        if (typeof x !== 'undefined') {
-            contact.messages.push([x, y, "snd", today]);
-        }
-        else {
-            contact.messages.push([y, "text", "snd", today]);
-        }
-
-        //update everyone else's conversations with me
-        for (var i = 0; i < contactLists.length; i++) {
-            if (contactLists[i][0] === this.props.phoneNumber) {
-                var contact1 = contactLists[i][1].find((contact1) => {
-                    return contact1.phoneNumber === this.props.username;
-                })
-                //in this case, i write to someone and he doesn't have me in his contact. need to add me as a phone number contact.
-                if (contact1 === undefined) {
-                    contactLists[i][1].push({ name: this.props.username, phoneNumber: this.props.username, messages: [], new: 0, source: this.props.imgsrc });
-                    contact1 = contactLists[i][1].find((contact1) => {
-                        return contact1.phoneNumber === this.props.username;
-                    })
-                }
-                if (typeof x !== 'undefined') {
-                    contact1.messages.push([x, y, "rcv", today]);
-                    contact1.new++;
-                    const index = contactLists[i][1].indexOf(contact1);
-                    contactLists[i][1].splice(index, 1);
-                    contactLists[i][1].unshift(contact1);
-                }
-                else {
-                    contact1.messages.push([y, "text", "rcv", today]);
-                    contact1.new++;
-                    const index = contactLists[i][1].indexOf(contact1);
-                    contactLists[i][1].splice(index, 1);
-                    contactLists[i][1].unshift(contact1);
-                }
-
+        //x is undefined if text message, y is the content.
+        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content:y },{withCredentials:true})
+        .then(res => {
+            if(res.data === 'yes'){
+                this.setState({
+                    doUpdate: true
+                });
             }
-            this.sendBox.current.value = '';
-            const index = this.props.contactList.indexOf(contact);
-            this.props.contactList.splice(index, 1);
-            this.props.contactList.unshift(contact);
-            this.props.addMessage();
-        }
+            else{
+                alert('message could not be sent');
+            }
+        })
+
+        this.sendBox.current.value = '';
     }
     onHoverDisplay() {
         this.setState({
@@ -204,18 +170,27 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
-    componentDidMount() {
-        console.log(this.props.phoneNumber)
+    componentDidUpdate() {
         if (this.props.phoneNumber === '') {
             return
         }
-        var url = `http://localhost:5243/api/contacts/Coral/messages`
+        if(this.state.doUpdate === false){
+            return
+        }
+        var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
         axios.get(url, { withCredentials: true })
             .then(res => {
-
-                console.log(res.data)
+                if(res.data === 'empty') {
+                    this.setState({
+                        contactMessages: [],
+                        lastPhoneNumber: this.props.phoneNumber
+                  }) 
+                } else{
+                this.setState({
+                    contactMessages: res.data,
+                    doUpdate: false
+              })   }
             });
-
     }
     render() {
         if (this.props.phoneNumber === '') {
@@ -227,9 +202,10 @@ class MessageList extends Component {
                 <div>
                     <div className="conversation bg-successive your-div">
                         <div className="card-body msg_card_body row">
-                            {/* {contact.messages.map((message, key) => {
-                                return <Message userimg={this.props.imgsrc} content={message} source={contact.source} key={key} />
-                            })} */}
+                            {this.state.contactMessages.map((message, key) => {
+                                console.log(message);
+                                 return <Message userimg={this.props.imgsrc} content={message} key={key} />
+                            })}
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >
                                 <Modal.Header closeButton>
