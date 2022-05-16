@@ -35,7 +35,7 @@ class Login extends Component {
         }
         axios.post(`http://localhost:5243/api/users/Login`, { username:username , password:password },{withCredentials:true})
         .then(res => {
-            if(res.data === 'yes'){
+            if(res.status == 201){
                 this.props.setName(this.usernameBox.current.value)
             }
             else{

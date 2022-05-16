@@ -53,7 +53,7 @@ class Register extends Component {
         password:this.password.current.value , nickname: this.nickname.current.value })
         .then(res => {
                 console.log(res.data)
-                if(res.data === 'yes'){
+                if(res.status === 201){
                     this.props.setName('GO_TO_LOGIN');
                 }
                 else{

@@ -49,12 +49,7 @@ class MessageList extends Component {
         })
     }
 
-    componentDidUpdate() {
-        var element = document.getElementById("update");
-        if (element != null) {
-            element.scrollIntoView();
-        }
-    }
+  
     updateCamera(camera) {
         this.closeCamera = camera;
     }
@@ -98,10 +93,11 @@ class MessageList extends Component {
         //x is undefined if text message, y is the content.
         axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content:y },{withCredentials:true})
         .then(res => {
-            if(res.data === 'yes'){
+            if(res.status === 201){
                 this.setState({
                     doUpdate: true
                 });
+                this.props.addMessage()
             }
             else{
                 alert('message could not be sent');
@@ -171,6 +167,36 @@ class MessageList extends Component {
         this.sendAllkindOfMessage(x, y);
     }
     componentDidUpdate() {
+        if (this.props.phoneNumber === '') {
+            return
+        }
+        if(this.state.doUpdate === false){
+            return
+        }
+        var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
+        axios.get(url, { withCredentials: true })
+            .then(res => {
+                if(res.data === 'empty') {
+                    this.setState({
+                        contactMessages: [],
+                        lastPhoneNumber: this.props.phoneNumber
+                  }) 
+                  var element = document.getElementById("update");
+                  if (element != null) {
+                      element.scrollIntoView();
+                  }
+                } else{
+                this.setState({
+                    contactMessages: res.data,
+                    doUpdate: false
+              })   }
+            });
+    }
+    componentDidMount(){
+        var element = document.getElementById("update");
+        if (element != null) {
+            element.scrollIntoView();
+        }
         if (this.props.phoneNumber === '') {
             return
         }

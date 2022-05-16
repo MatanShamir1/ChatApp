@@ -21,6 +21,14 @@ class Contacts extends Component {
         )
     }
 
+    componentDidUpdate(){
+        axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
+        .then(res => {
+                  this.setState({
+                        contacts: res.data
+                  })   
+        });
+    }
     componentDidMount(){
         axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
         .then(res => {
