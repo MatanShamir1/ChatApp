@@ -33,7 +33,7 @@ class Login extends Component {
             });
             return;
         }
-        axios.post(`https://localhost:7243/api/users/Login`, { username:username , password:password })
+        axios.post(`http://localhost:5243/api/users/Login`, { username:username , password:password },{withCredentials:true})
         .then(res => {
             if(res.data === 'yes'){
                 this.props.setName(this.usernameBox.current.value)

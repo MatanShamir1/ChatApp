@@ -49,7 +49,7 @@ class Register extends Component {
             });
             return;
         }
-        axios.post(`https://localhost:7243/api/users/Register`, { username:this.username.current.value ,
+        axios.post(`http://localhost:5243/api/users/Register`, { username:this.username.current.value ,
         password:this.password.current.value , nickname: this.nickname.current.value })
         .then(res => {
                 console.log(res.data)

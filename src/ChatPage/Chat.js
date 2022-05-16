@@ -5,7 +5,7 @@ import AddContactPopUp from "./AddContactPopUp.js";
 import { Modal } from 'react-bootstrap';
 import { Navigate } from "react-router-dom"
 import Recognition from "./Recognition";
-
+import axios from "axios";
 
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
@@ -43,6 +43,15 @@ class Chat extends Component {
     logOut = () => {
         this.props.setName('');
     }
+    // componentDidMount(){
+    //     axios.get(`https://localhost:7243`)
+    //     .then(res => {
+    //         this.setState({
+    //             contactList: res.data
+    //         })
+    //     })
+
+    // }
         
     render() {
         if (this.props.user === undefined) {
@@ -53,23 +62,24 @@ class Chat extends Component {
             theClass += " trans-out-div";
         }
         // user.nickname need to get from the server , img current need to remove , contact list need to get from th server,
-        //  
         return (
+            
             <div id="everything">
-                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user.nickname} logOut={this.logOut} />
-                {/* <Modal show={this.state.isAdd} onHide={this.addContact}>
+                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user} logOut={this.logOut} />
+            
+                <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
-                        <AddContactPopUp setActive={this.addContact} username = {this.props.user} contactList={this.props.contactList}>
+                        <AddContactPopUp setActive={this.addContact} username = {this.state.username} contactList={this.props.contactList}>
                         </AddContactPopUp>
                     </Modal.Body>
-                </Modal> */}
+                </Modal>
                 <div className={theClass}>
                     <div className="leftMenu ">
                         <Contacts setChat={this.setChat} addContact={this.addContact}/>
                     </div>
                     <div>
-                        {/* <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user.username} addMessage={this.addMessage}/> */}
+                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} addMessage={this.addMessage}/>
                     </div>
                 </div>
             </div>

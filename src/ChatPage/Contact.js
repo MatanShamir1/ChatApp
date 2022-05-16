@@ -23,7 +23,7 @@ class Contact extends Component {
                         <img src={this.props.source} alt="Avatar" className="circular-square"></img>
                     </div>
                     <div className="fw-bold">
-                        {this.props.name}
+                        {this.props.username}
                     </div>
                     {message}
                 </div>

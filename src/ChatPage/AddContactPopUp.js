@@ -1,12 +1,18 @@
 import React from "react";
 import { useRef, useState } from 'react';
 import users from '../LoginPage/usersList';
-
+import axios from "axios";
 function AddContactPopUp(props) {
     const [error, setError] = useState('');
     const contactBox = useRef(null);
     const phoneBox = useRef(null);
     const saveChanges = () => {
+        axios.post(`http://localhost:5243/api/contacts`,{
+         nickname:phoneBox.current.value , username:contactBox.current.value
+        },{withCredentials:true})
+        .then(res => {
+
+        })
         const doesExist = props.contactList.find((contact) => {
             return contact.name === contact.phoneNumber;
         });

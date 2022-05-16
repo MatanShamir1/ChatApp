@@ -7,7 +7,7 @@ import { Modal, ModalFooter } from 'react-bootstrap';
 import AddRecord from "./AddRecord";
 import AddVideoFromScreen from "./AddVIdeoFromScreen";
 import AddPicFromScreen from "./AddPicFromScreen";
-
+import axios from "axios";
 //you can write rce and it gives you a className template!
 //create a constructor using the keyword rconst.
 
@@ -24,7 +24,8 @@ class MessageList extends Component {
             popUpImgfromScreen: false,
             record: false,
             disabled: "disabled",
-            showError: false
+            showError: false,
+            contactMessage: []
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -203,23 +204,29 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
-
-
+    componentDidMount(){
+            axios.get(`http://localhost:5243/api/contacts/`)
+            .then(res => {
+                      this.setState({
+                            contacts: this.state.contacts.concat(res.data)
+                      })
+                      console.log(this.state.contacts)
+            });
+        
+    }
     render() {
         if (this.props.phoneNumber === '') {
             return (
                 <div className="conversation bg-successive" />
             )
         } else {
-            console.log(this.props.contactList);
-            const contact = this.props.contactList.filter((contact) => contact.phoneNumber.includes(this.props.phoneNumber))[0]
             return (
                 <div>
                     <div className="conversation bg-successive your-div">
                         <div className="card-body msg_card_body row">
-                            {contact.messages.map((message, key) => {
+                            {/* {contact.messages.map((message, key) => {
                                 return <Message userimg={this.props.imgsrc} content={message} source={contact.source} key={key} />
-                            })}
+                            })} */}
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >
                                 <Modal.Header closeButton>

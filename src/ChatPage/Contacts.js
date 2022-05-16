@@ -22,20 +22,25 @@ class Contacts extends Component {
     }
 
     componentDidMount(){
-        axios.get(`https://localhost:7243/api/contacts`, )
+        axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
         .then(res => {
-            console.log('this is ther contacts:');
-            console.log(res);
+                  this.setState({
+                        contacts: res.data
+                  })
+                  this.state.contacts.forEach( obj => {
+                    console.log(obj.name)
+                })
+           console.log(this.state.contacts)       
         });
     }
 
     applyChat = (username, name) => {
         this.props.setChat(username);
-        for (var i = 0, iLen = this.props.contactList.length; i < iLen; i++) {
-            if (this.props.contactList[i].name === name) {
-                this.props.contactList[i].new = 0;
-            }
-        }
+        // for (var i = 0, iLen = this.props.contactList.length; i < iLen; i++) {
+        //     if (this.props.contacts[i].name === name) {
+        //         this.props.contacts[i].new = 0;
+        //     }
+        // }
         this.setState({
             curr: name
         })
@@ -56,9 +61,10 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        const message = contact.messages.length===0?'': (contact.messages.at(-1)[0].indexOf("blob:") !== -1 || contact.messages.at(-1)[0].indexOf("data:") !== -1 || contact.messages.at(-1)[0].indexOf("/static") !== -1) ? "attachment" : contact.messages.at(-1)[0]
-                        const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
-                        return <Contact source={contact.source} name={contact.name} username={contact.phoneNumber} message={message} key={key} applyChat={this.applyChat} styles={styles} news={contact.new} oclock={oclock}/>
+                        // const message = contact.messages.length===0?'': (contact.messages.at(-1)[0].indexOf("blob:") !== -1 || contact.messages.at(-1)[0].indexOf("data:") !== -1 || contact.messages.at(-1)[0].indexOf("/static") !== -1) ? "attachment" : contact.messages.at(-1)[0]
+                        // const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
+                        // source={contact.source} name={contact.name} , news={contact.new}   oclock={oclock}
+                        return <Contact name={contact.name} username={contact.name} key={key} applyChat={this.applyChat} styles={styles} message={contact.last}/>
                     })}
                 </div>
             </div>
