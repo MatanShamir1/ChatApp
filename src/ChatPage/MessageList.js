@@ -23,7 +23,7 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
-            doUpdate: true,
+            lastMessage:'',
             disabled: "disabled",
             showError: false,
             contactMessages: []
@@ -166,13 +166,20 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
-    componentDidUpdate() {
-        if (this.props.phoneNumber === '') {
+    componentDidUpdate(prevProps , prevState) {
+        if(prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === ''){
+            this.setState({
+                lastMessage:this.state.lastMessage
+            })
             return
         }
-        if(this.state.doUpdate === false){
+        if((prevProps.phoneNumber === this.props.phoneNumber) && this.state.contactMessages[this.state.contactMessages.length -1].created === prevState.contactMessages[this.state.contactMessages.length -1].created ){
             return
         }
+
+        // if(this.state.doUpdate === false){
+        //     return
+        // }
         var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
         axios.get(url, { withCredentials: true })
             .then(res => {
@@ -188,36 +195,36 @@ class MessageList extends Component {
                 } else{
                 this.setState({
                     contactMessages: res.data,
-                    doUpdate: false
+                    lastMessage:res.data.pop().content
               })   }
             });
     }
-    componentDidMount(){
-        var element = document.getElementById("update");
-        if (element != null) {
-            element.scrollIntoView();
-        }
-        if (this.props.phoneNumber === '') {
-            return
-        }
-        if(this.state.doUpdate === false){
-            return
-        }
-        var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
-        axios.get(url, { withCredentials: true })
-            .then(res => {
-                if(res.data === 'empty') {
-                    this.setState({
-                        contactMessages: [],
-                        lastPhoneNumber: this.props.phoneNumber
-                  }) 
-                } else{
-                this.setState({
-                    contactMessages: res.data,
-                    doUpdate: false
-              })   }
-            });
-    }
+    // componentDidMount(){
+    //     var element = document.getElementById("update");
+    //     if (element != null) {
+    //         element.scrollIntoView();
+    //     }
+    //     if (this.props.phoneNumber === '') {
+    //         return
+    //     }
+    //     if(this.state.doUpdate === false){
+    //         return
+    //     }
+    //     var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
+    //     axios.get(url, { withCredentials: true })
+    //         .then(res => {
+    //             if(res.data === 'empty') {
+    //                 this.setState({
+    //                     contactMessages: [],
+    //                     lastPhoneNumber: this.props.phoneNumber
+    //               }) 
+    //             } else{
+    //             this.setState({
+    //                 contactMessages: res.data,
+    //                 doUpdate: false
+    //           })   }
+    //         });
+    // }
     render() {
         if (this.props.phoneNumber === '') {
             return (
