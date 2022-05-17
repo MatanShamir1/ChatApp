@@ -21,11 +21,14 @@ class Contacts extends Component {
         )
     }
 
-    componentDidUpdate(){
+    componentDidUpdate(prevProps){
+        if(prevProps.lastMessage === this.props.lastMessage){
+            return;
+        }
         axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
         .then(res => {
                   this.setState({
-                        contacts: res.data
+                        contacts: res.data,
                   })   
         });
     }
@@ -65,10 +68,8 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        // const message = contact.messages.length===0?'': (contact.messages.at(-1)[0].indexOf("blob:") !== -1 || contact.messages.at(-1)[0].indexOf("data:") !== -1 || contact.messages.at(-1)[0].indexOf("/static") !== -1) ? "attachment" : contact.messages.at(-1)[0]
-                        // const oclock = contact.messages.length===0?'': contact.messages.at(-1)[3];
                         // source={contact.source} name={contact.name} , news={contact.new}   oclock={oclock}
-                        return <Contact name={contact.id} key={key} applyChat={this.applyChat} styles={styles}  message={contact.last}/>
+                        return <Contact viewName={contact.name} realName={contact.id} key={key} applyChat={this.applyChat} styles={styles}  message={contact.last} oclock={contact.lastdate}/>
                     })}
                 </div>
             </div>

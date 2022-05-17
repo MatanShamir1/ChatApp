@@ -9,7 +9,7 @@ class Contact extends Component {
     }
     //only make it active in this function. the others' functions should make this unselected.
     changeState() {
-        this.props.applyChat(this.props.name);
+        this.props.applyChat(this.props.realName);
     }
 
     render() {
@@ -23,7 +23,7 @@ class Contact extends Component {
                         <img src={this.props.source} alt="Avatar" className="circular-square"></img>
                     </div>
                     <div className="fw-bold">
-                        {this.props.username}
+                        {this.props.viewName}
                     </div>
                     {message}
                 </div>

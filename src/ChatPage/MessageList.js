@@ -97,7 +97,7 @@ class MessageList extends Component {
                 this.setState({
                     doUpdate: true
                 });
-                this.props.addMessage()
+                this.props.addMessage(y)
             }
             else{
                 alert('message could not be sent');

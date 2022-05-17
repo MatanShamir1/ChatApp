@@ -18,7 +18,8 @@ class Chat extends Component {
             username: '',
             isAdd: false,
             nickname: '',
-            contactList: []
+            contactList: [],
+            lastMessage: ''
         }
     }
 
@@ -36,7 +37,8 @@ class Chat extends Component {
 
     addMessage = (message) => {
         this.setState({
-            isAdd: this.state.isAdd
+            isAdd: this.state.isAdd,
+            lastMessage: message
         })
     }
 
@@ -67,7 +69,7 @@ class Chat extends Component {
                 </Modal>
                 <div className={theClass}>
                     <div className="leftMenu ">
-                        <Contacts setChat={this.setChat} addContact={this.addContact}/>
+                        <Contacts setChat={this.setChat} addContact={this.addContact} hasToUpdate={true} lastMessage={this.state.lastMessage}/>
                     </div>
                     <div>
                         <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} addMessage={this.addMessage}/>

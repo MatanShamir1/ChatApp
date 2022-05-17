@@ -27,7 +27,7 @@ class Message extends Component {
         }
         var float_dir = "justify-content-start";
         var msg_col = "msg-sender";
-        if (this.props.content.sent === true) {
+        if (this.props.content.sent === false) {
             msg_col = "msg-receiver";
             float_dir = "justify-content-end";
         }
