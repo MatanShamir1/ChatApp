@@ -18,7 +18,6 @@ class Chat extends Component {
             username: '',
             isAdd: false,
             nickname: '',
-            contactList: [],
             lastMessage: '' , 
             firstTime : true
         }
@@ -65,7 +64,7 @@ class Chat extends Component {
                 <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
-                        <AddContactPopUp setActive={this.addContact} username = {this.state.username} contactList={this.props.contactList}>
+                        <AddContactPopUp setActive={this.addContact} username = {this.props.user}>
                         </AddContactPopUp>
                     </Modal.Body>
                 </Modal>

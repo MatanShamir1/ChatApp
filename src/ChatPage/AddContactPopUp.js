@@ -6,45 +6,52 @@ function AddContactPopUp(props) {
     const [error, setError] = useState('');
     const contactBox = useRef(null);
     const phoneBox = useRef(null);
+    const serverBox = useRef(null);
     const saveChanges = () => {
-        axios.post(`http://localhost:5243/api/contacts`,{
-         nickname:phoneBox.current.value , username:contactBox.current.value
+        //try check with other server
+        axios.post(`http://${serverBox}/api/invitations`,{
+         from:this.props.username , to:phoneBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {
+            if(res.status === 201){
+            } else {
+                setError("contact doesn't exist where you though it did! check server name, you probably got it wrong...")
+                return;
+            }
+        })
 
+        //add contact in our server
+        axios.post(`http://localhost:5243/api/contacts`,{
+         id:phoneBox.current.value , name:contactBox.current.value, server:serverBox.current.value
+        },{withCredentials:true})
+        .then(res => {
+            if(res.status === 201){
+                getOut();
+            } else {
+                setError("unexcpected behaviour: the contact exists, but your server had a bad response...")
+                return;
+            }
         })
-        const doesExist = props.contactList.find((contact) => {
-            return contact.name === contact.phoneNumber;
-        });
-        const user = users.find((user) => {
-            return user.username === phoneBox.current.value;
-        })
-        if (user === undefined) {
-            setError('There\'s no user with this phone number/username.');
-            return;
-        } else if (doesExist !== undefined) {
-            doesExist.name = contactBox.current.value;
-        } else {
-            props.contactList.push({
-                name: contactBox.current.value, phoneNumber: user.username, messages: [], new: 0, source: user.imgsrc //this should be the other user's image...
-            })
-        }
-        getOut();
     }
     const getOut = () => {
+        console.log('what the hell')
         props.setActive();
     }
     return (
         <div>
             <div>
                 <div className="row mb-3 form">
-                    <label className="col-sm-2 col-form-label add-contact-text" >Contact name</label>
+                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's id</label>
                     <div className="col-sm-4">
                         <input id='contact-name' ref={contactBox} className="form-control"></input>
                     </div>
-                    <label className="col-sm-2 col-form-label add-contact-text" >Contact phone number</label>
+                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's nickname</label>
                     <div className="col-sm-4">
                         <input id='contact-name' ref={phoneBox} className="form-control"></input>
+                    </div>
+                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's server</label>
+                    <div className="col-sm-4">
+                        <input id='contact-name' ref={serverBox} className="form-control"></input>
                     </div>
                     <div className="alert-message">
                         {error}
