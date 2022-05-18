@@ -9,7 +9,8 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            errors: ''
+            errors: '',
+            variable: ''
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.passwordBox = React.createRef();
@@ -33,10 +34,14 @@ class Login extends Component {
             });
             return;
         }
-        axios.post(`http://localhost:5243/api/users/Login`, { username:username , password:password },{withCredentials:true})
+        axios.post(`http://localhost:5243/api/users/Login`, { username:username , password:password },{withCredentials:true},axios.defaults.withCredentials = true)
         .then(res => {
             if(res.status == 201){
                 this.props.setName(this.usernameBox.current.value)
+                this.setState({
+                    variable : res.config.headers.Cookie
+                })
+                
             }
             else{
                 screenMessage += '*Wrong username or password.\n'

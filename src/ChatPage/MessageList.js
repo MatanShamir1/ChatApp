@@ -26,7 +26,8 @@ class MessageList extends Component {
             lastMessage:'',
             disabled: "disabled",
             showError: false,
-            contactMessages: []
+            contactMessages: [],
+            doUpdate:true
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -91,11 +92,12 @@ class MessageList extends Component {
 
     sendAllkindOfMessage(x, y) {
         //x is undefined if text message, y is the content.
-        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content:y },{withCredentials:true})
+        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content:y },{withCredentials:true},axios.defaults.withCredentials = true)
         .then(res => {
             if(res.status === 201){
                 this.setState({
-                    doUpdate: true
+                    doUpdate: true,
+                    
                 });
                 this.props.addMessage(y)
             }
@@ -173,58 +175,29 @@ class MessageList extends Component {
             })
             return
         }
-        if((prevProps.phoneNumber === this.props.phoneNumber) && this.state.contactMessages[this.state.contactMessages.length -1].created === prevState.contactMessages[this.state.contactMessages.length -1].created ){
+        if(this.state.doUpdate === false && (prevProps.phoneNumber === this.props.phoneNumber) && this.state.contactMessages[this.state.contactMessages.length -1].created === prevState.contactMessages[prevState.contactMessages.length -1].created){
+            var element = document.getElementById("update");
+            if (element != null) {
+                element.scrollIntoView();
+            }
             return
-        }
-
-        // if(this.state.doUpdate === false){
-        //     return
-        // }
+    }
         var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
-        axios.get(url, { withCredentials: true })
+        axios.get(url, { withCredentials: true } ,axios.defaults.withCredentials = true)
             .then(res => {
                 if(res.data === 'empty') {
                     this.setState({
                         contactMessages: [],
-                        lastPhoneNumber: this.props.phoneNumber
+                        lastPhoneNumber: this.props.phoneNumber,
                   }) 
-                  var element = document.getElementById("update");
-                  if (element != null) {
-                      element.scrollIntoView();
-                  }
                 } else{
                 this.setState({
                     contactMessages: res.data,
-                    lastMessage:res.data.pop().content
+                    lastMessage:res.data[res.data.length -1].content,
+                    doUpdate:false
               })   }
             });
     }
-    // componentDidMount(){
-    //     var element = document.getElementById("update");
-    //     if (element != null) {
-    //         element.scrollIntoView();
-    //     }
-    //     if (this.props.phoneNumber === '') {
-    //         return
-    //     }
-    //     if(this.state.doUpdate === false){
-    //         return
-    //     }
-    //     var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
-    //     axios.get(url, { withCredentials: true })
-    //         .then(res => {
-    //             if(res.data === 'empty') {
-    //                 this.setState({
-    //                     contactMessages: [],
-    //                     lastPhoneNumber: this.props.phoneNumber
-    //               }) 
-    //             } else{
-    //             this.setState({
-    //                 contactMessages: res.data,
-    //                 doUpdate: false
-    //           })   }
-    //         });
-    // }
     render() {
         if (this.props.phoneNumber === '') {
             return (
