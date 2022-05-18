@@ -23,11 +23,11 @@ class MessageList extends Component {
             PopUpRecordFromScreen: false,
             popUpImgfromScreen: false,
             record: false,
-            lastMessage:'',
+            lastMessage: '',
             disabled: "disabled",
             showError: false,
             contactMessages: [],
-            doUpdate:true
+            doUpdate: true
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -50,7 +50,7 @@ class MessageList extends Component {
         })
     }
 
-  
+
     updateCamera(camera) {
         this.closeCamera = camera;
     }
@@ -92,19 +92,19 @@ class MessageList extends Component {
 
     sendAllkindOfMessage(x, y) {
         //x is undefined if text message, y is the content.
-        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content:y },{withCredentials:true},axios.defaults.withCredentials = true)
-        .then(res => {
-            if(res.status === 201){
-                this.setState({
-                    doUpdate: true,
-                    
-                });
-                this.props.addMessage(y)
-            }
-            else{
-                alert('message could not be sent');
-            }
-        })
+        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content: y }, { withCredentials: true }, axios.defaults.withCredentials = true)
+            .then(res => {
+                if (res.status === 201) {
+                    this.setState({
+                        doUpdate: true,
+
+                    });
+                    this.props.addMessage(y, false)
+                }
+                else {
+                    alert('message could not be sent');
+                }
+            })
 
         this.sendBox.current.value = '';
     }
@@ -168,34 +168,36 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
-    componentDidUpdate(prevProps , prevState) {
-        if(prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === ''){
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === '') {
             this.setState({
-                lastMessage:this.state.lastMessage
+                lastMessage: this.state.lastMessage
             })
             return
         }
-        if(this.state.doUpdate === false && (prevProps.phoneNumber === this.props.phoneNumber) && this.state.contactMessages[this.state.contactMessages.length -1].created === prevState.contactMessages[prevState.contactMessages.length -1].created){
+        if ((this.state.doUpdate === false || this.props.isFirstTime === false) && (prevProps.phoneNumber === this.props.phoneNumber) &&
+         ((this.state.contactMessages[this.state.contactMessages.length - 1].created === prevState.contactMessages[prevState.contactMessages.length - 1].created) || (this.state.doUpdate === false || this.props.isFirstTime === false))) {
             var element = document.getElementById("update");
             if (element != null) {
                 element.scrollIntoView();
             }
             return
-    }
+        }
         var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
-        axios.get(url, { withCredentials: true } ,axios.defaults.withCredentials = true)
+        axios.get(url, { withCredentials: true }, axios.defaults.withCredentials = true)
             .then(res => {
-                if(res.data === 'empty') {
+                if (res.data === 'empty') {
                     this.setState({
                         contactMessages: [],
                         lastPhoneNumber: this.props.phoneNumber,
-                  }) 
-                } else{
-                this.setState({
-                    contactMessages: res.data,
-                    lastMessage:res.data[res.data.length -1].content,
-                    doUpdate:false
-              })   }
+                    })
+                } else {
+                    this.setState({
+                        contactMessages: res.data,
+                        lastMessage: res.data[res.data.length - 1].content,
+                        doUpdate: false
+                    })
+                }
             });
     }
     render() {
@@ -210,7 +212,7 @@ class MessageList extends Component {
                         <div className="card-body msg_card_body row">
                             {this.state.contactMessages.map((message, key) => {
                                 console.log(message);
-                                 return <Message userimg={this.props.imgsrc} content={message} key={key} />
+                                return <Message userimg={this.props.imgsrc} content={message} key={key} />
                             })}
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >

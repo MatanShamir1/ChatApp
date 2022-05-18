@@ -19,7 +19,8 @@ class Chat extends Component {
             isAdd: false,
             nickname: '',
             contactList: [],
-            lastMessage: ''
+            lastMessage: '' , 
+            firstTime : true
         }
     }
 
@@ -35,10 +36,11 @@ class Chat extends Component {
         })
     }
 
-    addMessage = (message) => {
+    addMessage = (message , first) => {
         this.setState({
             isAdd: this.state.isAdd,
-            lastMessage: message
+            lastMessage: message , 
+            firstTime : first
         })
     }
 
@@ -72,7 +74,7 @@ class Chat extends Component {
                         <Contacts setChat={this.setChat} addContact={this.addContact} hasToUpdate={true} lastMessage={this.state.lastMessage}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} addMessage={this.addMessage}/>
+                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} isFirstTime={this.state.firstTime} addMessage={this.addMessage}/>
                     </div>
                 </div>
             </div>
