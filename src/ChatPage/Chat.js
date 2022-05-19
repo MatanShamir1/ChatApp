@@ -74,7 +74,7 @@ class Chat extends Component {
                 </Modal>
                 <div className={theClass}>
                     <div className="leftMenu ">
-                        <Contacts setChat={this.setChat} addContact={this.addContact} hasToUpdate={true} lastMessage={this.state.lastMessage}/>
+                        <Contacts setChat={this.setChat} addContact={this.addContact} is_adding={this.state.is_adding} lastMessage={this.state.lastMessage}/>
                     </div>
                     <div>
                         <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage}/>

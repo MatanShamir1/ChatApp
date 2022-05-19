@@ -7,10 +7,10 @@ function AddContactPopUp(props) {
     const contactBox = useRef(null);
     const phoneBox = useRef(null);
     const serverBox = useRef(null);
-    const saveChanges = () => {
+    const saveChanges = async () => {
         //try check with other server
         var url = `http://${serverBox.current.value}/api/invitations`
-        axios.post(`http://${serverBox.current.value}/api/invitations`,{
+        await axios.post(`http://${serverBox.current.value}/api/invitations`,{
          from:props.username , to:phoneBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {
@@ -20,9 +20,8 @@ function AddContactPopUp(props) {
                 return;
             }
         })
-
         //add contact in our server
-        axios.post(`http://localhost:5243/api/contacts`,{
+        await axios.post(`http://localhost:5243/api/contacts`,{
          id:phoneBox.current.value , name:contactBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {

@@ -11,7 +11,8 @@ class Contacts extends Component {
         super(props)
         this.state = {
             contacts: [],
-            curr: ''
+            curr: '',
+            dontUpdate: false
         }
         this.render = this.render.bind(this)
     }
@@ -21,17 +22,32 @@ class Contacts extends Component {
         )
     }
 
-    componentDidUpdate(prevProps){
-        if(prevProps.lastMessage === this.props.lastMessage){
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.dontUpdate === true){
+            return;
+        }
+        if(this.state.dontUpdate === true){
+            this.setState({
+                dontUpdate: false
+            })
+            return
+        }
+        if(prevProps.lastMessage === this.props.lastMessage && !this.props.is_adding){
             return;
         }
         axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
         .then(res => {
+                var setter = false;
+                if(this.props.is_adding){
+                    setter = true;
+                }
                   this.setState({
                         contacts: res.data,
+                        dontUpdate: setter
                   })   
         });
     }
+
     componentDidMount(){
         axios.get(`http://localhost:5243/api/contacts`,{withCredentials:true})
         .then(res => {
