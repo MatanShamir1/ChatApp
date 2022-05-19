@@ -218,8 +218,7 @@ class MessageList extends Component {
         console.log(this.state.contactMessages[this.state.contactMessages.length - 1])
         console.log("")
         console.log(this.props.isFirstTime)
-        if ((this.state.doUpdate === false || this.props.isFirstTime === false) && (prevProps.phoneNumber === this.props.phoneNumber) &&
-         ((this.state.contactMessages[this.state.contactMessages.length - 1].created === prevState.contactMessages[prevState.contactMessages.length - 1].created) || (this.state.doUpdate === false || this.props.isFirstTime === false))) {
+        if ((this.state.doUpdate === false) && (prevProps.phoneNumber === this.props.phoneNumber) ) {
             console.log('im falling in crazy if statement all the time')
             var element = document.getElementById("update");
             if (element != null) {
