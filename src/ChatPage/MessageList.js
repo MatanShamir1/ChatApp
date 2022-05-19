@@ -98,7 +98,6 @@ class MessageList extends Component {
                 if (res.status === 201) {
                     this.setState({
                         doUpdate: true,
-
                     });
                     this.props.addMessage(y, false)
                 }
@@ -188,11 +187,40 @@ class MessageList extends Component {
         //     })
         //     return
         // }
-        if  ( this.state.contactMessages !== undefined && this.state.contactMessages[this.state.contactMessages.length - 1] !== undefined && prevState.contactMessages[prevState.contactMessages.length - 1] === undefined){
+        
+        if  (this.state.contactMessages[this.state.contactMessages.length - 1] === undefined){
+            var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
+            axios.get(url, { withCredentials: true }, axios.defaults.withCredentials = true)
+            .then(res => {
+                if (res.data === 'empty') {
+                    this.setState({
+                        contactMessages: [],
+                        lastPhoneNumber: this.props.phoneNumber,
+                        noMessages:true
+                    })
+                } else {
+                    this.setState({
+                        contactMessages: res.data,
+                        lastMessage: res.data[res.data.length - 1].content,
+                        doUpdate: true, 
+                        noMessages:false
+                    })
+                }
+            });
+            return;
+        } else if  (this.state.contactMessages[this.state.contactMessages.length - 1] !== undefined && prevState.contactMessages[prevState.contactMessages.length - 1] === undefined){
+            console.log('im falling in else if all the time')
             return;
         }
+        console.log("prevState:")
+        console.log(prevState.contactMessages[prevState.contactMessages.length - 1])
+        console.log("this State:")
+        console.log(this.state.contactMessages[this.state.contactMessages.length - 1])
+        console.log("")
+        console.log(this.props.isFirstTime)
         if ((this.state.doUpdate === false || this.props.isFirstTime === false) && (prevProps.phoneNumber === this.props.phoneNumber) &&
          ((this.state.contactMessages[this.state.contactMessages.length - 1].created === prevState.contactMessages[prevState.contactMessages.length - 1].created) || (this.state.doUpdate === false || this.props.isFirstTime === false))) {
+            console.log('im falling in crazy if statement all the time')
             var element = document.getElementById("update");
             if (element != null) {
                 element.scrollIntoView();
