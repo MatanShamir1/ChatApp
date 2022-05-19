@@ -27,7 +27,8 @@ class MessageList extends Component {
             disabled: "disabled",
             showError: false,
             contactMessages: [],
-            doUpdate: true
+            doUpdate: true, 
+            noMessages:false
         }
         this.startRecording = this.startRecording.bind(this)
         this.handleClickRecord = this.handleClickRecord.bind(this)
@@ -169,14 +170,26 @@ class MessageList extends Component {
         this.sendAllkindOfMessage(x, y);
     }
     componentDidUpdate(prevProps, prevState) {
+        if(prevState.noMessages === true){
+            return;
+        }
+        if(this.state.noMessages === true){
+            this.setState({
+                noMessages: false
+            })
+            return
+        }
         if(this.props.is_adding === true){
             return
         }
-        if (prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === '') {
-            this.setState({
-                lastMessage: this.state.lastMessage
-            })
-            return
+        // if (prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === '') {
+        //     this.setState({
+        //         lastMessage: this.state.lastMessage
+        //     })
+        //     return
+        // }
+        if  ( this.state.contactMessages !== undefined && this.state.contactMessages[this.state.contactMessages.length - 1] !== undefined && prevState.contactMessages[prevState.contactMessages.length - 1] === undefined){
+            return;
         }
         if ((this.state.doUpdate === false || this.props.isFirstTime === false) && (prevProps.phoneNumber === this.props.phoneNumber) &&
          ((this.state.contactMessages[this.state.contactMessages.length - 1].created === prevState.contactMessages[prevState.contactMessages.length - 1].created) || (this.state.doUpdate === false || this.props.isFirstTime === false))) {
@@ -193,12 +206,14 @@ class MessageList extends Component {
                     this.setState({
                         contactMessages: [],
                         lastPhoneNumber: this.props.phoneNumber,
+                        noMessages:true
                     })
                 } else {
                     this.setState({
                         contactMessages: res.data,
                         lastMessage: res.data[res.data.length - 1].content,
-                        doUpdate: false
+                        doUpdate: false , 
+                        noMessages:false
                     })
                 }
             });
