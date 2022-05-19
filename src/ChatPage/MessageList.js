@@ -169,6 +169,9 @@ class MessageList extends Component {
         this.sendAllkindOfMessage(x, y);
     }
     componentDidUpdate(prevProps, prevState) {
+        if(this.props.is_adding === true){
+            return
+        }
         if (prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === '') {
             this.setState({
                 lastMessage: this.state.lastMessage

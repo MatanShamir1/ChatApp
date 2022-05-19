@@ -19,19 +19,22 @@ class Chat extends Component {
             isAdd: false,
             nickname: '',
             lastMessage: '' , 
-            firstTime : true
+            firstTime : true , 
+            is_adding: false
         }
     }
 
     setChat = (username) => {
         this.setState({
-            username: username
+            username: username,
+            is_adding:false
         })
     }
 
     addContact = () => {
         this.setState({
-            isAdd: !this.state.isAdd
+            isAdd: !this.state.isAdd , 
+            is_adding: true
         })
     }
 
@@ -39,7 +42,8 @@ class Chat extends Component {
         this.setState({
             isAdd: this.state.isAdd,
             lastMessage: message , 
-            firstTime : first
+            firstTime : first, 
+            is_adding:false
         })
     }
 
@@ -73,11 +77,11 @@ class Chat extends Component {
                         <Contacts setChat={this.setChat} addContact={this.addContact} hasToUpdate={true} lastMessage={this.state.lastMessage}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} isFirstTime={this.state.firstTime} addMessage={this.addMessage}/>
+                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage}/>
                     </div>
                 </div>
             </div>
         )
     }
 }
-export default Chat;
+export default Chat; 

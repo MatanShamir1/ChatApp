@@ -9,8 +9,9 @@ function AddContactPopUp(props) {
     const serverBox = useRef(null);
     const saveChanges = () => {
         //try check with other server
-        axios.post(`http://${serverBox}/api/invitations`,{
-         from:this.props.username , to:phoneBox.current.value, server:serverBox.current.value
+        var url = `http://${serverBox.current.value}/api/invitations`
+        axios.post(`http://${serverBox.current.value}/api/invitations`,{
+         from:props.username , to:phoneBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {
             if(res.status === 201){
@@ -43,11 +44,11 @@ function AddContactPopUp(props) {
                 <div className="row mb-3 form">
                     <label className="col-sm-2 col-form-label add-contact-text" >Contact's id</label>
                     <div className="col-sm-4">
-                        <input id='contact-name' ref={contactBox} className="form-control"></input>
+                        <input id='contact-name' ref={phoneBox} className="form-control"></input>
                     </div>
                     <label className="col-sm-2 col-form-label add-contact-text" >Contact's nickname</label>
                     <div className="col-sm-4">
-                        <input id='contact-name' ref={phoneBox} className="form-control"></input>
+                        <input id='contact-name' ref={contactBox} className="form-control"></input>
                     </div>
                     <label className="col-sm-2 col-form-label add-contact-text" >Contact's server</label>
                     <div className="col-sm-4">
