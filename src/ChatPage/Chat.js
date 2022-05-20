@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import { Navigate } from "react-router-dom"
 import Recognition from "./Recognition";
 import axios from "axios";
-
+import CartIcon from '../images/jon_snow.jpg';
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 //shift+alt+f formatting!
@@ -20,7 +20,8 @@ class Chat extends Component {
             nickname: '',
             lastMessage: '' , 
             firstTime : true , 
-            is_adding: false
+            is_adding: false, 
+            source: CartIcon
         }
     }
 
@@ -52,7 +53,7 @@ class Chat extends Component {
     }
         
     render() {
-        if (this.props.user === undefined) {
+        if (this.props.user === undefined || this.props.user === '' ) {
             return (<Navigate to="../" />);
         }
         var theClass = "out-div";
@@ -63,8 +64,7 @@ class Chat extends Component {
         return (
             
             <div id="everything">
-                <Recognition imgsrc={this.props.user.imgsrc} username={this.props.user} logOut={this.logOut} />
-            
+                <Recognition imgsrc={CartIcon} username={this.props.user} logOut={this.logOut} />
                 <Modal show={this.state.isAdd} onHide={this.addContact}>
                     <Modal.Header closeButton >Add a contact</Modal.Header>
                     <Modal.Body >
