@@ -16,6 +16,7 @@ class Chat extends Component {
         super(props)
         this.state = {
             username: '',
+            remote_server:'',
             isAdd: false,
             nickname: '',
             lastMessage: '' , 
@@ -25,8 +26,9 @@ class Chat extends Component {
         }
     }
 
-    setChat = (username) => {
+    setChat = (username, remote_server) => {
         this.setState({
+            remote_server:remote_server,
             username: username,
             is_adding:false
         })
@@ -77,7 +79,8 @@ class Chat extends Component {
                         <Contacts username = {this.props.user} setChat={this.setChat} addContact={this.addContact} is_adding={this.state.is_adding} lastMessage={this.state.lastMessage}/>
                     </div>
                     <div>
-                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage}/>
+                        <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user}
+                         remote_server={this.state.remote_server} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage}/>
                     </div>
                 </div>
             </div>

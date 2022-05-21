@@ -86,7 +86,7 @@ class Message extends Component {
                     )}
                     {float_dir === "justify-content-end" &&
                         (<div className="img_cont_msg">
-                            <img src={this.props.source} className="circular-square" />
+                            <img src={this.props.userimg} className="circular-square" />
                         </div>)
                     }
                 </div>

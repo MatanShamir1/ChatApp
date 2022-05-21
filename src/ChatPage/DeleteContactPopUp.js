@@ -7,18 +7,22 @@ function DeleteContactPopUp(props) {
     const phoneBox = useRef(null);
     const serverBox = useRef(null);
     const saveChanges = async () => {
-        //try check with other server
-        await axios.delete(`http://localhost:5243/api/contacts/${props.id}`,{
+        try {
+            await axios.delete(`http://localhost:5243/api/contacts/${props.id}`,{
         },{withCredentials:true})
         .then(res => {
             if(res.status === 204){
                 getOut();
             } else {
-                setError("contact doesn't exist where you though it did! check server name, you probably got it wrong...")
+                setError("server couldn't change contacts name...")
                 return;
             }
         })
-
+        } catch (error) {
+            setError("check server name, you probably got it wrong...")
+                return;
+        }
+        //try check with other server
     }
     const getOut = () => {
         props.change(2);

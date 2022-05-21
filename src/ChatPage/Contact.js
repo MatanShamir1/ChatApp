@@ -64,7 +64,7 @@ class Contact extends Component {
                     </Modal.Body>
             </Modal>
                 <div className="ms-2 me-auto" onClick={this.changeState}>
-                    {this.props.news !== 0 && (<span className="badge bg-primary rounded-pill to-right">{this.props.news}</span>)}
+                    {this.props.news !== 0 && (<span className="badge bg-primary rounded-pill to-right">{this.props.hasNew}</span>)}
                     {this.props.oclock !== '' && (<span className="oclock">{this.props.oclock}</span>)}
                     <div className="position-relative avatar cont-div">
                         <img src={this.props.source} alt="Avatar" className="circular-square"></img>

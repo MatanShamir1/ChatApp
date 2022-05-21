@@ -8,6 +8,7 @@ import AddRecord from "./AddRecord";
 import AddVideoFromScreen from "./AddVIdeoFromScreen";
 import AddPicFromScreen from "./AddPicFromScreen";
 import axios from "axios";
+import CartIcon from '../images/jon_snow.jpg';
 //you can write rce and it gives you a className template!
 //create a constructor using the keyword rconst.
 
@@ -91,9 +92,28 @@ class MessageList extends Component {
         this.sendAllkindOfMessage(undefined, this.sendBox.current.value);
     }
 
-    sendAllkindOfMessage(x, y) {
+    async sendAllkindOfMessage(x, y) {
+        //try to send it to the contact's server first, the server will send it to their user.
+        console.log("sending from:")
+        console.log(this.props.username);
+        console.log("sending to:")
+        console.log(this.props.phoneNumber);
+        console.log("remote server:")
+        console.log(this.props.remote_server);
+        console.log("whose url is:")
+        console.log(`http://${this.props.remote_server}/api/transfer`);
+        
+        await axios.post(`http://${this.props.remote_server}/api/transfer`,{
+         from:this.props.username , to:this.props.phoneNumber, content: y},{withCredentials:true})
+        .then(res => {
+            if(res.status === 201){
+            } else {
+                alert("cannot send message to contact... maybe he doesn't exist? or his server went down?")
+                return;
+            }
+        })
         //x is undefined if text message, y is the content.
-        axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content: y }, { withCredentials: true }, axios.defaults.withCredentials = true)
+        await axios.post(`http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`, { content: y }, { withCredentials: true }, axios.defaults.withCredentials = true)
             .then(res => {
                 if (res.status === 201) {
                     this.setState({
@@ -181,12 +201,6 @@ class MessageList extends Component {
         if(this.props.is_adding === true){
             return
         }
-        // if (prevProps.phoneNumber === this.props.phoneNumber && prevState.lastMessage === '') {
-        //     this.setState({
-        //         lastMessage: this.state.lastMessage
-        //     })
-        //     return
-        // }
         
         if  (this.state.contactMessages[this.state.contactMessages.length - 1] === undefined){
             var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
@@ -209,22 +223,20 @@ class MessageList extends Component {
             });
             return;
         } else if  (this.state.contactMessages[this.state.contactMessages.length - 1] !== undefined && prevState.contactMessages[prevState.contactMessages.length - 1] === undefined){
-            console.log('im falling in else if all the time')
             return;
         }
-        console.log("prevState:")
-        console.log(prevState.contactMessages[prevState.contactMessages.length - 1])
-        console.log("this State:")
-        console.log(this.state.contactMessages[this.state.contactMessages.length - 1])
-        console.log("")
-        console.log(this.props.isFirstTime)
-        if ((this.state.doUpdate === false) && (prevProps.phoneNumber === this.props.phoneNumber) ) {
-            console.log('im falling in crazy if statement all the time')
+        
+        if ((this.state.doUpdate === false || this.props.isFirstTime === false) && (prevProps.phoneNumber === this.props.phoneNumber) &&
+         ((this.state.contactMessages[this.state.contactMessages.length - 1].created === prevState.contactMessages[prevState.contactMessages.length - 1].created) || (this.state.doUpdate === false || this.props.isFirstTime === false))) {
+            if(this.state.doUpdate === true){
+
+            }else{
             var element = document.getElementById("update");
             if (element != null) {
                 element.scrollIntoView();
             }
             return
+        }
         }
         var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
         axios.get(url, { withCredentials: true }, axios.defaults.withCredentials = true)
@@ -256,8 +268,7 @@ class MessageList extends Component {
                     <div className="conversation bg-successive your-div">
                         <div className="card-body msg_card_body row">
                             {this.state.contactMessages.map((message, key) => {
-                                console.log(message);
-                                return <Message userimg={this.props.imgsrc} content={message} key={key} />
+                                return <Message userimg={CartIcon} content={message} key={key} />
                             })}
                             <span id="update"></span>
                             <Modal show={this.state.show} onHide={this.closeButton} >

@@ -29,7 +29,7 @@ class Contacts extends Component {
             .then(res => {
                 this.setState({
                     contacts: res.data,
-                    contacts2: res.data
+                    contacts2: res.data,
                 })
             });
     }
@@ -79,12 +79,9 @@ class Contacts extends Component {
         if (x === 2) {
             this.check()
         }
-        this.props.setChat(name);
-        // for (var i = 0, iLen = this.props.contactList.length; i < iLen; i++) {
-        //     if (this.props.contacts[i].name === name) {
-        //         this.props.contacts[i].new = 0;
-        //     }
-        // }
+        var server = this.state.contacts.find(c => c.id === name).server;
+        this.props.setChat(name, server);
+        
         this.setState({
             curr: name
         })
@@ -105,8 +102,9 @@ class Contacts extends Component {
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
-                        // source={contact.source} name={contact.name} , news={contact.new}   oclock={oclock}
-                        return <Contact source={this.state.source}  username={this.props.username} viewName={contact.name} realName={contact.id} key={key} applyChat={this.applyChat} styles={styles} message={contact.last} oclock={contact.lastdate} />
+                        return <Contact source={this.state.source}  username={this.props.username} viewName={contact.name} realName={contact.id} key={key}
+                         applyChat={this.applyChat} styles={styles} message={contact.last} oclock={contact.lastDate}/>
+                         //hasNew={this.state.lastContacts.find(c => c.id === contact.id)!==undefined?(this.state.lastContacts.find(c => c.id === contact.id).lastDate!==contact.lastDate?"new messages":undefined):undefined}
                     })}
                 </div>
             </div>

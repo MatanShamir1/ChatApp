@@ -11,16 +11,21 @@ function AddContactPopUp(props) {
         //try check with other server
 
         var url = `http://${serverBox.current.value}/api/invitations`
-        await axios.post(`http://${serverBox.current.value}/api/invitations`,{
+        try {
+            await axios.post(`http://${serverBox.current.value}/api/invitations`,{
          from:props.username , to:phoneBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {
             if(res.status === 201){
             } else {
-                setError("contact doesn't exist where you though it did! check server name, you probably got it wrong...")
+                setError("contact doesn't exist where you though it did!")
                 return;
             }
         })
+        } catch (error) {
+            setError("contact doesn't exist where you though it did! check server name, you probably got it wrong...")
+            return;
+        }
         //add contact in our server
         await axios.post(`http://localhost:5243/api/contacts`,{
          id:phoneBox.current.value , name:contactBox.current.value, server:serverBox.current.value

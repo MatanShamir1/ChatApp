@@ -8,18 +8,22 @@ function ChangeContactPopUp(props) {
     const serverBox = useRef(null);
     const saveChanges = async () => {
         //try check with other server
-        await axios.put(`http://${serverBox.current.value}/api/contacts/${props.id}`,{
+        try {
+            await axios.put(`http://${serverBox.current.value}/api/contacts/${props.id}`,{
          name:contactBox.current.value, server:serverBox.current.value
         },{withCredentials:true})
         .then(res => {
             if(res.status === 204){
                 getOut();
             } else {
-                setError("contact doesn't exist where you though it did! check server name, you probably got it wrong...")
+                setError("server couldn't change contact name.")
                 return;
             }
         })
-
+        } catch (error) {
+            setError("check server name, you probably got it wrong...")
+                return;
+        }
     }
     const getOut = () => {
         props.change(1);
@@ -43,7 +47,7 @@ function ChangeContactPopUp(props) {
             </div>
 
             <div className="modal-footer">
-                <button type="button" className="btn btn-secondary modal__btn" data-bs-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-secondary modal__btn" data-bs-dismiss="modal" onClick={getOut}>Close</button>
                 <button type="button" className="btn btn-primary modal__btn" onClick={saveChanges}>Save changes</button>
             </div>
         </div>
