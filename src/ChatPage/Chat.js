@@ -68,11 +68,16 @@ class Chat extends Component {
         // need to  get oonly message so the on is work on contact
     const connection2 = new HubConnectionBuilder().withUrl("http://localhost:5243/ChatHub").configureLogging(LogLevel.Information).build();
     connection2.on("RecieveMessage" , () => {
+        console.log("cccccccccccccccccccccccccccccccccccccccccccccc")
         this.handlerMessage();
     })
-    await connection2.start();
-    await this.setState({connection: connection2})
-    await connection2.invoke("JoinRoom" , username)
+    
+    await connection2.start().then(()=>{
+        connection2.serverTimeoutInMilliseconds = 100000; 
+        this.setState({connection: connection2})
+         connection2.invoke("JoinRoom" , username)
+    })
+
 
 }
     logOut = () => {

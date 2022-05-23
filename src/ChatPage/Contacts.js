@@ -21,7 +21,7 @@ class Contacts extends Component {
         }
         this.render = this.render.bind(this)
         this.check =  this.check.bind(this)
-        this.handlerMessage = this.handlerMessage.bind(this);
+
     }
     setSearchQuery = (q) => {
         this.setState(
@@ -65,9 +65,7 @@ class Contacts extends Component {
                 })
             });
     }
-    handlerMessage(){
-        console.log("halan")
-    }
+
     async componentDidMount() {
         axios.get(`http://localhost:5243/api/contacts`, { withCredentials: true })
             .then(res => {
