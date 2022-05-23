@@ -15,6 +15,7 @@ class Contact extends Component {
         this.changeState = this.changeState.bind(this)
         this.edit = this.edit.bind(this)  
         this.delete = this.delete.bind(this)  
+       
     }
     //only make it active in this function. the others' functions should make this unselected.
     changeState(x) {
@@ -31,6 +32,7 @@ class Contact extends Component {
         this.props.applyChat(this.props.realName ,x);
   
     }
+    
     edit(){
         this.setState({
             isAdd : !this.state.isAdd

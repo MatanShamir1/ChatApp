@@ -7,11 +7,11 @@ import { Navigate } from "react-router-dom"
 import Recognition from "./Recognition";
 import axios from "axios";
 import CartIcon from '../images/jon_snow.jpg';
+import { HubConnectionBuilder , LogLevel } from '@microsoft/signalr';
 //you can write rce and it gives you a class template!
-//create a constructor using the keyword rconst.
+//create a construnnctor using the keyword rconst.
 //shift+alt+f formatting!
 class Chat extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -22,10 +22,11 @@ class Chat extends Component {
             lastMessage: '' , 
             firstTime : true , 
             is_adding: false, 
-            source: CartIcon
+            source: CartIcon , 
+            connection : ''
         }
+        this.handlerMessage = this.handlerMessage.bind(this);
     }
-
     setChat = (username, remote_server) => {
         this.setState({
             remote_server:remote_server,
@@ -33,7 +34,19 @@ class Chat extends Component {
             is_adding:false
         })
     }
-
+    handlerMessage(){
+        this.setState({
+            username: this.state.username, 
+            remote_server:this.state.remote_server,
+            isAdd: this.state.isAdd,
+            nickname: this.state.nickname,
+            lastMessage: this.state.lastMessage , 
+            firstTime : this.state.firstTime , 
+            is_adding: this.state.is_adding, 
+            source: this.state.source , 
+            connection : this.state.connection
+        })
+    }
     addContact = () => {
         this.setState({
             isAdd: !this.state.isAdd , 
@@ -50,6 +63,18 @@ class Chat extends Component {
         })
     }
 
+    async componentDidMount(){
+    var username = this.props.user;
+        // need to  get oonly message so the on is work on contact
+    const connection2 = new HubConnectionBuilder().withUrl("http://localhost:5243/ChatHub").configureLogging(LogLevel.Information).build();
+    connection2.on("RecieveMessage" , () => {
+        this.handlerMessage();
+    })
+    await connection2.start();
+    await this.setState({connection: connection2})
+    await connection2.invoke("JoinRoom" , username)
+
+}
     logOut = () => {
         this.props.setName('');
     }
@@ -64,7 +89,6 @@ class Chat extends Component {
         }
         // user.nickname need to get from the server , img current need to remove , contact list need to get from th server,
         return (
-            
             <div id="everything">
                 <Recognition imgsrc={CartIcon} username={this.props.user} logOut={this.logOut} />
                 <Modal show={this.state.isAdd} onHide={this.addContact}>
@@ -80,7 +104,7 @@ class Chat extends Component {
                     </div>
                     <div>
                         <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user}
-                         remote_server={this.state.remote_server} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage}/>
+                         remote_server={this.state.remote_server} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage} connection={this.state.connection}/>
                     </div>
                 </div>
             </div>

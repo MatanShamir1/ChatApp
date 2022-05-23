@@ -107,6 +107,7 @@ class MessageList extends Component {
          from:this.props.username , to:this.props.phoneNumber, content: y},{withCredentials:true})
         .then(res => {
             if(res.status === 201){
+            
             } else {
                 alert("cannot send message to contact... maybe he doesn't exist? or his server went down?")
                 return;
@@ -125,7 +126,8 @@ class MessageList extends Component {
                     alert('message could not be sent');
                 }
             })
-
+         var s = this.props.phoneNumber;
+    
         this.sendBox.current.value = '';
     }
     onHoverDisplay() {

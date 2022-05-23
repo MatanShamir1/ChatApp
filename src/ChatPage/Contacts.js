@@ -3,6 +3,8 @@ import Contact from "./Contact.js"
 import Search from "./Search"
 import axios from 'axios'
 import CartIcon from '../images/jon_snow.jpg';
+import { HubConnectionBuilder , LogLevel } from '@microsoft/signalr';
+
 //you can write rce and it gives you a class template!
 //create a constructor using the keyword rconst.
 class Contacts extends Component {
@@ -14,10 +16,12 @@ class Contacts extends Component {
             contacts2: [],
             curr: '',
             dontUpdate: false, 
-            source : CartIcon
+            source : CartIcon, 
+            
         }
         this.render = this.render.bind(this)
         this.check =  this.check.bind(this)
+        this.handlerMessage = this.handlerMessage.bind(this);
     }
     setSearchQuery = (q) => {
         this.setState(
@@ -61,8 +65,10 @@ class Contacts extends Component {
                 })
             });
     }
-
-    componentDidMount() {
+    handlerMessage(){
+        console.log("halan")
+    }
+    async componentDidMount() {
         axios.get(`http://localhost:5243/api/contacts`, { withCredentials: true })
             .then(res => {
                 this.setState({
