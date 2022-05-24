@@ -42,6 +42,7 @@ class MessageList extends Component {
         this.closeButton = this.closeButton.bind(this)
         this.updateCamera = this.updateCamera.bind(this)
         this.sendAllkindOfMessage = this.sendAllkindOfMessage.bind(this)
+        this.getSignalr = this.getSignalr.bind(this)
         this.sendBox = React.createRef();
         this.closeCamera = React.createRef();
     }
@@ -190,7 +191,28 @@ class MessageList extends Component {
         })
         this.sendAllkindOfMessage(x, y);
     }
+    getSignalr(){
+        var url = `http://localhost:5243/api/contacts/${this.props.phoneNumber}/messages`
+        axios.get(url, { withCredentials: true }, axios.defaults.withCredentials = true)
+        .then(res => {
+            if (res.data === 'empty') {
+                this.setState({
+                    contactMessages: [],
+                    lastPhoneNumber: this.props.phoneNumber,
+                    noMessages:true
+                })
+            } else {
+                this.setState({
+                    contactMessages: res.data,
+                    lastMessage: res.data[res.data.length - 1].content,
+                    doUpdate: true, 
+                    noMessages:false
+                })
+            }
+        });
+    }
     componentDidUpdate(prevProps, prevState) {
+
         if(prevState.noMessages === true){
             return;
         }

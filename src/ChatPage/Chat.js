@@ -26,6 +26,8 @@ class Chat extends Component {
             connection : ''
         }
         this.handlerMessage = this.handlerMessage.bind(this);
+        this.child = React.createRef();
+        this.getContact = React.createRef();
     }
     setChat = (username, remote_server) => {
         this.setState({
@@ -35,17 +37,7 @@ class Chat extends Component {
         })
     }
     handlerMessage(){
-        this.setState({
-            username: this.state.username, 
-            remote_server:this.state.remote_server,
-            isAdd: this.state.isAdd,
-            nickname: this.state.nickname,
-            lastMessage: this.state.lastMessage , 
-            firstTime : this.state.firstTime , 
-            is_adding: this.state.is_adding, 
-            source: this.state.source , 
-            connection : this.state.connection
-        })
+        this.forceUpdate()
     }
     addContact = () => {
         this.setState({
@@ -68,12 +60,14 @@ class Chat extends Component {
         // need to  get oonly message so the on is work on contact
     const connection2 = new HubConnectionBuilder().withUrl("http://localhost:5243/ChatHub").configureLogging(LogLevel.Information).build();
     connection2.on("RecieveMessage" , () => {
-        console.log("cccccccccccccccccccccccccccccccccccccccccccccc")
+   
         this.handlerMessage();
+        this.child.current.getSignalr();
+        this.getContact.current.check();
     })
     
     await connection2.start().then(()=>{
-        connection2.serverTimeoutInMilliseconds = 100000; 
+        connection2.serverTimeoutInMilliseconds = 100000000000000; 
         this.setState({connection: connection2})
          connection2.invoke("JoinRoom" , username)
     })
@@ -82,6 +76,8 @@ class Chat extends Component {
 }
     logOut = () => {
         this.props.setName('');
+        var username = this.props.user;
+        this.state.connection.invoke("Remove" , username)
     }
         
     render() {
@@ -105,11 +101,11 @@ class Chat extends Component {
                 </Modal>
                 <div className={theClass}>
                     <div className="leftMenu ">
-                        <Contacts username = {this.props.user} setChat={this.setChat} addContact={this.addContact} is_adding={this.state.is_adding} lastMessage={this.state.lastMessage}/>
+                        <Contacts username = {this.props.user} setChat={this.setChat} addContact={this.addContact} is_adding={this.state.is_adding} lastMessage={this.state.lastMessage} ref={this.getContact}/>
                     </div>
                     <div>
                         <MessageList imgsrc={this.props.user.imgsrc} phoneNumber={this.state.username} username={this.props.user}
-                         remote_server={this.state.remote_server} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage} connection={this.state.connection}/>
+                         remote_server={this.state.remote_server} isFirstTime={this.state.firstTime} is_adding={this.state.is_adding} addMessage={this.addMessage} connection={this.state.connection} ref={this.child}/>
                     </div>
                 </div>
             </div>
