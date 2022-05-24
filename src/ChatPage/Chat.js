@@ -36,7 +36,22 @@ class Chat extends Component {
             is_adding:false
         })
     }
-    handlerMessage(){
+    async handlerMessage(user , server){
+        // if(user !== undefined ){
+        //     if(!this.state.contacts.includes(user)){
+        //        await axios.post(`http://localhost:5243/api/contacts`,{
+        //         id:user , name: "", server:server
+        //         },{withCredentials:true})
+        //         .then(res => {
+        //             if(res.status === 201){
+        //                 return
+        //             } else {
+        //                 alert("unexcpected behaviour: the contact exists, but your server had a bad response...")
+        //                 return;
+        //             }
+        //         })
+        // }
+        //     }
         this.forceUpdate()
     }
     addContact = () => {
@@ -59,13 +74,12 @@ class Chat extends Component {
     var username = this.props.user;
         // need to  get oonly message so the on is work on contact
     const connection2 = new HubConnectionBuilder().withUrl("http://localhost:5243/ChatHub").configureLogging(LogLevel.Information).build();
-    connection2.on("RecieveMessage" , () => {
-   
-        this.handlerMessage();
+    connection2.on("RecieveMessage" , (user , server) => {
+        this.handlerMessage(user , server);
+        this.getContact.current.check( );
         this.child.current.getSignalr();
-        this.getContact.current.check();
+
     })
-    
     await connection2.start().then(()=>{
         connection2.serverTimeoutInMilliseconds = 100000000000000; 
         this.setState({connection: connection2})

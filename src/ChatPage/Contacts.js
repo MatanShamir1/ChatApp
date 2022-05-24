@@ -21,21 +21,20 @@ class Contacts extends Component {
         }
         this.render = this.render.bind(this)
         this.check =  this.check.bind(this)
-
     }
     setSearchQuery = (q) => {
         this.setState(
         { contacts2: this.state.contacts.filter((contact) => contact.name.includes(q)) })
     }
-
-    check() {
-        axios.get(`http://localhost:5243/api/contacts`, { withCredentials: true })
+    async check() {
+        await axios.get(`http://localhost:5243/api/contacts`, { withCredentials: true })
             .then(res => {
                 this.setState({
                     contacts: res.data,
                     contacts2: res.data,
                 })
             });
+        
     }
 
 
