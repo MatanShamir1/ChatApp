@@ -19,11 +19,13 @@ class Contact extends Component {
     }
     //only make it active in this function. the others' functions should make this unselected.
     changeState(x) {
+        //change called this function
         if(x === 1){
             this.setState({
                 isAdd: false
             })
         }
+        //delete called this function
         if(x === 2){
             this.setState({
                 isdeleted: false
@@ -61,7 +63,7 @@ class Contact extends Component {
             <Modal show={this.state.isAdd} onHide={this.edit}>
                     <Modal.Header closeButton >change a contact</Modal.Header>
                     <Modal.Body>
-                        <ChangeContactPopUp id={this.props.realName}change={this.changeState} username={this.props.username}>
+                        <ChangeContactPopUp id={this.props.realName} change={this.changeState} username={this.props.username}>
                         </ChangeContactPopUp>
                     </Modal.Body>
             </Modal>

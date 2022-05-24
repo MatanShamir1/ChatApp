@@ -76,14 +76,11 @@ class Contacts extends Component {
     }
 
     applyChat = (name ,x ) => {
-        if (x === 1) {
-            this.check()
-        }
-        if (x === 2) {
+        if ((x === 1)||(x===2)) {
             this.check()
         }
         var server = this.state.contacts.find(c => c.id === name).server;
-        this.props.setChat(name, server);
+        this.props.setChat(name, server, x);
         
         this.setState({
             curr: name

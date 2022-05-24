@@ -29,10 +29,18 @@ class Chat extends Component {
         this.child = React.createRef();
         this.getContact = React.createRef();
     }
-    setChat = (username, remote_server) => {
+    setChat = (username, remote_server, x) => {
+        var new_username = username;
+        //we deleted a contact
+        if(x===2){
+            if(username === this.state.username){
+                new_username = '';
+            }
+        }
+        
         this.setState({
             remote_server:remote_server,
-            username: username,
+            username: new_username,
             is_adding:false
         })
     }
