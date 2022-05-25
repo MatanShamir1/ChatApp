@@ -198,6 +198,10 @@ class MessageList extends Component {
                     doUpdate: true, 
                     noMessages:false
                 })
+                var element = document.getElementById("update");
+                if (element != null) {
+                    element.scrollIntoView();
+                }
             }
         });
     }
@@ -235,8 +239,16 @@ class MessageList extends Component {
                     })
                 }
             });
+            var element = document.getElementById("update");
+            if (element != null) {
+                element.scrollIntoView();
+            }
             return;
         } else if  (this.state.contactMessages[this.state.contactMessages.length - 1] !== undefined && prevState.contactMessages[prevState.contactMessages.length - 1] === undefined){
+            var element = document.getElementById("update");
+            if (element != null) {
+                element.scrollIntoView();
+            }
             return;
         }
         
@@ -268,6 +280,10 @@ class MessageList extends Component {
                         doUpdate: false , 
                         noMessages:false
                     })
+                    var element = document.getElementById("update");
+                    if (element != null) {
+                        element.scrollIntoView();
+                    }
                 }
             });
     }
