@@ -1,4 +1,8 @@
-# Chat App
+# Chat App - ex2 branch
+## important! ! !
+**if you want to know how to run the server side, go to the server repository and read the instructions there!
+another important thing- we use session cookies, so if you want to try and check several users in the same time, you must use different browsers and *not* just different tabs!!!**
+
 ## a chatting app by Matan Shamir and Itamar Bachar.
 1. [About](#About)
 2. [Dependencies](#dependencies)  
@@ -7,22 +11,23 @@
 5. [How-to-use-the-app](#How-to-use-the-app)
 6. [Developers](#Developers)
 
-
 ## About
-This is the first milestone in the advanced programming 2 course. we used react for the client side.
+this branch is continues to the first branch- master, and is the main branch of ex2.
+it has been edited to communicate with the server, which lies in another repository.
+the client-side of the project lies in this repository, and runs in a different server, as a different program.
 
 ## Dependencies
 * Windows / Linux / macOS
 * Git
 * VScode
 * node.js
-* React packages:  react-bootstrap, react-router-dom
+* React packages:  react-bootstrap, react-router-dom, axios
 
 ## Pages-flow-and-explanation:
 ### Login page
-At this stage, only existing users (hard coded) can log in.<br />
 In case of a wrong user name or password there is a note notifying about the error.<br />
 For safety reasons we do not give the information about which field is incorrect.<br />
+when a user hits "login", a post request is sent to the server, who checks that the user actually exists and he's password is the right one. if so, the user is redirected to the chat page via react. else, he remains in the login page and gets notified.<br />
 <br />
 ![image](https://user-images.githubusercontent.com/74719554/164935361-04d6928e-9c86-4373-a76f-1efa5d161db1.png)
 By clicking on "register" you can go to the register page.
@@ -32,7 +37,8 @@ A new user can register.<br />
 The username must be unique and in the form of a phone number. <br />
 Password must contain digits and letters, and must be at least 8 digit's long. (unlike already registered users)<br />
 Nickname isn't optional. When not given, a red error appears.<br />
-Picture is optional. When not given, a default image will appear.<br />
+Picture are not working on this milestone.<br />
+when a user hits 'register' the server gets a post request and checks whether or not another user with the same username already exists. if not, it adds thre user and react redirects him to the lign page for authentication.<br />
 <br />
 ![image](https://user-images.githubusercontent.com/74719554/164936106-07606545-3bce-43a7-9514-dd453c4206bd.png)
 
@@ -46,6 +52,16 @@ Our app supports text, image choosing, video choosing, recording voice messages 
 Try to use these by choosing the pop-up next to the chat text-box.<br />
 ![image](https://user-images.githubusercontent.com/74719554/164934621-d79e6693-2a7b-46ec-af60-c224af73e58b.png)
 <br />
+
+### Ratings site
+the ratings site is another MVC project which client side in implemented in the server.
+you can **navigate there** only as a logged in user, by pressing the upper-right botton:
+![image](https://user-images.githubusercontent.com/74719554/170246219-a9fdbe7b-85e4-4ecf-a421-2e873d2a43cc.png)
+if you did go there, you get to the ratings index.html page. more on that in the server repository readme. 
+if you want to **navigate back**, you can press the "chatpage" botton in the ratings page layout:
+![image](https://user-images.githubusercontent.com/74719554/170246447-40ba1776-b742-42b5-b97d-9e3c626255dc.png)
+* **an important point:**
+  in case your cookie session is still valid, you will be redirected to the chat page and will not     have to log back in! your cookie session is valid for **30 minutes** from the moment you logged     in. if your cookie session is no longer valid, or if you pressed "log out", are the only ways to     go back to the login page.
 ### pay attention:
 ![image](https://user-images.githubusercontent.com/84122241/164944419-b9da86b4-2e40-4e2e-8d0e-b4585a28b38f.png)
 - in first button you can upload both video and image and only them.
@@ -95,21 +111,18 @@ if you are in windows please do the following..
 4. Write npm start.   
 
 ## How-to-use-the-app
-Now that you have logged in, in order to use our app, enter the following username and password:
-```
-Username - 054-1234567
-Password - 12345678
-```
-This will log into Jon Snow's account. you will be able to observe already sent <br />
-messages with Sansa and Arya, and add more messages.
+Now that you have logged in, in order to use our app, you can choose 2 options:
+### first option: sign you own users up!
+go ahead and sign users up, open different browsers, add them as contacts and make them conversations to test the app.
 
-If you wish to further test our app, log out and log in again with another user, <br />
-after some messages were sent, say to Arya with these credentials:
+### second option: get some DB intial info from our code
+go to the server program in visual studio, to the conversationController's contructor, un-comment all of it, and use a plain browser to surf to http://localhost:5243/api/contacts.
+this will trigger the constructor and initialize the data your DB needs. 
+re-comment the commented lines, go to the client and log in as:
 ```
-Username - 054-2345678
-Password - 12345678
+  username: 12345
+  password: aaa
 ```
-and see that Jons messages were received.
 
 ## Developers:
 **Matan Shamir 206960239** <br />
