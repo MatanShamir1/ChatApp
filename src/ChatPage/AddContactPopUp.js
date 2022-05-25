@@ -1,6 +1,5 @@
 import React from "react";
 import { useRef, useState } from 'react';
-import users from '../LoginPage/usersList';
 import axios from "axios";
 function AddContactPopUp(props) {
     const [error, setError] = useState('');
@@ -9,8 +8,6 @@ function AddContactPopUp(props) {
     const serverBox = useRef(null);
     const saveChanges = async () => {
         //try check with other server
-
-        var url = `http://${serverBox.current.value}/api/invitations`
         try {
             await axios.post(`http://${serverBox.current.value}/api/invitations`,{
          from:props.username , to:phoneBox.current.value, server:serverBox.current.value
@@ -40,7 +37,6 @@ function AddContactPopUp(props) {
         })
     }
     const getOut = () => {
-        console.log('what the hell')
         props.setActive();
     }
     return (

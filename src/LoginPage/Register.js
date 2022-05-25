@@ -1,11 +1,8 @@
 
 import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import React, { Component } from "react";
-import contactLists from '../ChatPage/contactLists';
-import users from './usersList';
 import './Login.css';
 import logo from "../images/ChatApp-logos.jpeg";
-import default_img from "../images/default_friend_img.jpg"
 import axios from 'axios';
 class Register extends Component {
     constructor(props) {
@@ -52,7 +49,6 @@ class Register extends Component {
         axios.post(`http://localhost:5243/api/users/Register`, { username:this.username.current.value ,
         password:this.password.current.value , nickname: this.nickname.current.value })
         .then(res => {
-                console.log(res.data)
                 if(res.status === 201){
                     this.props.setName('GO_TO_LOGIN');
                 }

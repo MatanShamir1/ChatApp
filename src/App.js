@@ -6,8 +6,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from "./LoginPage/Login";
 import Register from "./LoginPage/Register";
 import Chat from "./ChatPage/Chat";
-import users from './LoginPage/usersList';
-import contactLists from "./ChatPage/contactLists";
 
 //if i want to write children inside my component, instead of returning it in them, i can write them between its tag and make sure to return props.children from it.
 function App() {

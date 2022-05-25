@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Message from "./Message";
-import contactLists from "./contactLists";
 import './MessageList.css';
 import AddVideoOrImagePopUp from "./AddVideoOrImagePopUp";
 import { Modal, ModalFooter } from 'react-bootstrap';
@@ -95,15 +94,6 @@ class MessageList extends Component {
 
     async sendAllkindOfMessage(x, y) {
         //try to send it to the contact's server first, the server will send it to their user.
-        console.log("sending from:")
-        console.log(this.props.username);
-        console.log("sending to:")
-        console.log(this.props.phoneNumber);
-        console.log("remote server:")
-        console.log(this.props.remote_server);
-        console.log("whose url is:")
-        console.log(`http://${this.props.remote_server}/api/transfer`);
-        
         await axios.post(`http://${this.props.remote_server}/api/transfer`,{
          from:this.props.username , to:this.props.phoneNumber, content: y},{withCredentials:true})
         .then(res => {

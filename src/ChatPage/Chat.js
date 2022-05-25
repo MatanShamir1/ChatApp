@@ -45,21 +45,6 @@ class Chat extends Component {
         })
     }
     async handlerMessage(user , server){
-        // if(user !== undefined ){
-        //     if(!this.state.contacts.includes(user)){
-        //        await axios.post(`http://localhost:5243/api/contacts`,{
-        //         id:user , name: "", server:server
-        //         },{withCredentials:true})
-        //         .then(res => {
-        //             if(res.status === 201){
-        //                 return
-        //             } else {
-        //                 alert("unexcpected behaviour: the contact exists, but your server had a bad response...")
-        //                 return;
-        //             }
-        //         })
-        // }
-        //     }
         this.forceUpdate()
     }
     addContact = () => {
@@ -84,7 +69,7 @@ class Chat extends Component {
     const connection2 = new HubConnectionBuilder().withUrl("http://localhost:5243/ChatHub").configureLogging(LogLevel.Information).build();
     connection2.on("RecieveMessage" , (user , server) => {
         this.handlerMessage(user , server);
-        this.getContact.current.check( );
+        this.getContact.current.check(user);
         this.child.current.getSignalr();
 
     })
@@ -96,7 +81,12 @@ class Chat extends Component {
 
 
 }
-    logOut = () => {
+    logOut = async () => {
+        await axios.post(`http://localhost:5243/api/users/LogOut`,{withCredentials:true},axios.defaults.withCredentials = true)
+        .then(res => {
+            
+        })
+        console.log('here');
         this.props.setName('');
         var username = this.props.user;
         this.state.connection.invoke("Remove" , username)

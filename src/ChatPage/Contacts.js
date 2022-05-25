@@ -16,8 +16,8 @@ class Contacts extends Component {
             contacts2: [],
             curr: '',
             dontUpdate: false, 
-            source : CartIcon, 
-            
+            source : CartIcon,
+            new_list: []
         }
         this.render = this.render.bind(this)
         this.check =  this.check.bind(this)
@@ -26,10 +26,15 @@ class Contacts extends Component {
         this.setState(
         { contacts2: this.state.contacts.filter((contact) => contact.name.includes(q)) })
     }
-    async check() {
+    async check(user_just_sent) {
         await axios.get(`http://localhost:5243/api/contacts`, { withCredentials: true })
             .then(res => {
+                var new_new_list = this.state.new_list;
+                if(this.state.curr !== user_just_sent){
+                    new_new_list.push(user_just_sent);
+                }
                 this.setState({
+                    new_list: new_new_list,
                     contacts: res.data,
                     contacts2: res.data,
                 })
@@ -81,10 +86,22 @@ class Contacts extends Component {
         }
         var server = this.state.contacts.find(c => c.id === name).server;
         this.props.setChat(name, server, x);
-        
-        this.setState({
+        //remove this guy from the new messages list, he has been pressed.
+        var index = -1;
+        if((index = this.state.new_list.indexOf(name)) >= 0){
+            var new_new_list = this.state.new_list;
+            //remove one item from the "news" list.
+            new_new_list.splice(index,1);
+            this.setState({
+                new_list: new_new_list,
+                curr: name
+            })
+        }
+        else{
+            this.setState({
             curr: name
-        })
+            })
+        }
     }
 
     addContact = () => {
@@ -98,12 +115,13 @@ class Contacts extends Component {
                 <div id="contacts" className="card">
                     <ul className="list-group list-group-flush"></ul>
                     {this.state.contacts2.map((contact, key) => {
+                        var is_new = this.state.new_list.find(name => name == contact.id)!==undefined
                         let styles = "contact btn btn-outline-secondary"
                         if (contact.name === this.state.curr) {
                             styles = "contact bg-successive btn btn-outline-secondary"
                         }
                         return <Contact source={this.state.source}  username={this.props.username} viewName={contact.name} realName={contact.id} key={key}
-                         applyChat={this.applyChat} styles={styles} message={contact.last} oclock={contact.lastDate}/>
+                         applyChat={this.applyChat} styles={styles} message={contact.last} oclock={contact.lastDate} news={is_new}/>
                          //hasNew={this.state.lastContacts.find(c => c.id === contact.id)!==undefined?(this.state.lastContacts.find(c => c.id === contact.id).lastDate!==contact.lastDate?"new messages":undefined):undefined}
                     })}
                 </div>

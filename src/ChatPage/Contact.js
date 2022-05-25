@@ -50,9 +50,11 @@ class Contact extends Component {
         let message = this.props.message.length<25 ? this.props.message : this.props.message.substring(0,23)+"..."
         return (
             <div>
-            <button style={{"float": "right" ,"height": "100%" ,"background-color": "#b4c5d5"}} className="bi bi-pencil-fill" onClick={this.edit}></button>
-            <button style={{"float": "right" ,"height": "100%","background-color": "#b4c5d5"}} className="bi bi-trash" onClick={this.delete}></button>
-            <li className={this.props.styles}  style={{"width": "87%"}} >
+            <ul className=" list-group list-group-flush contact-buttons">
+            <li className="bi bi-pencil-fill contact-button" onClick={this.edit}></li>
+            <li className="bi bi-trash contact-button" onClick={this.delete}></li>
+            </ul>
+            <li className={this.props.styles}  style={{"width": "91%"}} >
             <Modal show={this.state.isdeleted} onHide={this.delete}>
                     <Modal.Header closeButton >Delete a Contact</Modal.Header>
                     <Modal.Body>
@@ -68,7 +70,7 @@ class Contact extends Component {
                     </Modal.Body>
             </Modal>
                 <div className="ms-2 me-auto" onClick={this.changeState}>
-                    {this.props.news !== 0 && (<span className="badge bg-primary rounded-pill to-right">{this.props.hasNew}</span>)}
+                    {this.props.news && (<span className="badge bg-primary rounded-pill to-right">{"new messages!"}</span>)}
                     {this.props.oclock !== '' && (<span className="oclock">{this.props.oclock}</span>)}
                     <div className="position-relative avatar cont-div">
                         <img src={this.props.source} alt="Avatar" className="circular-square"></img>

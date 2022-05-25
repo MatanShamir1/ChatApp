@@ -2,19 +2,27 @@ import { BrowserRouter as Router, Route, Link, BrowserRouter, Routes } from 'rea
 import React, { Component } from "react";
 import './Login.css';
 import axios from 'axios'
-import users from './usersList';
 import logo from "../images/ChatApp-logos.jpeg";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            errors: '',
-            variable: ''
+            errors: ''
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.passwordBox = React.createRef();
         this.usernameBox = React.createRef();
+    }
+
+    async componentDidMount() {
+        axios.get(`http://localhost:5243/api/users/IsExists`, { withCredentials: true })
+            .then(res => {
+                if(res.data!==''){
+                    this.props.setName(res.data)
+                }
+                return;
+            });
     }
 
    async onSubmit(event) {
@@ -38,10 +46,6 @@ class Login extends Component {
         .then(res => {
             if(res.status == 201){
                 this.props.setName(this.usernameBox.current.value)
-                this.setState({
-                    variable : res.config.headers.Cookie
-                })
-                
             }
             else{
                 screenMessage += '*Wrong username or password.\n'

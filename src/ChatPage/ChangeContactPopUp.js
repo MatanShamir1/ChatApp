@@ -32,11 +32,11 @@ function ChangeContactPopUp(props) {
         <div>
             <div>
                 <div className="row mb-3 form">
-                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's nickname</label>
+                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's new nickname</label>
                     <div className="col-sm-4">
                         <input id='contact-name' ref={contactBox} className="form-control"></input>
                     </div>
-                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's server</label>
+                    <label className="col-sm-2 col-form-label add-contact-text" >Contact's current server</label>
                     <div className="col-sm-4">
                         <input id='contact-name' ref={serverBox} className="form-control"></input>
                     </div>
