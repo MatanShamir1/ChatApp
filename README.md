@@ -83,6 +83,9 @@ The user can have as much contacts as he want with the same names, as nicknames 
 ![image](https://user-images.githubusercontent.com/74719554/164935231-434a76e1-ea98-4f88-887e-1d37f48ee947.png)
 
 ## How-to-open-the-app
+
+**Please make sure you read the readme of "ChatAppServer and run the server *before* running the client! it is important and will not work otherwise!**
+
 if you are in linux please do the following..
 1) select Download Zip 
 ![image](https://user-images.githubusercontent.com/84122241/165762901-012d7396-d583-470a-b5de-71a714cf5801.png)
